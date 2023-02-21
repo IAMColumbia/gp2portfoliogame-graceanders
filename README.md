@@ -1,7 +1,8 @@
-# GameProgramming2 Final
+# GameProgramming 2 Final
  Game Programming 2 Final Template
 
 Game Name: Perfecting Cultivation
+
 Description Short:  
 Description Long:
 
