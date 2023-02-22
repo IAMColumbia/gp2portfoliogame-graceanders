@@ -16,3 +16,5 @@ A winning state for the game would be getting "Perfect" quality for all of the p
 > In addition other achievements and stats will be included at the end of the game
 
 ![Sprites](https://user-images.githubusercontent.com/71109231/220491357-ddcf3f55-5e9e-45c8-9d58-54b7fd6d085c.png)
+
+[Notion Page](https://gray-shade.notion.site/Final-Game-775eaf59205c48eebef1c9e69a9ddf09)
