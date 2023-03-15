@@ -1,1 +1,11 @@
 Release Notes version 1 POC
+
+For the POC I got the grid drawing out, and I've written it to be dynamic with screen size
+The Grid Manager is able to check for collision, and adjust each gird square if it is colliding with the player's range
+The player managers their range and their movement and sprite adjustment based on direction
+
+Whether a player is in range will affect whether they can interact with the objects on the screen. The player's range includes the square they stand on...
+In addition to the 8 squares surrounding them. To interact with any object on the grid system, the object will need to be on a "green grid square".
+
+For the final build, the grid and the pointers for player's location and range will not be visible. They will all be viewable from debug mode, but...
+most of the visual elements and ques are just to aid the rest of my process.
