@@ -1,0 +1,37 @@
+Initially for POC I thought it would be best to get the player interacting with objects around them
+I know I wanted to have the player have a range around them and only be able to interact with objects that are within their range
+I was going to loosely place my objects, but I realized while thinking it through farther that a grid system would be a bit better
+
+Grid system is drawing, it is locked in how many rows and columns which may work for my ration, but the window ration is not a set number it takes the device into account so that won't work for other devices
+I adjusted the grid system to fill the space it has with grid squares, so on larger screens it should dynamically increase the number of grid squares
+	- how will this effect how I place my objects, Objects that are placed with my dimensions in mind may not look great on different resolutions
+
+Got the player drawing, but I want to separate movement control properly
+- Going to use PlayerControler
+
+Utilized PlayerContoler, and got separation of concern for the player
+
+The player is now moving, but I need to take into account what direction the player is moving to change the sprite.
+- tried to have this me based on the player direction, but it didn't work, I ended up adding a state to the PlayerControler: PlayerFacingState
+- It changes its state based on when one of the arrow keys is hit, then PlayableCharacter manages its own sprite and gets the state from the PlayerControler
+
+Player Sprite is now adjusting based on direction
+
+I added a state to the Squares, they are either Occupied or Free
+- Each square has a state, and if there is collision detected it will change the state which will update the GridSquare Sprite.
+
+GridManager has the responsibility of checking for collision, but it doesn't have a version of player within the class (handling collision better than I have in the past)
+Game Manager's Update is handling checking for collision utilizing the method within the GridManager
+
+Grid is checking for collisions correctly, but it's going off of the locationRec, which is also off due to needing to scale my sprite
+- the scaling fucks up quite a bit, going to go back to my art and scale it down to the size I want it to be, so I can avoid scaling
+
+Fixed scaling on the sprites.
+
+Location Rectangle is better, but it's not what I want to use. I want the player's range to start from the square the sprite stands on and then the 8 squares surrounding it
+
+I'm going to utilize the code that is making the points for the location rectangle and updating them, to modify to get the range I'm looking for
+
+I got the 4 cube markers correctly for the range I want, but now I need a new PlayerRangeRectangle to use for collision, instead of location rectangle
+- I had a bit of issue for a while trying to figure out how to get this rectangle from the 4 points and assure it is the same size
+- Thought it would be harder, but I was able to just  reference the location rectangle code to help me out.
