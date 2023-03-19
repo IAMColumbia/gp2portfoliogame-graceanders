@@ -159,8 +159,8 @@ namespace FinalGame
             if (this.Location.X < (this.spriteTexture.Width * .40f / 4))
                 this.Location.X = (this.spriteTexture.Width * .40f / 4);
 
-            if (this.Location.Y > Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height * .40f / 2))
-                this.Location.Y = Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height * .40f / 2);
+            if (this.Location.Y > Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height / 2))
+                this.Location.Y = Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height / 2);
 
             if (this.Location.Y < -10)
                 this.Location.Y = -10;
