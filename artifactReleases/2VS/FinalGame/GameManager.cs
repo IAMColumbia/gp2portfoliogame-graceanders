@@ -82,9 +82,19 @@ namespace FinalGame
 
             sb.DrawString(font, $"Total Time: {(int)CurrentTime} | Day Time: {(int)DayTime} | Day: {Day}", TimeLocation, Color.White);
 
+            DrawGridCords();
+
             sb.End();
 
             base.Draw(gameTime);
+        }
+
+        public void DrawGridCords() 
+        {
+            foreach(GridSquare gs in gridManager.GridBoard) 
+            {
+                sb.DrawString(font, $"({gs.Cords.X},{gs.Cords.Y})", gs.Location, Color.Black);
+            }
         }
 
     }
