@@ -8,8 +8,13 @@ namespace FinalGame
 {
     internal class Item
     {
-        string Name;
-        int Worth;
+        private string name;
+        private int worth;
+
+        public string Name 
+        { get { return name; } set { name = value; } }
+        public int Worth
+        { get { return worth; } set { worth = value; } }
 
         public Item(string name, int worth)
         {

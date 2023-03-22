@@ -49,7 +49,7 @@ namespace FinalGame
         }
 
 
-        public PlayableCharacter(Game game) : base(game) 
+        public PlayableCharacter(Game game) : base(game)
         {
             SetupIPlayerController(game);
             Player = new GameConsolePlayer((GameConsole)game.Services.GetService<IGameConsole>());
@@ -69,7 +69,7 @@ namespace FinalGame
             this.Location = new Vector2(200, 700);
             this.Speed = 150;
 
-            this.showMarkers= true;
+            this.showMarkers = true;
             //this.locationRect = CalculateBoundingRectangle(new Rectangle(0, 0, (int)(this.spriteTexture.Width * Scale), (int)(this.spriteTexture.Height * Scale)), spriteTransform);
 
         }
@@ -159,8 +159,8 @@ namespace FinalGame
             if (this.Location.X < (this.spriteTexture.Width * .40f / 4))
                 this.Location.X = (this.spriteTexture.Width * .40f / 4);
 
-            if (this.Location.Y > Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height * .40f / 2))
-                this.Location.Y = Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height * .40f / 2);
+            if (this.Location.Y > Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height / 2))
+                this.Location.Y = Game.GraphicsDevice.Viewport.Height - (this.spriteTexture.Height / 2);
 
             if (this.Location.Y < -10)
                 this.Location.Y = -10;

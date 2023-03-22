@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct2D1;
 
 namespace FinalGame
 {
@@ -54,6 +55,8 @@ namespace FinalGame
                     gs = new GridSquare(this.Game);
                     gs.Initialize();
 
+                    gs.Cords = new Vector2(w, h);
+
                     gs.Location = new Vector2(x + (w * (gs.SpriteTexture.Width)), 60 + (h * gs.SpriteTexture.Height + (h * Margin)));
 
                     GridBoard.Add(gs);
@@ -84,6 +87,7 @@ namespace FinalGame
             }
         }
 
+        
 
         public override void Draw(GameTime gameTime)
         {
@@ -93,5 +97,6 @@ namespace FinalGame
             }
             base.Draw(gameTime);
         }
+
     }
 }
