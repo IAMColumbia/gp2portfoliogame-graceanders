@@ -11,6 +11,8 @@ namespace FinalGame
         protected string FreeTextureName, OccupiedTextureName;
         protected Texture2D FreeTexture, OccupiedTexture;
 
+        public Vector2 Cords;
+
         private SquareState squarestate;
         public SquareState SquareState 
         {
