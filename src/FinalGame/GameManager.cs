@@ -19,6 +19,8 @@ namespace FinalGame
         PlayableCharacter playableCharacter;
         GridManager gridManager;
 
+        //Terrain terrain;
+
         float CurrentTime, DayTime, DayDuration;
         int Day;
 
@@ -46,6 +48,8 @@ namespace FinalGame
             font = this.Game.Content.Load<SpriteFont>("Arial");
             Day = 1;
             DayDuration = 10;//Going to change to 300 (5 min)
+
+            gridManager.DrawTerrain();
         }
 
         public override void Update(GameTime gameTime)

@@ -22,6 +22,8 @@ namespace FinalGame
         Rectangle ScreenSize;
         int Margin = 110;
 
+        Terrain terrain;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -42,7 +44,10 @@ namespace FinalGame
             this._graphics.PreferredBackBufferWidth = w;
             this._graphics.PreferredBackBufferHeight = h;
 
-            gridM = new GridManager(this, ScreenSize);
+            terrain = new Terrain(this);
+            this.Components.Add(terrain);
+
+            gridM = new GridManager(this, ScreenSize, terrain.Terrains);
             this.Components.Add(gridM);
 
             player = new PlayableCharacter(this);

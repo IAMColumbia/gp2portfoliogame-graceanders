@@ -21,11 +21,27 @@ namespace FinalGame
         int SquaresHeigh;
         int Margin = 1;
 
-        public GridManager(Game game, Rectangle SS) : base(game) 
+        List<Terrain> Terrains;
+        //read this from text file
+        //Grass = 0, Water = 1, Soil = 2, Sand = 3
+        int[,] TerrainGuide = new int[9, 17] {
+            {0,3,1,1,1,1,3,0,0,0,0,0,0,0,0,0,0},
+            {3,1,1,1,1,3,0,0,0,0,0,0,0,0,0,0,0},
+            {1,1,1,3,3,0,0,0,0,0,0,0,0,0,0,0,0}, 
+            {1,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, 
+            {1,1,3,0,0,2,2,0,2,2,0,2,2,0,2,2,0}, 
+            {1,3,0,0,0,2,2,0,2,2,0,2,2,0,2,2,0}, 
+            {1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+            {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+        };
+        //for this too work I need the grid to always be 17 x 9 the grid builds dynamically on screen size, so how will that affect this?
+
+        public GridManager(Game game, Rectangle SS, List<Terrain> terrains) : base(game) 
         {
             this.GridBoard = new List<GridSquare>();
-
             ScreenSize = SS;
+            Terrains = terrains;
             
         }       
 
@@ -70,6 +86,15 @@ namespace FinalGame
             {
                 if (gs.LocationRect.Intersects(p.PlayerReach)) { gs.PlayerOnGrid(gs);}
                 else { gs.PlayerOffGrid(gs); }
+            }
+        }
+
+        //Is this the correct location? Should this be in a seprate class?
+        public void DrawTerrain() 
+        {
+            foreach (GridSquare gs in GridBoard)
+            {
+                gs.spriteTexture = Terrains[0].Texture;
             }
         }
 
