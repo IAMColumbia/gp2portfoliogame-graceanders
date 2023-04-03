@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary.GameComponents.Player;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Util;
@@ -58,6 +59,12 @@ namespace FinalGame
         protected virtual void SetupIPlayerController(Game game)
         {
             this.Contoller = new PlayerController(game);
+
+            this.Contoller.UpKey = Keys.W;
+            this.Contoller.DownKey = Keys.S;
+            this.Contoller.LeftKey = Keys.A;
+            this.Contoller.RightKey = Keys.D;
+
         }
 
         protected override void LoadContent()
