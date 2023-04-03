@@ -55,9 +55,6 @@ namespace FinalGame
         {
             GridSquare gs;
 
-            //[Rows, Columns]
-
-
             for (int w = 0; w < GridBoard.GetLength(0); w++)
             {
                 for (int h = 0; h < GridBoard.GetLength(1); h++)
@@ -102,7 +99,6 @@ namespace FinalGame
             {
                 square.Update(gameTime);
             }
-
         }
 
         public override void Draw(GameTime gameTime)

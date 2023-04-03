@@ -50,7 +50,7 @@ namespace FinalGame
             gT = new GridTerrain(this);
             this.Components.Add(gT);
 
-            gridM = new GridManager(this, ScreenSize,gT);
+            gridM = new GridManager(this, ScreenSize, gT);
             this.Components.Add(gridM);
 
             gardenM = new GardenManager(this);

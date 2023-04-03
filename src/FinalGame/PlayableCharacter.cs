@@ -65,13 +65,10 @@ namespace FinalGame
             base.LoadContent();
             this.SpriteTexture = this.Game.Content.Load<Texture2D>("FrontSprite");
             this.Origin = new Vector2(this.SpriteTexture.Width / 2, this.SpriteTexture.Height / 2);
-            //this.Scale = .40f;
             this.Location = new Vector2(200, 700);
             this.Speed = 150;
 
             this.showMarkers = true;
-            //this.locationRect = CalculateBoundingRectangle(new Rectangle(0, 0, (int)(this.spriteTexture.Width * Scale), (int)(this.spriteTexture.Height * Scale)), spriteTransform);
-
         }
 
         public override void Update(GameTime gameTime)

@@ -11,37 +11,100 @@ namespace FinalGame.Crops
 {
     internal class GardenManager : DrawableGameComponent
     {
-        SpriteBatch sb;
-
-        List<Plant> Garden;
+        List<Plant> Garden;// May have all plants in garden drawn, but not visible
         List<Plant> AllPlants;
 
-        Plant Plant,Potato;
+        Plant Potato;
 
         bool testing;
+
+        protected string PotatoTextureName, MelonTextureName, GreenBeanTextureName, StrawberryTextureName, CornTextureName, RadishTextureName, TomatoTextureName, GrapesTextureName, PumpkinTextureName, BeetTextureName;
+        protected Texture2D PotatoTexture, MelonTexture, GreenBeanTexture, StrawberryTexture, CornTexture, RadishTexture, TomatoTexture, GrapesTexture, PumpkinTexture, BeetTexture;
+
 
         public GardenManager(Game game) : base(game)
         {
             Garden = new List<Plant> { };
             AllPlants = new List<Plant> { };
-            Plant = new Plant(game);
 
             testing = true;
+            SetPlantTextureNames();
         }
 
-        public override void Initialize()
+        private void SetPlantTextureNames()
         {
-            sb = new SpriteBatch(this.Game.GraphicsDevice);
+           PotatoTextureName = "Crops/Potato_Stage_1";
+        }
+
+        //public override void Initialize()
+        //{
+        //    LoadPlants();
+        //    if (testing) { Garden.Add(Potato); }
+        //    base.Initialize();
+        //}
+
+        //protected override void LoadContent()
+        //{
+        //    this.PotatoTexture = this.Game.Content.Load<Texture2D>(PotatoTextureName);
+
+        //    UpdatePlantTexture(Potato);
+        //    base.LoadContent();
+
+        //}
+
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+            this.PotatoTexture = this.Game.Content.Load<Texture2D>(PotatoTextureName); 
             LoadPlants();
-            base.Initialize();
+
+            UpdatePlantTexture(Potato);
+
+        }
+
+        protected void UpdatePlantTexture(Plant plant)
+        {
+            switch (plant.PlantType)
+            {
+                case PlantType.Potato:
+                    plant.spriteTexture = this.PotatoTexture;
+                    break;
+                case PlantType.Melon:
+
+                    break;
+                case PlantType.GreenBean:
+
+                    break;
+                case PlantType.Strawberry:
+
+                    break;
+                case PlantType.Corn:
+
+                    break;
+                case PlantType.Radish:
+
+                    break;
+                case PlantType.Tomato:
+
+                    break;
+                case PlantType.Grapes:
+
+                    break;
+                case PlantType.Beet:
+
+                    break;
+
+            }
+
         }
 
         private void LoadPlants()
         {
-            Plant.TextureName = "Crops/Potato_Stage_1";
-            Plant.Texture = this.Game.Content.Load<Texture2D>(Plant.TextureName);
-            Potato = new Plant(this.Game,"Potato", 0, Plant.Texture);
-            Potato.Location = new Vector2 (100,100);
+            Potato = new Plant(this.Game, "Potato", 0, PlantType.Potato);
+            //Potato.Initialize();
+            Potato.Location = new Vector2(100, 100);
+            Potato.ShowMarkers = true;
+
             AllPlants.Add(Potato);
 
         }
@@ -67,16 +130,13 @@ namespace FinalGame.Crops
             }
         }
 
-        public override void Draw(GameTime gameTime) 
+        public override void Draw(GameTime gameTime)
         {
-            sb.Begin();
-
-            if(testing) 
+            foreach (Plant plant in this.Garden)
             {
-            
+                plant.Draw(gameTime);
             }
-
-            sb.End();
+            base.Draw(gameTime);
         }
     }
 }
