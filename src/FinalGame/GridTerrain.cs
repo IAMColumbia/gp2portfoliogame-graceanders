@@ -13,15 +13,8 @@ namespace FinalGame
 
     internal class GridTerrain : Sprite
     {
-        //protected Terrain terrain;
-        protected Square square;
-
-        public List<Terrain> Terrains = new List<Terrain>();
-
         protected string GrassTextureName, WaterTextureName, SoilTextureName, SandTextureName;
         protected Texture2D GrassTexture, WaterTexture, SoilTexture, SandTexture;
-
-        Terrain Grass, Water, Soil, Sand;
 
         private TerrainType terrainType;
         public TerrainType TerrainType
@@ -48,25 +41,20 @@ namespace FinalGame
 
         public GridTerrain(Game game) : base(game)
         {
-            this.square = new Square();
-            //Grass = new Terrain();
             GrassTextureName = "Terrain_Grass";
-            //Water = new Terrain();
             WaterTextureName = "Terrain_Water";
-            //Soil = new Terrain();
             SoilTextureName = "Terrain_Soil";
-            //Sand = new Terrain();
             SandTextureName = "Terrain_Sand";
         }
 
         public virtual void GetTerrainTexture()
         {
             //this.terrainType = this.terrain.Type;
-            switch(terrainType)
+            switch (terrainType)
             {
                 case TerrainType.Grass:
                     this.spriteTexture = GrassTexture;
-                    break; 
+                    break;
                 case TerrainType.Water:
                     this.spriteTexture = WaterTexture;
                     break;
@@ -92,20 +80,11 @@ namespace FinalGame
         protected override void LoadContent()
         {
             this.GrassTexture = this.Game.Content.Load<Texture2D>(GrassTextureName);
-            Grass = new Terrain(GrassTexture, TerrainType.Grass);
-            //Terrains.Add(Grass);
             this.WaterTexture = this.Game.Content.Load<Texture2D>(WaterTextureName);
-            Water = new Terrain(WaterTexture, TerrainType.Water);
-            Terrains.Add(Water);
             this.SoilTexture = this.Game.Content.Load<Texture2D>(SoilTextureName);
-            Soil = new Terrain(SoilTexture, TerrainType.Soil);
-            Terrains.Add(Soil);
             this.SandTexture = this.Game.Content.Load<Texture2D>(SandTextureName);
-            Sand = new Terrain(SandTexture, TerrainType.Sand);
-            Terrains.Add(Sand);
 
             GetTerrainTexture();
-            Terrains.Add(Grass);
 
             base.LoadContent();
         }

@@ -27,7 +27,6 @@ namespace FinalGame
 
         public GridManager(Game game, Rectangle SS, GridTerrain gT) : base(game) 
         {
-            //this.GridBoard = new List<GridSquare>();
             this.GridBoard = new GridSquare[17, 9];
             ScreenSize = SS;
 

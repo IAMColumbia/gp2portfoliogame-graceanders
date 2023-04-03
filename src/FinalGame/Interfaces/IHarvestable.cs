@@ -10,6 +10,6 @@ namespace FinalGame.Interfaces
     internal interface IHarvestable
     {
         bool Harvested { get; set; }
-        void Harvest(Plants plant);
+        void Harvest(Plant plant);
     }
 }

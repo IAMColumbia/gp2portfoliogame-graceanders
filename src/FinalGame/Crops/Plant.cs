@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FinalGame.Interfaces;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace FinalGame.Crops
 {
@@ -23,17 +25,27 @@ namespace FinalGame.Crops
     }
 
 
-    internal class Plants : Item, IHarvestable, IWaterable, IGrowable
+    internal class Plant : Item, IHarvestable, IWaterable, IGrowable
     {
+        internal Texture2D Texture { get; set; }
+        internal string TextureName { get; set; }
+        //internal Vector2 Location { get; set; }
         Quality PlantQuality;
         internal PlantState PS;
-        int Count;
+        internal PlantDay Day;
+        //int Count;
         bool AchievedExelence;
 
-        public Plants(string name, int worth) : base(name, worth) 
+        public Plant(Game game) : base(game) { }
+
+        public Plant(Game game, string name, int worth, Texture2D texture) : base(game,name, worth) 
         { 
             this.Name = name;
             this.Worth = worth;
+            this.Texture = texture;
+
+            this.Day = PlantDay.DayOne;
+            this.PS = PlantState.Alive;
         }
 
         public bool Watered { get; set; }
@@ -42,17 +54,18 @@ namespace FinalGame.Crops
         public int DaysGrowing { get; set; }
         public bool Harvested { get; set; }
 
+        int i;
         public void Grow()
         {
-            throw new NotImplementedException();
+            i = (int)this.Day;
         }
 
-        public void Harvest(Plants plant)
+        public void Harvest(Plant plant)
         {
             throw new NotImplementedException();
         }
 
-        public void Water(Plants plant)
+        public void Water(Plant plant)
         {
             throw new NotImplementedException();
         }
