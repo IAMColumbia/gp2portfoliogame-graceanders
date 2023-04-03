@@ -21,7 +21,8 @@ namespace FinalGame
         int SquaresHeigh;
         int Margin = 1;
 
-        List<Terrain> Terrains;
+        GridTerrain GT;
+
         //read this from text file
         //Grass = 0, Water = 1, Soil = 2, Sand = 3
         int[,] TerrainGuide = new int[9, 17] {
@@ -37,11 +38,12 @@ namespace FinalGame
         };
         //for this too work I need the grid to always be 17 x 9 the grid builds dynamically on screen size, so how will that affect this?
 
-        public GridManager(Game game, Rectangle SS, List<Terrain> terrains) : base(game) 
+        public GridManager(Game game, Rectangle SS, GridTerrain gT) : base(game) 
         {
             this.GridBoard = new List<GridSquare>();
             ScreenSize = SS;
-            Terrains = terrains;
+
+            GT = gT;
             
         }       
 
@@ -52,6 +54,7 @@ namespace FinalGame
             SquaresWide = ScreenSize.Width / GridTexture.Width;
             SquaresHeigh = ScreenSize.Height / GridTexture.Height;
             LoadGrid();
+            //DrawTerrain();
             base.Initialize();
         }
 
@@ -70,6 +73,8 @@ namespace FinalGame
                 {
                     gs = new GridSquare(this.Game);
                     gs.Initialize();
+
+                    //gs.spriteTexture = GT.Terrains[0].Texture;
 
                     gs.Cords = new Vector2(w, h);
 
@@ -90,13 +95,13 @@ namespace FinalGame
         }
 
         //Is this the correct location? Should this be in a seprate class?
-        public void DrawTerrain() 
-        {
-            foreach (GridSquare gs in GridBoard)
-            {
-                gs.spriteTexture = Terrains[0].Texture;
-            }
-        }
+        //public void DrawTerrain() 
+        //{
+        //    foreach (GridSquare gs in GridBoard)
+        //    {
+        //        gs.spriteTexture = GT.Terrains[0].Texture;
+        //    }
+        //}
 
         public override void Update(GameTime gameTime)
         {
