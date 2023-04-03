@@ -36,18 +36,10 @@ namespace FinalGame.Crops
            PotatoTextureName = "Crops/Potato_Stage_1";
         }
 
-        public override void Initialize()
-        {
-            this.PotatoTexture = this.Game.Content.Load<Texture2D>(PotatoTextureName);
-
-            LoadPlants();
-            base.Initialize();
-        }
-
         protected override void LoadContent()
         {
             base.LoadContent();
-            
+            this.PotatoTexture = this.Game.Content.Load<Texture2D>(PotatoTextureName);
             LoadPlants();
 
             UpdatePlantTexture(Potato);
@@ -57,9 +49,12 @@ namespace FinalGame.Crops
         {
             Potato = new Plant(this.Game, "Potato", 0, PlantType.Potato);
             Potato.Location = new Vector2(100, 100);
-            Potato.LocationRect = new Rectangle(100, 100, 100, 100);
+
+            Potato.Initialize();
 
             AllPlants.Add(Potato);
+
+            if (testing) { Garden.Add(Potato);}
 
         }
 

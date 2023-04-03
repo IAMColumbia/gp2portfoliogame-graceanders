@@ -59,7 +59,7 @@ namespace FinalGame
             player = new PlayableCharacter(this);
             this.Components.Add(player);
 
-            gameM = new GameManager(this, player, gridM);
+            gameM = new GameManager(this, player, gridM, gardenM);
             this.Components.Add(gameM);
 
         }

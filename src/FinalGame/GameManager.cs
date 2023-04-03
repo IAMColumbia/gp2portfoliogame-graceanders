@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FinalGame.Crops;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace FinalGame
 
         PlayableCharacter playableCharacter;
         GridManager gridManager;
+        GardenManager gardenManager;
 
         bool DrawCords;
 
@@ -29,11 +31,12 @@ namespace FinalGame
             g = game;
         }
 
-        internal GameManager(Game game, PlayableCharacter p, GridManager gm) : base(game)
+        internal GameManager(Game game, PlayableCharacter p, GridManager gridM, GardenManager gardenM) : base(game)
         {
             g = game;
             playableCharacter = p;
-            gridManager = gm;
+            gridManager = gridM;
+            gardenManager = gardenM;
 
             DrawCords = false;
         }
