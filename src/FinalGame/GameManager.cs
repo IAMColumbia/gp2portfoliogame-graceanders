@@ -49,7 +49,7 @@ namespace FinalGame
             sb = new SpriteBatch(this.Game.GraphicsDevice);
             font = this.Game.Content.Load<SpriteFont>("Arial");
             Day = 1;
-            DayDuration = 10;//Going to change to 300 (5 min)
+            DayDuration = 10;
         }
 
         public override void Update(GameTime gameTime)

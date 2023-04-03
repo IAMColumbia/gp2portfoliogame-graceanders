@@ -87,6 +87,15 @@ namespace FinalGame
             }
         }
 
+        private List<GridSquare> SoilSquares = new List<GridSquare>();
+        //public virtual List<GridSquare> ReturnSoilSquares()
+        //{
+        //    foreach (GridSquare gs in GridBoard)
+        //    {
+        //        if(gs. = ter)
+        //    }
+        //}
+
         public override void Update(GameTime gameTime)
         {
             UpdateSquares(gameTime);

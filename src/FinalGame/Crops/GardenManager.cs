@@ -24,7 +24,7 @@ namespace FinalGame.Crops
 
         public GardenManager(Game game) : base(game)
         {
-            Garden = new List<Plant> { };
+            Garden = new List<Plant>(16) { };
             AllPlants = new List<Plant> { };
 
             testing = true;
@@ -36,10 +36,18 @@ namespace FinalGame.Crops
            PotatoTextureName = "Crops/Potato_Stage_1";
         }
 
+        public override void Initialize()
+        {
+            this.PotatoTexture = this.Game.Content.Load<Texture2D>(PotatoTextureName);
+
+            LoadPlants();
+            base.Initialize();
+        }
+
         protected override void LoadContent()
         {
             base.LoadContent();
-            this.PotatoTexture = this.Game.Content.Load<Texture2D>(PotatoTextureName); 
+            
             LoadPlants();
 
             UpdatePlantTexture(Potato);
