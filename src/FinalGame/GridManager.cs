@@ -12,7 +12,6 @@ namespace FinalGame
 {
     class GridManager : DrawableGameComponent
     {
-        //public List<GridSquare> GridBoard { get; private set; }
         public GridSquare[,] GridBoard;
 
         Texture2D GridTexture;
@@ -35,7 +34,6 @@ namespace FinalGame
             GridVisible = false;
 
             GT = gT;
-            
         }       
 
         public override void Initialize()
@@ -48,36 +46,10 @@ namespace FinalGame
             LoadGrid();
             base.Initialize();
         }
-
         
         protected virtual void LoadGrid() { CreateGrid(SquaresWide, SquaresHeigh, Margin); }
 
         int x = 0;
-        //Uses a list
-        //private void CreateGrid(int width, int height, int margin)
-        //{
-        //    GridSquare gs;
-
-        //    for(int w = 0; w < width; w++)
-        //    {
-        //        for(int h = 0; h < height; h++)
-        //        {
-        //            gs = new GridSquare(this.Game);
-
-        //            if(!GridVisible) { gs.TerrainMode(gs); }
-        //            //gs.spriteTexture = GT.ReturnTexture(GT.TerrainGuide[w, h]);
-
-        //            gs.Initialize();
-
-        //            gs.Cords = new Vector2(w, h);
-
-        //            gs.Location = new Vector2(x + (w * (gs.SpriteTexture.Width)), 60 + (h * gs.SpriteTexture.Height + (h * Margin)));
-
-        //            GridBoard.Add(gs);
-        //        }
-        //    }
-        //    //WhichTerrain();
-        //}
 
         //uses multi-dimensional array
         private void CreateGrid(int width, int height, int margin)
@@ -105,20 +77,6 @@ namespace FinalGame
                     GridBoard[w,h] = gs;
                 }
             }
-            //WhichTerrain();
-        }
-
-        int g = 0;
-        private void WhichTerrain()//This assigns the textures after the GridBoard is populated
-        {
-            for (int i = 0; i < GT.TerrainGuide.GetLength(0); i++)
-            {
-                for (int j = 0; j < GT.TerrainGuide.GetLength(1); j++)
-                {
-                    //GridBoard[g].spriteTexture = GT.ReturnTexture(GT.TerrainGuide[i, j]);
-                    g++;
-                }
-            }
         }
 
         public virtual void CheckCollision(PlayableCharacter p)
@@ -131,7 +89,6 @@ namespace FinalGame
                     else { gs.PlayerOffGrid(gs); }
                 }
             }
-
         }
 
         public override void Update(GameTime gameTime)
@@ -148,8 +105,6 @@ namespace FinalGame
             }
 
         }
-
-        
 
         public override void Draw(GameTime gameTime)
         {

@@ -19,7 +19,7 @@ namespace FinalGame
         PlayableCharacter playableCharacter;
         GridManager gridManager;
 
-        //Terrain terrain;
+        bool DrawCords;
 
         float CurrentTime, DayTime, DayDuration;
         int Day;
@@ -34,6 +34,8 @@ namespace FinalGame
             g = game;
             playableCharacter = p;
             gridManager = gm;
+
+            DrawCords = false;
         }
 
         protected override void LoadContent()
@@ -84,7 +86,7 @@ namespace FinalGame
 
             sb.DrawString(font, $"Total Time: {(int)CurrentTime} | Day Time: {(int)DayTime} | Day: {Day}", TimeLocation, Color.White);
 
-            DrawGridCords();
+            if (DrawCords) { DrawGridCords(); }
 
             sb.End();
 
