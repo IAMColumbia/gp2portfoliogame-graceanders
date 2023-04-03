@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct2D1;
 
 namespace FinalGame
 {
     class GridManager : DrawableGameComponent
     {
-        public List<GridSquare> GridBoard { get; private set; }
+        //public List<GridSquare> GridBoard { get; private set; }
+        public GridSquare[,] GridBoard;
 
         Texture2D GridTexture;
         Rectangle ScreenSize;
@@ -27,7 +28,8 @@ namespace FinalGame
 
         public GridManager(Game game, Rectangle SS, GridTerrain gT) : base(game) 
         {
-            this.GridBoard = new List<GridSquare>();
+            //this.GridBoard = new List<GridSquare>();
+            this.GridBoard = new GridSquare[17, 9];
             ScreenSize = SS;
 
             GridVisible = false;
@@ -51,19 +53,48 @@ namespace FinalGame
         protected virtual void LoadGrid() { CreateGrid(SquaresWide, SquaresHeigh, Margin); }
 
         int x = 0;
+        //Uses a list
+        //private void CreateGrid(int width, int height, int margin)
+        //{
+        //    GridSquare gs;
 
+        //    for(int w = 0; w < width; w++)
+        //    {
+        //        for(int h = 0; h < height; h++)
+        //        {
+        //            gs = new GridSquare(this.Game);
+
+        //            if(!GridVisible) { gs.TerrainMode(gs); }
+        //            //gs.spriteTexture = GT.ReturnTexture(GT.TerrainGuide[w, h]);
+
+        //            gs.Initialize();
+
+        //            gs.Cords = new Vector2(w, h);
+
+        //            gs.Location = new Vector2(x + (w * (gs.SpriteTexture.Width)), 60 + (h * gs.SpriteTexture.Height + (h * Margin)));
+
+        //            GridBoard.Add(gs);
+        //        }
+        //    }
+        //    //WhichTerrain();
+        //}
+
+        //uses multi-dimensional array
         private void CreateGrid(int width, int height, int margin)
         {
             GridSquare gs;
 
-            for(int w = 0; w < width; w++)
+            //[Rows, Columns]
+
+
+            for (int w = 0; w < GridBoard.GetLength(0); w++)
             {
-                for(int h = 0; h < height; h++)
+                for (int h = 0; h < GridBoard.GetLength(1); h++)
                 {
                     gs = new GridSquare(this.Game);
-                    //gs.SquareState = SquareState.Terrain;
-                    gs.TerrainMode(gs);
-                    //gs.spriteTexture = GT.ReturnTexture(GT.TerrainGuide[w, h]);
+
+                    if (!GridVisible) { gs.TerrainMode(gs); }
+                    gs.spriteTexture = GT.ReturnTexture(GT.TerrainGuide[h, w]);
 
                     gs.Initialize();
 
@@ -71,20 +102,20 @@ namespace FinalGame
 
                     gs.Location = new Vector2(x + (w * (gs.SpriteTexture.Width)), 60 + (h * gs.SpriteTexture.Height + (h * Margin)));
 
-                    GridBoard.Add(gs);
+                    GridBoard[w,h] = gs;
                 }
             }
             //WhichTerrain();
         }
 
         int g = 0;
-        private void WhichTerrain()
+        private void WhichTerrain()//This assigns the textures after the GridBoard is populated
         {
             for (int i = 0; i < GT.TerrainGuide.GetLength(0); i++)
             {
                 for (int j = 0; j < GT.TerrainGuide.GetLength(1); j++)
                 {
-                    GridBoard[g].spriteTexture = GT.ReturnTexture(GT.TerrainGuide[i, j]);
+                    //GridBoard[g].spriteTexture = GT.ReturnTexture(GT.TerrainGuide[i, j]);
                     g++;
                 }
             }

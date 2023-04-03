@@ -43,6 +43,7 @@ namespace FinalGame
             {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
         };
+
         //for this too work I need the grid to always be 17 x 9 the grid builds dynamically on screen size, so how will that affect this?
 
         public GridTerrain(Game game) : base(game)
