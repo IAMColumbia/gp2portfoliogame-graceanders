@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FinalGame
 {
-    enum TerrainType { Grass, Water, Soil, Sand }
+    //enum TerrainType { Grass, Water, Soil, Sand }
 
     internal class Terrain
     {

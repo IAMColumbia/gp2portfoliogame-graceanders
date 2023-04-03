@@ -23,25 +23,14 @@ namespace FinalGame
 
         GridTerrain GT;
 
-        //read this from text file
-        //Grass = 0, Water = 1, Soil = 2, Sand = 3
-        int[,] TerrainGuide = new int[9, 17] {
-            {0,3,1,1,1,1,3,0,0,0,0,0,0,0,0,0,0},
-            {3,1,1,1,1,3,0,0,0,0,0,0,0,0,0,0,0},
-            {1,1,1,3,3,0,0,0,0,0,0,0,0,0,0,0,0}, 
-            {1,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, 
-            {1,1,3,0,0,2,2,0,2,2,0,2,2,0,2,2,0}, 
-            {1,3,0,0,0,2,2,0,2,2,0,2,2,0,2,2,0}, 
-            {1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
-        };
-        //for this too work I need the grid to always be 17 x 9 the grid builds dynamically on screen size, so how will that affect this?
+        bool GridVisible;
 
         public GridManager(Game game, Rectangle SS, GridTerrain gT) : base(game) 
         {
             this.GridBoard = new List<GridSquare>();
             ScreenSize = SS;
+
+            GridVisible = false;
 
             GT = gT;
             
@@ -53,8 +42,8 @@ namespace FinalGame
 
             SquaresWide = ScreenSize.Width / GridTexture.Width;
             SquaresHeigh = ScreenSize.Height / GridTexture.Height;
+
             LoadGrid();
-            //DrawTerrain();
             base.Initialize();
         }
 
@@ -72,9 +61,11 @@ namespace FinalGame
                 for(int h = 0; h < height; h++)
                 {
                     gs = new GridSquare(this.Game);
-                    gs.Initialize();
+                    //gs.SquareState = SquareState.Terrain;
+                    gs.TerrainMode(gs);
+                    //gs.spriteTexture = GT.ReturnTexture(GT.TerrainGuide[w, h]);
 
-                    //gs.spriteTexture = GT.Terrains[0].Texture;
+                    gs.Initialize();
 
                     gs.Cords = new Vector2(w, h);
 
@@ -83,25 +74,34 @@ namespace FinalGame
                     GridBoard.Add(gs);
                 }
             }
+            //WhichTerrain();
+        }
+
+        int g = 0;
+        private void WhichTerrain()
+        {
+            for (int i = 0; i < GT.TerrainGuide.GetLength(0); i++)
+            {
+                for (int j = 0; j < GT.TerrainGuide.GetLength(1); j++)
+                {
+                    GridBoard[g].spriteTexture = GT.ReturnTexture(GT.TerrainGuide[i, j]);
+                    g++;
+                }
+            }
         }
 
         public virtual void CheckCollision(PlayableCharacter p)
         {
-            foreach (GridSquare gs in GridBoard)
+            if (GridVisible)
             {
-                if (gs.LocationRect.Intersects(p.PlayerReach)) { gs.PlayerOnGrid(gs);}
-                else { gs.PlayerOffGrid(gs); }
+                foreach (GridSquare gs in GridBoard)
+                {
+                    if (gs.LocationRect.Intersects(p.PlayerReach)) { gs.PlayerOnGrid(gs); }
+                    else { gs.PlayerOffGrid(gs); }
+                }
             }
-        }
 
-        //Is this the correct location? Should this be in a seprate class?
-        //public void DrawTerrain() 
-        //{
-        //    foreach (GridSquare gs in GridBoard)
-        //    {
-        //        gs.spriteTexture = GT.Terrains[0].Texture;
-        //    }
-        //}
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -115,6 +115,7 @@ namespace FinalGame
             {
                 square.Update(gameTime);
             }
+
         }
 
         

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinalGame
 {
-    public enum SquareState { Occupied, Free }
+    public enum SquareState { Occupied, Free, Terrain }
     //square
 
     public class Square
@@ -21,6 +21,8 @@ namespace FinalGame
         public virtual void Occupied() { this.SquareState = SquareState.Occupied; }
         public virtual void Free() { this.SquareState = SquareState.Free; }
 
+        public virtual void Terrain() { this.SquareState = SquareState.Terrain; }
+
         public virtual void UpdateBlockState()
         {
             switch(this.SquareState) 
@@ -28,6 +30,8 @@ namespace FinalGame
                 case SquareState.Occupied:
                     break;
                 case SquareState.Free:
+                    break;
+                case SquareState.Terrain:
                     break;
             }
         }

@@ -8,8 +8,8 @@ namespace FinalGame
     {
         protected Square square;
 
-        protected string FreeTextureName, OccupiedTextureName;
-        protected Texture2D FreeTexture, OccupiedTexture;
+        protected string FreeTextureName, OccupiedTextureName, GrassTextureName;
+        protected Texture2D FreeTexture, OccupiedTexture, GrassTexture;
 
         public Vector2 Cords;
 
@@ -36,10 +36,14 @@ namespace FinalGame
                 case SquareState.Free:
                     //this.Visible = true;
                     this.spriteTexture = FreeTexture;
+                    //this.spriteTexture = GrassTexture;
                     break;
                 case SquareState.Occupied:
                     //this.Visible = true;
                     this.spriteTexture = OccupiedTexture;
+                    break;
+                case SquareState.Terrain:
+                    //this.spriteTexture = null;
                     break;
             }
         }
@@ -48,6 +52,9 @@ namespace FinalGame
         {
             this.FreeTexture = this.Game.Content.Load<Texture2D>(FreeTextureName);
             this.OccupiedTexture = this.Game.Content.Load<Texture2D>(OccupiedTextureName);
+
+            //this.GrassTexture = this.Game.Content.Load<Texture2D>(GrassTextureName);
+
             updateSquareTexture();
             base.LoadContent();
         }
@@ -62,5 +69,6 @@ namespace FinalGame
 
         public void PlayerOnGrid(GridSquare square) { this.square.Occupied(); }
         public void PlayerOffGrid(GridSquare square) { this.square.Free(); }
+        public void TerrainMode(GridSquare square) { this.square.Terrain(); }
     }
 }
