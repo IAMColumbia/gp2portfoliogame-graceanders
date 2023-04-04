@@ -61,7 +61,15 @@ namespace FinalGame
                 {
                     gs = new GridSquare(this.Game);
 
-                    if (!GridVisible) { gs.TerrainMode(gs); }
+                    if (!GridVisible) 
+                    { 
+                        gs.TerrainMode(gs); 
+                    }
+                    else 
+                    { 
+                        gs.GridMode(gs); 
+                    }
+
                     gs.spriteTexture = GT.ReturnTexture(GT.TerrainGuide[h, w]);
 
                     gs.Initialize();
@@ -81,8 +89,8 @@ namespace FinalGame
             {
                 foreach (GridSquare gs in GridBoard)
                 {
-                    if (gs.LocationRect.Intersects(p.PlayerReach)) { gs.PlayerOnGrid(gs); }
-                    else { gs.PlayerOffGrid(gs); }
+                    if (gs.LocationRect.Intersects(p.PlayerReach)) { gs.Occupied(); }
+                    else { gs.Free(); }
                 }
             }
         }

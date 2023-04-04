@@ -4,6 +4,8 @@ using MonoGameLibrary.Sprite;
 
 namespace FinalGame
 {
+    public enum GridState { Occupied, Free, Interacted }
+
     public class GridSquare : DrawableSprite
     {
         protected Square square;
@@ -13,11 +15,20 @@ namespace FinalGame
 
         public Vector2 Cords;
 
+        //Manages whether the square square is showing terrain or grid
         private SquareState squarestate;
         public SquareState SquareState 
         {
-            get { return this.square.SquareState; }
-            set { this.square.SquareState = value; }
+            get { return squarestate; }
+            set { this.squarestate = value; }
+        }
+
+        //If the SquareState is "Grid" this manages whether the grid is Occupied, Free, or Interacted
+        private GridState gridstate;
+        public GridState GridState
+        {
+            get { return this.gridstate; }
+            set { this.gridstate = value; }
         }
 
         public GridSquare(Game game) : base(game)
@@ -26,26 +37,43 @@ namespace FinalGame
             FreeTextureName = "Grid";
             OccupiedTextureName = "GridGreen";
 
+            this.GridState = GridState.Free;
+
         }
 
-        protected virtual void updateSquareTexture()
+        protected virtual void updateGridTexture()
         {
-            this.squarestate = this.square.SquareState;
-            switch (square.SquareState) 
+            this.gridstate = this.GridState;
+            switch (GridState)
             {
-                case SquareState.Free:
+                case GridState.Free:
                     //this.Visible = true;
                     this.spriteTexture = FreeTexture;
                     //this.spriteTexture = GrassTexture;
                     break;
-                case SquareState.Occupied:
+                case GridState.Occupied:
                     //this.Visible = true;
                     this.spriteTexture = OccupiedTexture;
                     break;
-                case SquareState.Terrain:
-                    //this.spriteTexture = null;
+                case GridState.Interacted:
+                    //need to make Interacted texture
+                    this.DrawColor = Color.Red;
                     break;
             }
+        }
+
+        protected virtual void UpdateSquareTexture()
+        {
+            this.squarestate = this.SquareState;
+            switch (SquareState) 
+            {
+                case SquareState.Grid:
+                    updateGridTexture();
+                    break;
+                case SquareState.Terrain:
+                    break;
+            }
+
         }
 
         protected override void LoadContent()
@@ -53,22 +81,23 @@ namespace FinalGame
             this.FreeTexture = this.Game.Content.Load<Texture2D>(FreeTextureName);
             this.OccupiedTexture = this.Game.Content.Load<Texture2D>(OccupiedTextureName);
 
-            //this.GrassTexture = this.Game.Content.Load<Texture2D>(GrassTextureName);
-
-            updateSquareTexture();
+            UpdateSquareTexture();
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            this.updateSquareTexture();
+            UpdateSquareTexture();
+
             base.Update(gameTime);
-            square.UpdateBlockState();
-            
         }
 
-        public void PlayerOnGrid(GridSquare square) { this.square.Occupied(); }
-        public void PlayerOffGrid(GridSquare square) { this.square.Free(); }
-        public void TerrainMode(GridSquare square) { this.square.Terrain(); }
+        public void TerrainMode(GridSquare s) { this.SquareState = SquareState.Terrain; }
+        public void GridMode(GridSquare s) { this.SquareState = SquareState.Grid; }
+
+
+        public virtual void Occupied() { this.GridState = GridState.Occupied; }
+        public virtual void Free() { this.GridState = GridState.Free; }
+        public virtual void Interacted() { this.GridState = GridState.Interacted; }
     }
 }
