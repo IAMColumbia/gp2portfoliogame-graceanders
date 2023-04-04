@@ -34,7 +34,7 @@ namespace FinalGame
             this.GridBoard = new GridSquare[17, 9];
             ScreenSize = SS;
 
-            GridVisible = true;
+            GridVisible = false;
 
             GT = gT;
 
