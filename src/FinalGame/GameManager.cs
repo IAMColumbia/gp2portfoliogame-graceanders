@@ -1,6 +1,7 @@
 ﻿using FinalGame.Crops;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameLibrary.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace FinalGame
         GridManager gridManager;
         GardenManager gardenManager;
 
+        InputHandler input;
+
         bool DrawCords;
 
         float CurrentTime, DayTime, DayDuration;
@@ -29,6 +32,7 @@ namespace FinalGame
         public GameManager(Game game) : base(game)
         {
             g = game;
+            input = (InputHandler)game.Services.GetService(typeof(IInputHandler));
         }
 
         internal GameManager(Game game, PlayableCharacter p, GridManager gridM, GardenManager gardenM) : base(game)
@@ -59,7 +63,7 @@ namespace FinalGame
         {
             HandleInput(gameTime);
             playableCharacter.Update(gameTime);
-            gridManager.CheckCollision(playableCharacter);
+            gridManager.CheckPlayerCollision(playableCharacter);
             UpdateTime(gameTime);
 
             base.Update(gameTime);

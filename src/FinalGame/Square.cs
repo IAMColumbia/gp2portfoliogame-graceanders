@@ -12,6 +12,7 @@ namespace FinalGame
     {
         public Square() { }
 
+
         public void PlayerOnGrid(GridSquare square) { square.Occupied(); }
         public void PlayerOffGrid(GridSquare square) { square.Free(); }
         public void GridClicked(GridSquare square) { square.Interacted(); }

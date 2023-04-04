@@ -4,9 +4,10 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using MonoGameLibrary.Util;
 
 namespace FinalGame
 {
@@ -23,16 +24,21 @@ namespace FinalGame
 
         GridTerrain GT;
 
+        //InputHandler input;
+
+
         bool GridVisible;
 
-        public GridManager(Game game, Rectangle SS, GridTerrain gT) : base(game) 
+        public GridManager(Game game, Rectangle SS, GridTerrain gT, InputHandler IH) : base(game) 
         {
             this.GridBoard = new GridSquare[17, 9];
             ScreenSize = SS;
 
-            GridVisible = false;
+            GridVisible = true;
 
             GT = gT;
+
+            //input = IH;
         }       
 
         public override void Initialize()
@@ -83,7 +89,7 @@ namespace FinalGame
             }
         }
 
-        public virtual void CheckCollision(PlayableCharacter p)
+        public virtual void CheckPlayerCollision(PlayableCharacter p)
         {
             if (GridVisible)
             {
@@ -106,6 +112,7 @@ namespace FinalGame
 
         public override void Update(GameTime gameTime)
         {
+            HandleInput(gameTime);
             UpdateSquares(gameTime);
             base.Update(gameTime);
         }
@@ -125,6 +132,26 @@ namespace FinalGame
                 square.Draw(gameTime);
             }
             base.Draw(gameTime);
+        }
+
+        bool isClicked;
+        public void HandleInput(GameTime gameTime)
+        {
+            var mouseState = Mouse.GetState();
+            var mousePoint = new Point(mouseState.X, mouseState.Y);
+
+            isClicked = mouseState.LeftButton == ButtonState.Pressed;
+
+            if (isClicked)
+            {
+                foreach (GridSquare gs in GridBoard)
+                {
+                    if (gs.Rectagle.Contains(mousePoint))
+                    {
+                        gs.Interacted();
+                    }
+                }
+            }
         }
 
     }

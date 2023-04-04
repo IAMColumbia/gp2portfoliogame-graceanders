@@ -10,11 +10,11 @@ namespace FinalGame
     {
         protected Square square;
 
-        protected string FreeTextureName, OccupiedTextureName, GrassTextureName;
-        protected Texture2D FreeTexture, OccupiedTexture, GrassTexture;
+        protected string FreeTextureName, OccupiedTextureName, InteractedTextureName;
+        protected Texture2D FreeTexture, OccupiedTexture, InteractedTexture;
 
         public Vector2 Cords;
-
+        
         //Manages whether the square square is showing terrain or grid
         private SquareState squarestate;
         public SquareState SquareState 
@@ -36,6 +36,7 @@ namespace FinalGame
             this.square = new Square();
             FreeTextureName = "Grid";
             OccupiedTextureName = "GridGreen";
+            InteractedTextureName = "GridRed";
 
             this.GridState = GridState.Free;
 
@@ -57,7 +58,7 @@ namespace FinalGame
                     break;
                 case GridState.Interacted:
                     //need to make Interacted texture
-                    this.DrawColor = Color.Red;
+                    this.spriteTexture = InteractedTexture;
                     break;
             }
         }
@@ -80,6 +81,7 @@ namespace FinalGame
         {
             this.FreeTexture = this.Game.Content.Load<Texture2D>(FreeTextureName);
             this.OccupiedTexture = this.Game.Content.Load<Texture2D>(OccupiedTextureName);
+            this.InteractedTexture = this.Game.Content.Load<Texture2D>(InteractedTextureName);
 
             UpdateSquareTexture();
             base.LoadContent();
