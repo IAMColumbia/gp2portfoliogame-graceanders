@@ -58,6 +58,11 @@ namespace FinalGame.Crops
 
         }
 
+        //public override void Update(GameTime gameTime)
+        //{
+        //    base.Update(gameTime);
+        //}
+
         protected void UpdatePlantTexture(Plant plant)
         {
             switch (plant.PlantType)
@@ -120,6 +125,7 @@ namespace FinalGame.Crops
         {
             foreach (Plant plant in this.Garden)
             {
+                plant.Update(gameTime);
                 plant.Draw(gameTime);
             }
             base.Draw(gameTime);

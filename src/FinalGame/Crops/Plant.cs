@@ -47,10 +47,6 @@ namespace FinalGame.Crops
         //int Count;
         bool AchievedExelence;
 
-        //Should I have a GridPlant?
-        //protected string PotatoTextureName, MelonTextureName, GreenBeanTextureName, StrawberryTextureName, CornTextureName, RadishTextureName, TomatoTextureName, GrapesTextureName, PumpkinTextureName, BeetTextureName;
-        //protected Texture2D PotatoTexture, MelonTexture, GreenBeanTexture, StrawberryTexture, CornTexture, RadishTexture, TomatoTexture, GrapesTexture, PumpkinTexture, BeetTexture;
-
         public Plant(Game game) : base(game) { }
 
         public Plant(Game game, string name, int worth, PlantType PT) : base(game,name, worth) 
@@ -61,45 +57,12 @@ namespace FinalGame.Crops
 
             this.Day = PlantDay.DayOne;
             this.PS = PlantState.Alive;
-
         }
 
-        //if I do it this way I would need an aditional conditinal statemnt that would check which day it is
-        //protected virtual void updatePlantTexture()
-        //{
-        //    switch (this.PlantType)
-        //    {
-        //        case PlantType.Potato:
-
-        //            break;
-        //        case PlantType.Melon:
-
-        //            break;
-        //        case PlantType.GreenBean:
-
-        //            break;
-        //        case PlantType.Strawberry:
-
-        //            break;
-        //        case PlantType.Corn:
-
-        //            break;
-        //        case PlantType.Radish:
-
-        //            break;
-        //        case PlantType.Tomato:
-
-        //            break;
-        //        case PlantType.Grapes:
-
-        //            break;
-        //        case PlantType.Beet:
-
-        //            break;
-
-        //    }
-
-        //}
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+        }
 
         public bool Watered { get; set; }
         public int DaysUnwatered { get; set; }
