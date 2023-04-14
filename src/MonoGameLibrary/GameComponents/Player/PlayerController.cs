@@ -4,6 +4,7 @@ using MonoGameLibrary.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,11 @@ namespace MonoGameLibrary.GameComponents.Player
         Vector2 Direction { get;  }
         float Rotate { get; }
         IInputHandler Input { get; }
+
+        Keys UpKey { get; set; }
+        Keys DownKey { get; set; }
+        Keys LeftKey { get; set; }
+        Keys RightKey { get; set; }
 
         void Update(GameTime gameTime);
 
@@ -32,6 +38,18 @@ namespace MonoGameLibrary.GameComponents.Player
             get { return this.playerFacingState; }
             set { this.playerFacingState = value; }
         }
+
+        public Keys upKey, downKey, leftKey, rightKey;
+
+        Keys IPlayerController.UpKey 
+        { get { return this.upKey; } set { this.upKey = value; } }
+        Keys IPlayerController.DownKey
+        { get { return this.downKey; } set { this.downKey = value; } }
+        Keys IPlayerController.LeftKey
+        { get { return this.leftKey; } set { this.leftKey = value; } }
+        Keys IPlayerController.RightKey
+        { get { return this.rightKey; } set { this.rightKey = value; } }
+
 
         public Vector2 StickDir;
         public Vector2 DPadDir;
@@ -63,7 +81,7 @@ namespace MonoGameLibrary.GameComponents.Player
             }
         }
 
-
+        
         public PlayerController(Game game) : base(game)
         {
             this.Rotate = 0;
@@ -131,22 +149,22 @@ namespace MonoGameLibrary.GameComponents.Player
 
             KeyDir = new Vector2(0, 0);
 
-            if (keyboardState.IsKeyDown(Keys.Left))
+            if (keyboardState.IsKeyDown(leftKey))
             {
                 KeyDir += new Vector2(-1, 0);
                 this.playerFacingState = PlayerFacingState.Left;
             }
-            if (keyboardState.IsKeyDown(Keys.Right))
+            if (keyboardState.IsKeyDown(rightKey))
             {
                 KeyDir += new Vector2(1, 0);
                 this.playerFacingState = PlayerFacingState.Right;
             }
-            if (keyboardState.IsKeyDown(Keys.Up))
+            if (keyboardState.IsKeyDown(upKey))
             {
                 KeyDir += new Vector2(0, -1);
                 this.playerFacingState = PlayerFacingState.Back;
             }
-            if (keyboardState.IsKeyDown(Keys.Down))
+            if (keyboardState.IsKeyDown(downKey))
             {
                 KeyDir += new Vector2(0, 1);
                 this.playerFacingState = PlayerFacingState.Front;

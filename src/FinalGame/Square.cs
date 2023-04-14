@@ -6,30 +6,15 @@ using System.Threading.Tasks;
 
 namespace FinalGame
 {
-    public enum SquareState { Occupied, Free }
-    //square
+    public enum SquareState { Grid, Terrain }
 
     public class Square
     {
-        public SquareState SquareState { get; set; }
+        public Square() { }
 
-        public Square() 
-        {
-            this.SquareState = SquareState.Free;
-        }
 
-        public virtual void Occupied() { this.SquareState = SquareState.Occupied; }
-        public virtual void Free() { this.SquareState = SquareState.Free; }
-
-        public virtual void UpdateBlockState()
-        {
-            switch(this.SquareState) 
-            {
-                case SquareState.Occupied:
-                    break;
-                case SquareState.Free:
-                    break;
-            }
-        }
+        public void PlayerOnGrid(GridSquare square) { square.Occupied(); }
+        public void PlayerOffGrid(GridSquare square) { square.Free(); }
+        public void GridClicked(GridSquare square) { square.Interacted(); }
     }
 }

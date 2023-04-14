@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FinalGame.Crops;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary.Util;
@@ -10,9 +11,13 @@ namespace FinalGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        GameManager gm;
+        GameManager gameM;
+
+        GridTerrain gT;
 
         GridManager gridM;
+
+        GardenManager gardenM;
 
         PlayableCharacter player;
 
@@ -42,14 +47,20 @@ namespace FinalGame
             this._graphics.PreferredBackBufferWidth = w;
             this._graphics.PreferredBackBufferHeight = h;
 
-            gridM = new GridManager(this, ScreenSize);
+            gT = new GridTerrain(this);
+            this.Components.Add(gT);
+
+            gridM = new GridManager(this, ScreenSize, gT, input);
             this.Components.Add(gridM);
+
+            gardenM = new GardenManager(this);
+            this.Components.Add(gardenM);
 
             player = new PlayableCharacter(this);
             this.Components.Add(player);
 
-            gm = new GameManager(this, player, gridM);
-            this.Components.Add(gm);
+            gameM = new GameManager(this, player, gridM, gardenM);
+            this.Components.Add(gameM);
 
         }
 
