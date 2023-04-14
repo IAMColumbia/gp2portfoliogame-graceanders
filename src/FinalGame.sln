@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalGame", "FinalGame\FinalGame.csproj", "{4FA5B823-4C5B-4790-BB51-2CEB860DCDAA}"
 EndProject
+
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGameLibrary", "MonoGameLibrary\MonoGameLibrary.csproj", "{655E478E-0E0B-41AC-9EB6-E2E3613E4B6D}"
+
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
