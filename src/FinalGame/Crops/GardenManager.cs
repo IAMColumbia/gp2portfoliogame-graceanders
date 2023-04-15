@@ -58,11 +58,6 @@ namespace FinalGame.Crops
 
         }
 
-        //public override void Update(GameTime gameTime)
-        //{
-        //    base.Update(gameTime);
-        //}
-
         protected void UpdatePlantTexture(Plant plant)
         {
             switch (plant.PlantType)

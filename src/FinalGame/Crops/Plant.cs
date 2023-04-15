@@ -24,10 +24,10 @@ namespace FinalGame.Crops
         DayOne, DayTwo, DayThree, DayFour, DayFive, Harvest
     }
 
-    enum PlantType
-    {
-        Potato, Melon, GreenBean, Strawberry, Corn, Radish, Tomato, Grapes, Pumpkin, Beet
-    }
+    //enum PlantType
+    //{
+    //    Potato, Melon, GreenBean, Strawberry, Corn, Radish, Tomato, Grapes, Pumpkin, Beet
+    //}
 
 
 
@@ -36,32 +36,42 @@ namespace FinalGame.Crops
         internal string TextureName { get; set; }
         Quality PlantQuality;
         internal PlantState PS;
-        internal PlantDay Day;
-
-        private PlantType plantType;
-        public PlantType PlantType
+        private PlantDay plantDay;
+        public PlantDay PlantDay
         {
-            get { return this.plantType; }
-            set { this.plantType = value; }
+            get { return this.plantDay; }
+            set { this.plantDay = value; }
         }
+
+        //private PlantType plantType;
+        //public PlantType PlantType
+        //{
+        //    get { return this.plantType; }
+        //    set { this.plantType = value; }
+        //}
         //int Count;
         bool AchievedExelence;
 
         public Plant(Game game) : base(game) { }
 
-        public Plant(Game game, string name, int worth, PlantType PT) : base(game,name, worth) 
+        public Plant(Game game, string name, int worth) : base(game,name, worth) 
         { 
             this.Name = name;
             this.Worth = worth;
-            this.PlantType = PT;
+            //this.PlantType = PT;
 
-            this.Day = PlantDay.DayOne;
+            this.plantDay = PlantDay.DayOne;
             this.PS = PlantState.Alive;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+        }
+
+        protected virtual void UpdatePlantDay()
+        {
+            this.plantDay = this.PlantDay;
         }
 
         public bool Watered { get; set; }
@@ -73,7 +83,7 @@ namespace FinalGame.Crops
         int i;
         public void Grow()
         {
-            i = (int)this.Day;
+            this.plantDay++;
         }
 
         public void Harvest(Plant plant)
