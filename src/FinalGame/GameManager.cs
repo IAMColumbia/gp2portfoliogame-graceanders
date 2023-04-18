@@ -114,7 +114,7 @@ namespace FinalGame
 
         public void CheckInteractedSquare()
         {
-            foreach (GridSquare gs in gridManager.GridBoard)
+            foreach (GridSquare gs in gridManager.SoilSquares)
             {
                 if (gs.GridState == GridState.Interacted)
                 {

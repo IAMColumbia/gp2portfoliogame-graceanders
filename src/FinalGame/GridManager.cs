@@ -14,6 +14,7 @@ namespace FinalGame
     class GridManager : DrawableGameComponent
     {
         public GridSquare[,] GridBoard;
+        internal List<GridSquare> SoilSquares;
 
         Texture2D GridTexture;
         Rectangle ScreenSize;
@@ -32,6 +33,7 @@ namespace FinalGame
         public GridManager(Game game, Rectangle SS, GridTerrain gT, InputHandler IH) : base(game) 
         {
             this.GridBoard = new GridSquare[17, 9];
+            SoilSquares = new List<GridSquare>();
             ScreenSize = SS;
 
             GridVisible = false;
@@ -78,6 +80,8 @@ namespace FinalGame
 
                     gs.spriteTexture = GT.ReturnTexture(GT.TerrainGuide[h, w]);
 
+                    if (gs.spriteTexture == GT.SoilTexture) { SoilSquares.Add(gs); }
+
                     gs.Initialize();
 
                     gs.Cords = new Vector2(w, h);
@@ -101,14 +105,6 @@ namespace FinalGame
             }
         }
 
-        private List<GridSquare> SoilSquares = new List<GridSquare>();
-        //public virtual List<GridSquare> ReturnSoilSquares()
-        //{
-        //    foreach (GridSquare gs in GridBoard)
-        //    {
-                
-        //    }
-        //}
 
         public override void Update(GameTime gameTime)
         {

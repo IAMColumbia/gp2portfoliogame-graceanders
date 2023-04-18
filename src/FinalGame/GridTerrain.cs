@@ -14,7 +14,7 @@ namespace FinalGame
     public class GridTerrain : Sprite
     {
         protected string GrassTextureName, WaterTextureName, SoilTextureName, SandTextureName;
-        protected Texture2D GrassTexture, WaterTexture, SoilTexture, SandTexture;
+        internal Texture2D GrassTexture, WaterTexture, SoilTexture, SandTexture;
 
         private TerrainType terrainType;
         public TerrainType TerrainType
