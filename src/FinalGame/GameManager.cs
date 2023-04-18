@@ -19,7 +19,7 @@ namespace FinalGame
 
         SpriteFont font;
 
-        PlayableCharacter playableCharacter;
+        PlayableCharacter PC;
         GridManager gridManager;
         GardenManager gardenManager;
         ShopManager shopManager;
@@ -40,7 +40,7 @@ namespace FinalGame
         {
             g = game;
             Input = input;
-            playableCharacter = p;
+            PC = p;
             gridManager = gridM;
             gardenManager = gardenM;
             shopManager = shopM;
@@ -65,8 +65,8 @@ namespace FinalGame
 
         public override void Update(GameTime gameTime)
         {
-            playableCharacter.Update(gameTime);
-            gridManager.CheckPlayerCollision(playableCharacter);
+            PC.Update(gameTime);
+            gridManager.CheckPlayerCollision(PC);
             UpdateTime(gameTime);
 
             CheckInteractedSquare();
@@ -130,7 +130,7 @@ namespace FinalGame
                         //Harvest
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true && p.PS != PlantState.Harvested)
                         {
-                            playableCharacter.Player.Inventory.Add(p);
+                            PC.Player.Inventory.Add(p);
                             p.PS = PlantState.Harvested;
                         }
 
@@ -146,7 +146,8 @@ namespace FinalGame
         {
             sb.Begin();
 
-            sb.DrawString(font, $"Total Time: {(int)CurrentTime} | Day Time: {(int)DayTime} | Day: {Day}", TimeLocation, Color.White);
+            sb.DrawString(font, $"Total Time: {(int)CurrentTime} | Day Time: {(int)DayTime} | Day: {Day}                                " +
+                $"Click to water plants!                          S: Shop | Money: {PC.Player.gold}", TimeLocation, Color.White);
 
             if (DrawCords) { DrawGridCords(); }
 
