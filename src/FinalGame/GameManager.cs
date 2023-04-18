@@ -120,16 +120,14 @@ namespace FinalGame
                 {
                     foreach (Plant p in gardenManager.Garden)
                     {
-                        if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true)
+                        if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true && p.PS != PlantState.Harvested)
                         {
                             playableCharacter.Player.Inventory.Add(p);
                             p.PS = PlantState.Harvested;
                             gardenManager.UpdatePlantState(p);
-
                             gs.GridState = GridState.Free;
                         }
                     }
-
                 }
             }
         }

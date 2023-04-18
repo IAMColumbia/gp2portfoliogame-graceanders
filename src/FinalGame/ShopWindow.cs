@@ -75,6 +75,7 @@ namespace FinalGame
 
         protected override void LoadContent()
         {
+            ShopModeUpdated();
             base.LoadContent();
         }
 
@@ -85,17 +86,17 @@ namespace FinalGame
             // Check for input to change the selected item
             if (Input.WasKeyPressed(Keys.Up))
             {
-                selectedItemIndex = (selectedItemIndex + buyableItems.Count - 1) % buyableItems.Count;
+                selectedItemIndex = (selectedItemIndex + displayItems.Count - 1) % displayItems.Count;
             }
             else if (Input.WasKeyPressed(Keys.Down))
             {
-                selectedItemIndex = (selectedItemIndex + 1) % buyableItems.Count;
+                selectedItemIndex = (selectedItemIndex + 1) % displayItems.Count;
             }
 
             // Check for input to buy or sell the selected item
             if (Input.WasKeyPressed(Keys.Enter))
             {
-                Item selectedItem = buyableItems[selectedItemIndex];
+                Item selectedItem = displayItems[selectedItemIndex];
                 if (BuyItemSelected != null && selectedItem.Worth <= Money)
                 {
                     BuyItemSelected(this, selectedItem);
@@ -145,7 +146,7 @@ namespace FinalGame
             // Draw the title
             spriteBatch.DrawString(title, $"Shop: {SM.ToString()}", titlePosition, Color.Black);
 
-            // Draw the buyable items
+            // Draw the display items
             for (int i = 0; i < displayItems.Count; i++)
             {
                 Color color = (i == selectedItemIndex) ? Color.Red : Color.Black;
