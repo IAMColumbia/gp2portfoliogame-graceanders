@@ -21,6 +21,7 @@ namespace FinalGame
         PlayableCharacter playableCharacter;
         GridManager gridManager;
         GardenManager gardenManager;
+        ShopManager shopManager;
 
         InputHandler input;
 
@@ -35,14 +36,16 @@ namespace FinalGame
             input = (InputHandler)game.Services.GetService(typeof(IInputHandler));
         }
 
-        internal GameManager(Game game, PlayableCharacter p, GridManager gridM, GardenManager gardenM) : base(game)
+        internal GameManager(Game game, PlayableCharacter p, GridManager gridM, GardenManager gardenM, ShopManager shopM) : base(game)
         {
             g = game;
             playableCharacter = p;
             gridManager = gridM;
             gardenManager = gardenM;
+            shopManager = shopM;
 
             DrawCords = false;
+            
         }
 
         protected override void LoadContent()
@@ -61,10 +64,11 @@ namespace FinalGame
 
         public override void Update(GameTime gameTime)
         {
-            HandleInput(gameTime);
             playableCharacter.Update(gameTime);
             gridManager.CheckPlayerCollision(playableCharacter);
             UpdateTime(gameTime);
+
+            CheckInteractedSquare();
 
             base.Update(gameTime);
         }
@@ -78,12 +82,33 @@ namespace FinalGame
             {
                 Day++;
                 DayTime = 0;
+                NextDay(gameTime);
             }
         }
 
-        public void HandleInput(GameTime gameTime)
+        public void NextDay(GameTime gameTime)
         {
+            gardenManager.GrowPlants();
+        }
 
+        public void CheckInteractedSquare()
+        {
+            foreach (GridSquare gs in gridManager.GridBoard)
+            {
+                if (gs.GridState == GridState.Interacted)
+                {
+                    foreach (Plant p in gardenManager.Garden)
+                    {
+                        if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true)
+                        {
+                            playableCharacter.Inventory.Add(p);
+                            p.PS = PlantState.Harvested;
+                            gardenManager.UpdatePlantState(p);
+                        }
+                    }
+
+                }
+            }
         }
 
         Vector2 TimeLocation = new Vector2(10, 10);

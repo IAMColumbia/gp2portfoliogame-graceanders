@@ -12,6 +12,6 @@ namespace FinalGame.Interfaces
         bool Watered { get; set; }
         int DaysUnwatered { get; set; }
 
-        void Water(Plant plant);
+        void Water();
     }
 }

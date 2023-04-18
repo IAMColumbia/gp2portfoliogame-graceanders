@@ -25,6 +25,8 @@ namespace FinalGame
 
         public Rectangle PlayerReach;
 
+        public List<Item> Inventory = new List<Item>();
+
         Rectangle TopLeftReach, TopRightReach, BottomLeftReach, BottomRightReach;
 
         public PlayerState PlayerState

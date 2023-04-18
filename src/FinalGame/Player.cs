@@ -28,19 +28,39 @@ namespace FinalGame
         }
 
         List<Item> Inventory = new List<Item>();
-        int Money;
+        public int gold;
+        private int Gold
+        {
+            get { return this.gold; }
+            set { this.gold = value; }
+        }
 
         public Player() { }
 
-        public Player(List<Item> inventory, int money)
+        public Player(List<Item> inventory, int gold)
         {
             Inventory = inventory;
-            Money = money;
+            Gold = gold;
         }
 
         public virtual void Log(string s) 
         { 
             Console.WriteLine(s);
+        }
+
+        public void AddItem(Item item)
+        {
+            Inventory.Add(item);
+        }
+
+        public bool HasItem(Item item, int quantity = 1)
+        {
+            return Inventory.Count(i => i == item) >= quantity;
+        }
+
+        public void RemoveItem(Item item) 
+        {
+            Inventory.Remove(item);
         }
     }
 }

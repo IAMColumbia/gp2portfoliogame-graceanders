@@ -11,85 +11,71 @@ namespace FinalGame.Crops
 {
     internal class GardenManager : DrawableGameComponent
     {
-        List<Plant> Garden;// May have all plants in garden drawn, but not visible
+        internal List<Plant> Garden;// May have all plants in garden drawn, but not visible
         List<Plant> AllPlants;
-
-        Plant Potato;
+        Plant Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry, Tomato;
+        
 
         bool testing;
 
-        protected string PotatoTextureName, MelonTextureName, GreenBeanTextureName, StrawberryTextureName, CornTextureName, RadishTextureName, TomatoTextureName, GrapesTextureName, PumpkinTextureName, BeetTextureName;
-        protected Texture2D PotatoTexture, MelonTexture, GreenBeanTexture, StrawberryTexture, CornTexture, RadishTexture, TomatoTexture, GrapesTexture, PumpkinTexture, BeetTexture;
-
+        int GardenPlotOneX, GardenPlotTwoX, GardenPlotThreeX, GardenPlotFourX;
 
         public GardenManager(Game game) : base(game)
         {
-            Garden = new List<Plant>(16) { };
-            AllPlants = new List<Plant> { };
+            Garden = new List<Plant>(4) { };
 
             testing = true;
-            SetPlantTextureNames();
-        }
-
-        private void SetPlantTextureNames()
-        {
-           PotatoTextureName = "Crops/Potato_Stage_1";
         }
 
         protected override void LoadContent()
         {
-            base.LoadContent();
-            this.PotatoTexture = this.Game.Content.Load<Texture2D>(PotatoTextureName);
-            LoadPlants();
+            GardenPlotOneX = 550;
+            GardenPlotTwoX = 850;
+            GardenPlotThreeX = 1160;
+            GardenPlotFourX = 1450;
 
-            UpdatePlantTexture(Potato);
+            base.LoadContent();
+            LoadPlants();
         }
 
         private void LoadPlants()
         {
-            Potato = new Plant(this.Game, "Potato", 0, PlantType.Potato);
-            Potato.Location = new Vector2(100, 100);
+            Beet = new Beet(this.Game, GardenPlotTwoX); 
+            Corn = new Corn(this.Game, GardenPlotThreeX);
+            Garlic = new Garlic(this.Game, GardenPlotFourX);
+            Grapes = new Grapes(this.Game, GardenPlotOneX);
+            GreenBean = new GreenBean(this.Game, GardenPlotOneX);
+            Melon = new Melon(this.Game, GardenPlotOneX);
+            Potato = new Potato(this.Game, GardenPlotOneX);
+            Radish = new Radish(this.Game, GardenPlotOneX);
+            Strawberry = new Strawberry(this.Game, GardenPlotOneX);
+            Tomato = new Tomato(this.Game, GardenPlotOneX);
 
-            Potato.Initialize();
+            AllPlants = new List<Plant>() { Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry , Tomato};
 
-            AllPlants.Add(Potato);
+            if (testing) 
+            {
+                Garden.Add(Potato);
+                Garden.Add(Beet);
+                Garden.Add(Corn);
+                Garden.Add(Garlic);
 
-            if (testing) { Garden.Add(Potato);}
+            }
 
         }
 
-        protected void UpdatePlantTexture(Plant plant)
+        internal void UpdatePlantState(Plant plant)
         {
-            switch (plant.PlantType)
+            switch (plant.PS)
             {
-                case PlantType.Potato:
-                    plant.spriteTexture = this.PotatoTexture;
+                case PlantState.Alive:
                     break;
-                case PlantType.Melon:
-
+                case PlantState.Dead:
+                    plant.DrawColor = Color.Brown;
                     break;
-                case PlantType.GreenBean:
-
+                case PlantState.Harvested:
+                    plant.DrawColor = Color.Transparent;
                     break;
-                case PlantType.Strawberry:
-
-                    break;
-                case PlantType.Corn:
-
-                    break;
-                case PlantType.Radish:
-
-                    break;
-                case PlantType.Tomato:
-
-                    break;
-                case PlantType.Grapes:
-
-                    break;
-                case PlantType.Beet:
-
-                    break;
-
             }
 
         }
@@ -104,6 +90,7 @@ namespace FinalGame.Crops
         {
             foreach (Plant plant in Garden)
             {
+                plant.Water();
                 if (plant.Watered)
                 {
                     plant.Grow();
@@ -113,6 +100,7 @@ namespace FinalGame.Crops
                     if (plant.DaysUnwatered >= 2) { plant.PS = PlantState.Dead; }
                     else { plant.DaysUnwatered++; }
                 }
+                plant.UpdatePlantDay();
             }
         }
 
