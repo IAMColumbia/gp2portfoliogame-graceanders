@@ -56,6 +56,7 @@ namespace FinalGame
         {
             SetupIPlayerController(game);
             Player = new GameConsolePlayer((GameConsole)game.Services.GetService<IGameConsole>());
+            Player.gold = 100;
         }
 
         protected virtual void SetupIPlayerController(Game game)

@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MonoGameLibrary.Util;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FinalGame
 {
@@ -29,7 +31,8 @@ namespace FinalGame
         private List<Item> playerItems;
 
         private int selectedItemIndex;
-        private int Money;
+
+        PlayableCharacter PC;
 
         ShopMode SM;
 
@@ -42,7 +45,7 @@ namespace FinalGame
         internal ShopWindow(Game game, List<Item> items, PlayableCharacter p, InputHandler input) : base(game)
         {
             buyableItems = items;
-            Money = p.Player.gold;
+            PC = p;
             playerItems = p.Player.Inventory;
             Input = input;
 
@@ -63,9 +66,9 @@ namespace FinalGame
                                          background.Width, background.Height);
 
             // Calculate the positions of the various elements
-            titlePosition = new Vector2(windowBounds.X + 20, windowBounds.Y + 20);
-            itemsPosition = new Vector2(windowBounds.X + 20, windowBounds.Y + 80);
-            moneyPosition = new Vector2(windowBounds.X + 20, windowBounds.Y + windowBounds.Height - 60);
+            titlePosition = new Vector2(windowBounds.X + 40, windowBounds.Y + 40);
+            itemsPosition = new Vector2(windowBounds.X + 40, windowBounds.Y + 90);
+            moneyPosition = new Vector2(windowBounds.X + 40, windowBounds.Y + windowBounds.Height - 90);
 
             // Set the selected item to the first item in the list
             selectedItemIndex = 0;
@@ -86,26 +89,28 @@ namespace FinalGame
             // Check for input to change the selected item
             if (Input.WasKeyPressed(Keys.Up))
             {
-                selectedItemIndex = (selectedItemIndex + displayItems.Count - 1) % displayItems.Count;
+                if(displayItems.Count != 0)
+                    selectedItemIndex = (selectedItemIndex + displayItems.Count - 1) % displayItems.Count;
             }
             else if (Input.WasKeyPressed(Keys.Down))
             {
-                selectedItemIndex = (selectedItemIndex + 1) % displayItems.Count;
+                if (displayItems.Count != 0)
+                    selectedItemIndex = (selectedItemIndex + 1) % displayItems.Count;
             }
 
             // Check for input to buy or sell the selected item
             if (Input.WasKeyPressed(Keys.Enter))
             {
                 Item selectedItem = displayItems[selectedItemIndex];
-                if (BuyItemSelected != null && selectedItem.Worth <= Money)
+                if (SM == ShopMode.Buy && selectedItem.Worth <= PC.Player.gold)
                 {
-                    BuyItemSelected(this, selectedItem);
-                    Money -= selectedItem.Worth;
+                    PC.Player.AddItem(selectedItem);
+                    PC.Player.gold -= selectedItem.Worth;
                 }
-                else if (SellItemSelected != null)
+                else if (SM == ShopMode.Sell)
                 {
-                    SellItemSelected(this, selectedItem);
-                    Money += selectedItem.Worth / 2;
+                    PC.Player.RemoveItem(selectedItem);
+                    PC.Player.gold += selectedItem.Worth;
                 }
             }
 
@@ -119,7 +124,7 @@ namespace FinalGame
                 SM = ShopMode.Buy;
             }
 
-                base.Update(gameTime);
+             base.Update(gameTime);
         }
 
         internal void ShopModeUpdated()
@@ -144,7 +149,8 @@ namespace FinalGame
             spriteBatch.Draw(background, windowBounds, Color.White);
 
             // Draw the title
-            spriteBatch.DrawString(title, $"Shop: {SM.ToString()}", titlePosition, Color.Black);
+            spriteBatch.DrawString(title, $"Shop: {SM.ToString()}                       " +
+                $"| Enter Select | - Sell | + Buy |", titlePosition, Color.Black);
 
             // Draw the display items
             for (int i = 0; i < displayItems.Count; i++)
@@ -154,7 +160,7 @@ namespace FinalGame
             }
 
             // Draw the money
-            spriteBatch.DrawString(font, "Money: " + Money, moneyPosition, Color.Black);
+            spriteBatch.DrawString(font, "Money: " + PC.Player.gold, moneyPosition, Color.Black);
 
             spriteBatch.End();
 
