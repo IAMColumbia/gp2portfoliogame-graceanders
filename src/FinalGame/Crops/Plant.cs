@@ -14,7 +14,7 @@ namespace FinalGame.Crops
         Unknown, Poor, Acceptable, Decent, Excellent
     }
 
-    enum PlantState//Unplanted and Harvest may not be nessacary
+    enum PlantState
     {
         Alive, Dead, Harvested
     }

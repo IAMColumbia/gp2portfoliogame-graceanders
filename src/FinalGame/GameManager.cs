@@ -110,6 +110,8 @@ namespace FinalGame
         public void NextDay(GameTime gameTime)
         {
             gardenManager.GrowPlants();
+            foreach (Plant plant in gardenManager.Garden) { plant.Watered = false; }
+            
         }
 
         public void CheckInteractedSquare()
@@ -120,13 +122,20 @@ namespace FinalGame
                 {
                     foreach (Plant p in gardenManager.Garden)
                     {
+                        //Water
+                        if (p.LocationRect.Intersects(gs.LocationRect) && p.PS == PlantState.Alive)
+                        {
+                            p.Water();
+                        }
+                        //Harvest
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true && p.PS != PlantState.Harvested)
                         {
                             playableCharacter.Player.Inventory.Add(p);
                             p.PS = PlantState.Harvested;
-                            gardenManager.UpdatePlantState(p);
-                            gs.GridState = GridState.Free;
                         }
+
+                        gs.GridState = GridState.Free;
+                        gardenManager.UpdatePlantState(p);
                     }
                 }
             }

@@ -71,7 +71,7 @@ namespace FinalGame.Crops
                 case PlantState.Alive:
                     break;
                 case PlantState.Dead:
-                    plant.DrawColor = Color.Brown;
+                    plant.DrawColor = Color.Transparent;
                     break;
                 case PlantState.Harvested:
                     plant.DrawColor = Color.Transparent;
@@ -90,15 +90,20 @@ namespace FinalGame.Crops
         {
             foreach (Plant plant in Garden)
             {
-                plant.Water();
                 if (plant.Watered)
                 {
                     plant.Grow();
                 }
                 else
                 {
-                    if (plant.DaysUnwatered >= 2) { plant.PS = PlantState.Dead; }
-                    else { plant.DaysUnwatered++; }
+                    if (plant.DaysUnwatered >= 2) { 
+                        plant.PS = PlantState.Dead;
+                        plant.DrawColor = Color.Transparent;
+                    }
+                    else{ 
+                        plant.DaysUnwatered++;
+                        plant.DrawColor = Color.Olive;
+                    }
                 }
                 plant.UpdatePlantDay();
             }
