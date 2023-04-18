@@ -11,52 +11,41 @@ namespace FinalGame.Crops
 {
     enum Quality
     {
-        Poor, Acceptable, Decent, Excellent
+        Unknown, Poor, Acceptable, Decent, Excellent
     }
 
-    enum PlantState//Unplanted and Harvest may not be nessacary
+    enum PlantState
     {
-        Unplanted, Alive, Dead, Harvested
+        Alive, Dead, Harvested
     }
 
     enum PlantDay 
     { 
-        DayOne, DayTwo, DayThree, DayFour, DayFive, Harvest
+        DayOne, DayTwo, DayThree, DayFour, DayFive, DaySix
     }
-
-    enum PlantType
-    {
-        Potato, Melon, GreenBean, Strawberry, Corn, Radish, Tomato, Grapes, Pumpkin, Beet
-    }
-
-
 
     internal class Plant : Item, IHarvestable, IWaterable, IGrowable
     {
         internal string TextureName { get; set; }
         Quality PlantQuality;
         internal PlantState PS;
-        internal PlantDay Day;
-
-        private PlantType plantType;
-        public PlantType PlantType
+        private PlantDay plantDay;
+        public PlantDay PlantDay
         {
-            get { return this.plantType; }
-            set { this.plantType = value; }
+            get { return this.plantDay; }
+            set { this.plantDay = value; }
         }
-        //int Count;
+
+        internal Texture2D DayOneTexture, DayTwoTexture, DayThreeTexture, DayFourTexture, DayFiveTexture, DaySixTexture;
+        internal string DayOneTextureName, DayTwoTextureName, DayThreeTextureName, DayFourTextureName, DayFiveTextureName, DaySixTextureName;
+
         bool AchievedExelence;
 
-        public Plant(Game game) : base(game) { }
-
-        public Plant(Game game, string name, int worth, PlantType PT) : base(game,name, worth) 
-        { 
-            this.Name = name;
-            this.Worth = worth;
-            this.PlantType = PT;
-
-            this.Day = PlantDay.DayOne;
+        public Plant(Game game) : base(game) 
+        {
+            this.plantDay = PlantDay.DayOne;
             this.PS = PlantState.Alive;
+            this.Harvestable = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -64,26 +53,79 @@ namespace FinalGame.Crops
             base.Update(gameTime);
         }
 
+
+        internal void UpdatePlantDay()
+        {
+            this.plantDay = this.PlantDay;
+            switch (this.PlantDay)
+            {
+                case PlantDay.DayOne:
+                    this.spriteTexture = this.DayOneTexture;
+                    break;
+                case PlantDay.DayTwo:
+                    this.spriteTexture = this.DayTwoTexture;
+                    break;
+                case PlantDay.DayThree:
+                    this.spriteTexture = this.DayThreeTexture;
+                    break;
+                case PlantDay.DayFour:
+                    this.spriteTexture = this.DayFourTexture;
+                    break;
+                case PlantDay.DayFive:
+                    this.spriteTexture = this.DayFiveTexture;
+                    break;
+                case PlantDay.DaySix:
+                    this.spriteTexture = this.DaySixTexture;
+                    this.Harvestable = true;
+                    if(this.PlantQuality == Quality.Unknown) { CalculateQuality();}
+                    break;
+            }
+        }
+
         public bool Watered { get; set; }
         public int DaysUnwatered { get; set; }
-        public int DaysToGrow { get; set; }
-        public int DaysGrowing { get; set; }
-        public bool Harvested { get; set; }
+        public bool Harvestable { get; set; }
 
         int i;
         public void Grow()
         {
-            i = (int)this.Day;
+            this.plantDay++;
         }
 
-        public void Harvest(Plant plant)
+        public Plant Harvest()
         {
-            throw new NotImplementedException();
+            return this;
         }
 
-        public void Water(Plant plant)
+        public void Water()
         {
-            throw new NotImplementedException();
+            this.Watered = true;
+        }
+
+        internal void CalculateQuality()
+        {
+            int qualityRoll = new Random().Next(1, 101);
+
+            if (qualityRoll <= 60) // 60% chance of Poor quality
+            {
+                this.PlantQuality = Quality.Poor;
+            }
+            else if (qualityRoll <= 85) // 25% chance of Acceptable quality
+            {
+                this.PlantQuality = Quality.Acceptable;
+                this.Worth += 20;
+            }
+            else if (qualityRoll <= 95) // 10% chance of Decent quality
+            {
+                this.PlantQuality = Quality.Decent;
+                this.Worth += 20;
+            }
+            else // 5% chance of Excellent quality
+            {
+                this.PlantQuality = Quality.Excellent;
+                this.Worth += 20;
+                this.AchievedExelence = true;
+            }
         }
     }    
 }

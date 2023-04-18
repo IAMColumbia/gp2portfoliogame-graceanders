@@ -20,12 +20,6 @@ namespace FinalGame
 
         public Item(Game game) : base(game) { }
 
-        //public Item(string name, int worth)
-        //{
-        //    Name = name;
-        //    Worth = worth;
-        //}
-
         public Item(Game game, string name, int worth) : base(game)
         {
             Name = name;

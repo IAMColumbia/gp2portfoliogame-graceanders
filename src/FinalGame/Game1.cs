@@ -21,6 +21,8 @@ namespace FinalGame
 
         PlayableCharacter player;
 
+        ShopManager shopM;
+
         InputHandler input;
         GameConsole console;
 
@@ -59,7 +61,10 @@ namespace FinalGame
             player = new PlayableCharacter(this);
             this.Components.Add(player);
 
-            gameM = new GameManager(this, player, gridM, gardenM);
+            shopM = new ShopManager(this, player, input);
+            this.Components.Add(shopM);
+
+            gameM = new GameManager(this, input, player, gridM, gardenM, shopM);
             this.Components.Add(gameM);
 
         }

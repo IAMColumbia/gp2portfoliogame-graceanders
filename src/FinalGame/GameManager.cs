@@ -1,6 +1,7 @@
 ﻿using FinalGame.Crops;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary.Util;
 using System;
 using System.Collections.Generic;
@@ -18,11 +19,12 @@ namespace FinalGame
 
         SpriteFont font;
 
-        PlayableCharacter playableCharacter;
+        PlayableCharacter PC;
         GridManager gridManager;
         GardenManager gardenManager;
+        ShopManager shopManager;
 
-        InputHandler input;
+        IInputHandler Input;
 
         bool DrawCords;
 
@@ -32,17 +34,19 @@ namespace FinalGame
         public GameManager(Game game) : base(game)
         {
             g = game;
-            input = (InputHandler)game.Services.GetService(typeof(IInputHandler));
         }
 
-        internal GameManager(Game game, PlayableCharacter p, GridManager gridM, GardenManager gardenM) : base(game)
+        internal GameManager(Game game, InputHandler input, PlayableCharacter p, GridManager gridM, GardenManager gardenM, ShopManager shopM) : base(game)
         {
             g = game;
-            playableCharacter = p;
+            Input = input;
+            PC = p;
             gridManager = gridM;
             gardenManager = gardenM;
+            shopManager = shopM;
 
             DrawCords = false;
+            
         }
 
         protected override void LoadContent()
@@ -61,10 +65,13 @@ namespace FinalGame
 
         public override void Update(GameTime gameTime)
         {
-            HandleInput(gameTime);
-            playableCharacter.Update(gameTime);
-            gridManager.CheckPlayerCollision(playableCharacter);
+            PC.Update(gameTime);
+            gridManager.CheckPlayerCollision(PC);
             UpdateTime(gameTime);
+
+            CheckInteractedSquare();
+
+            HandleInput();
 
             base.Update(gameTime);
         }
@@ -72,18 +79,66 @@ namespace FinalGame
 
         public void UpdateTime(GameTime gameTime)
         {
+            if (shopManager.IsShopOpen)
+            {
+                return;
+            }
+
             CurrentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
             DayTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (DayTime >= DayDuration)
             {
                 Day++;
                 DayTime = 0;
+                NextDay(gameTime);
             }
         }
 
-        public void HandleInput(GameTime gameTime)
+        public void HandleInput()
         {
+            if (!shopManager.IsShopOpen && Input.KeyboardState.WasKeyPressed(Keys.D4))
+            {
+                shopManager.OpenShopWindow();
+            }
+            else if (shopManager.IsShopOpen && Input.KeyboardState.WasKeyPressed(Keys.D4))
+            {
+                shopManager.CloseShopWindow();
+            }
 
+        }
+
+        public void NextDay(GameTime gameTime)
+        {
+            gardenManager.GrowPlants();
+            foreach (Plant plant in gardenManager.Garden) { plant.Watered = false; }
+            
+        }
+
+        public void CheckInteractedSquare()
+        {
+            foreach (GridSquare gs in gridManager.SoilSquares)
+            {
+                if (gs.GridState == GridState.Interacted)
+                {
+                    foreach (Plant p in gardenManager.Garden)
+                    {
+                        //Water
+                        if (p.LocationRect.Intersects(gs.LocationRect) && p.PS == PlantState.Alive)
+                        {
+                            p.Water();
+                        }
+                        //Harvest
+                        if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true && p.PS != PlantState.Harvested)
+                        {
+                            PC.Player.Inventory.Add(p);
+                            p.PS = PlantState.Harvested;
+                        }
+
+                        gs.GridState = GridState.Free;
+                        gardenManager.UpdatePlantState(p);
+                    }
+                }
+            }
         }
 
         Vector2 TimeLocation = new Vector2(10, 10);
@@ -91,7 +146,8 @@ namespace FinalGame
         {
             sb.Begin();
 
-            sb.DrawString(font, $"Total Time: {(int)CurrentTime} | Day Time: {(int)DayTime} | Day: {Day}", TimeLocation, Color.White);
+            sb.DrawString(font, $"Total Time: {(int)CurrentTime} | Day Time: {(int)DayTime} | Day: {Day}                                " +
+                $"Click to water plants!                          S: Shop | Money: {PC.Player.gold}", TimeLocation, Color.White);
 
             if (DrawCords) { DrawGridCords(); }
 
