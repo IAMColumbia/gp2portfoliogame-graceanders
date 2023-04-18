@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using MonoGameLibrary.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,29 @@ namespace FinalGame
 {
     public class ShopManager : DrawableGameComponent
     {
-        private Dictionary<Item, int> ShopInventory = new Dictionary<Item, int>();
+        Game Game;
+        PlayableCharacter PC;
+        InputHandler input;
+
+        private List<Item> ShopInventory;
         private List<Item> BuyableItems = new List<Item>();
         private Random random = new Random();
 
         Item BeetSeeds, CornSeeds, GarlicSeeds, GrapeSeeds, GreenBeanSeeds, MelonSeeds, PotatoSeeds, RadishSeeds, StrawberrySeeds, TomatoSeeds;
 
-        public ShopManager(Game game) : base(game)
+        private bool isShopOpen;
+
+        internal bool IsShopOpen
         {
+            get { return isShopOpen; }
+        }
+
+        internal ShopManager(Game game, PlayableCharacter p, InputHandler IH) : base(game)
+        {
+            Game = game;
+            PC = p;
+            input = IH;
+
             BeetSeeds = new Item(game, "Beet Seeds", 20);
             CornSeeds = new Item(game, "Corn Seeds", 150);//may adjust price
             GarlicSeeds = new Item(game, "Garlic Seeds", 40);
@@ -26,59 +42,76 @@ namespace FinalGame
             StrawberrySeeds = new Item(game, "Strawberry Seeds", 100);
             TomatoSeeds = new Item(game, "Tomato Seeds", 50);
 
-            ShopInventory.Add(BeetSeeds, 10);
-            ShopInventory.Add(CornSeeds, 10);
-            ShopInventory.Add(GarlicSeeds, 10);
-            ShopInventory.Add(GrapeSeeds, 10);
-            ShopInventory.Add(GreenBeanSeeds, 10);
-            ShopInventory.Add(MelonSeeds, 10);
-            ShopInventory.Add(PotatoSeeds, 10);
-            ShopInventory.Add(RadishSeeds, 10);
-            ShopInventory.Add(StrawberrySeeds, 10);
-            ShopInventory.Add(TomatoSeeds, 10);
+            ShopInventory = new List<Item>() { BeetSeeds, CornSeeds, GarlicSeeds, GrapeSeeds, GreenBeanSeeds, MelonSeeds, PotatoSeeds, RadishSeeds, StrawberrySeeds , TomatoSeeds};
 
             // Pick 5 random items to be buyable
-            var items = ShopInventory.Keys.ToList();
             for (int i = 0; i < 5; i++)
             {
-                int index = random.Next(items.Count);
-                Item item = items[index];
+                int index = random.Next(ShopInventory.Count);
+                Item item = ShopInventory[index];
                 BuyableItems.Add(item);
-                items.RemoveAt(index);
+                ShopInventory.RemoveAt(index);
             }
         }
 
         internal void BuyItem(Item item, Player player)
         {
             int cost = item.Worth;
-            if (player.gold >= cost && ShopInventory.ContainsKey(item) && ShopInventory[item] > 0)
+            if (player.gold >= cost && ShopInventory.Contains(item))
             {
                 player.gold -= cost;
                 player.AddItem(item);
-                ShopInventory[item]--;
+                ShopInventory.Remove(item);
             }
         }
 
         internal void SellItem(Item item, Player player)
         {
             int cost = item.Worth / 2;
-            if (player.HasItem(item) && ShopInventory.ContainsKey(item))
+            if (player.HasItem(item))
             {
                 player.gold += cost;
                 player.RemoveItem(item);
-                ShopInventory[item]++;
+                ShopInventory.Add(item);
             }
         }
-        
+
         internal int GetInventoryCount(Item item)
         {
-            if (ShopInventory.ContainsKey(item))
+            return ShopInventory.Count(i => i == item);
+        }
+
+        public void OpenShopWindow()
+        {
+            if (!isShopOpen)
             {
-                return ShopInventory[item];
+                // TODO: Code to open the shop window
+                // For example, you could create a new ShopWindow object and add it to the game components
+                ShopWindow shopWindow = new ShopWindow(Game,ShopInventory,PC.Player.gold,input);
+                Game.Components.Add(shopWindow);
+
+                isShopOpen = true;
+
+                // Pause the game update loop
+                Game.IsFixedTimeStep = false;
+                Game.IsMouseVisible = false;
             }
-            else
+        }
+
+        public void CloseShopWindow()
+        {
+            if (isShopOpen)
             {
-                return 0;
+                // TODO: Code to close the shop window
+                // For example, you could remove the ShopWindow object from the game components
+                ShopWindow shopWindow = (ShopWindow)Game.Components.FirstOrDefault(c => c is ShopWindow);
+                Game.Components.Remove(shopWindow);
+
+                isShopOpen = false;
+
+                // Resume the game update loop
+                Game.IsFixedTimeStep = true;
+                Game.IsMouseVisible = true;
             }
         }
     }

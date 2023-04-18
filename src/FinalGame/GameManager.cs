@@ -1,6 +1,7 @@
 ﻿using FinalGame.Crops;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary.Util;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace FinalGame
         GardenManager gardenManager;
         ShopManager shopManager;
 
-        InputHandler input;
+        IInputHandler Input;
 
         bool DrawCords;
 
@@ -33,12 +34,12 @@ namespace FinalGame
         public GameManager(Game game) : base(game)
         {
             g = game;
-            input = (InputHandler)game.Services.GetService(typeof(IInputHandler));
         }
 
-        internal GameManager(Game game, PlayableCharacter p, GridManager gridM, GardenManager gardenM, ShopManager shopM) : base(game)
+        internal GameManager(Game game, InputHandler input, PlayableCharacter p, GridManager gridM, GardenManager gardenM, ShopManager shopM) : base(game)
         {
             g = game;
+            Input = input;
             playableCharacter = p;
             gridManager = gridM;
             gardenManager = gardenM;
@@ -70,12 +71,19 @@ namespace FinalGame
 
             CheckInteractedSquare();
 
+            HandleInput();
+
             base.Update(gameTime);
         }
 
 
         public void UpdateTime(GameTime gameTime)
         {
+            if (shopManager.IsShopOpen)
+            {
+                return;
+            }
+
             CurrentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
             DayTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (DayTime >= DayDuration)
@@ -84,6 +92,19 @@ namespace FinalGame
                 DayTime = 0;
                 NextDay(gameTime);
             }
+        }
+
+        public void HandleInput()
+        {
+            if (!shopManager.IsShopOpen && Input.KeyboardState.WasKeyPressed(Keys.D4))
+            {
+                shopManager.OpenShopWindow();
+            }
+            else if (shopManager.IsShopOpen && Input.KeyboardState.WasKeyPressed(Keys.D4))
+            {
+                shopManager.CloseShopWindow();
+            }
+
         }
 
         public void NextDay(GameTime gameTime)
