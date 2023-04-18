@@ -113,14 +113,17 @@ namespace FinalGame.Crops
             else if (qualityRoll <= 85) // 25% chance of Acceptable quality
             {
                 this.PlantQuality = Quality.Acceptable;
+                this.Worth += 20;
             }
             else if (qualityRoll <= 95) // 10% chance of Decent quality
             {
                 this.PlantQuality = Quality.Decent;
+                this.Worth += 20;
             }
             else // 5% chance of Excellent quality
             {
                 this.PlantQuality = Quality.Excellent;
+                this.Worth += 20;
                 this.AchievedExelence = true;
             }
         }

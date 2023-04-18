@@ -14,7 +14,7 @@ namespace FinalGame.Crops
         public Corn(Game game, int Xloc) : base(game)
         {
             this.Name = "Corn";
-            this.Worth = 10; //Calculate worth later
+            this.Worth = 50;
             this.Location = new Vector2(Xloc, Yloc);
             this.Scale = 2;
             SetTextureNames();

@@ -14,7 +14,7 @@ namespace FinalGame.Crops
         public Grapes(Game game, int Xloc) : base(game)
         {
             this.Name = "Grapes";
-            this.Worth = 10; //Calculate worth later
+            this.Worth = 80;
             this.Location = new Vector2(Xloc, Yloc);
             this.Scale = 2;
             SetTextureNames();

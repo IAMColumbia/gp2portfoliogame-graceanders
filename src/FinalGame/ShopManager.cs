@@ -32,7 +32,7 @@ namespace FinalGame
             input = IH;
 
             BeetSeeds = new Item(game, "Beet Seeds", 20);
-            CornSeeds = new Item(game, "Corn Seeds", 150);//may adjust price
+            CornSeeds = new Item(game, "Corn Seeds", 50);
             GarlicSeeds = new Item(game, "Garlic Seeds", 40);
             GrapeSeeds = new Item(game, "Grape Seeds", 60);
             GreenBeanSeeds = new Item(game, "Green Bean Seeds", 60);

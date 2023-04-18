@@ -14,7 +14,7 @@ namespace FinalGame.Crops
         public Radish(Game game, int Xloc) : base(game)
         {
             this.Name = "Radish";
-            this.Worth = 10; //Calculate worth later
+            this.Worth = 90;
             this.Location = new Vector2(Xloc, Yloc);
             this.Scale = 2;
             SetTextureNames();
