@@ -10,18 +10,28 @@ using Microsoft.Xna.Framework.Input;
 
 namespace FinalGame
 {
+    enum ShopMode 
+    {
+        Buy, Sell
+    }
     public class ShopWindow : DrawableGameComponent
     {
         private SpriteBatch spriteBatch;
-        private SpriteFont font;
+        private SpriteFont font, title;
         private Texture2D background;
         private Rectangle windowBounds;
         private Vector2 titlePosition;
         private Vector2 itemsPosition;
         private Vector2 moneyPosition;
+
+        private List<Item> displayItems;
         private List<Item> buyableItems;
+        private List<Item> playerItems;
+
         private int selectedItemIndex;
         private int Money;
+
+        ShopMode SM;
 
         internal event EventHandler<Item> BuyItemSelected;
 
@@ -29,11 +39,14 @@ namespace FinalGame
 
         InputHandler Input;
 
-        internal ShopWindow(Game game, List<Item> items, int playerMoney, InputHandler input) : base(game)
+        internal ShopWindow(Game game, List<Item> items, PlayableCharacter p, InputHandler input) : base(game)
         {
             buyableItems = items;
-            Money = playerMoney;
+            Money = p.Player.gold;
+            playerItems = p.Player.Inventory;
             Input = input;
+
+            SM = ShopMode.Buy;
         }
 
         public override void Initialize()
@@ -41,6 +54,7 @@ namespace FinalGame
             // Set up the sprite batch and load content
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Game.Content.Load<SpriteFont>("Arial");
+            title = Game.Content.Load<SpriteFont>("Title");
             background = Game.Content.Load<Texture2D>("ShopBackground");
 
             // Calculate the bounds of the window
@@ -66,6 +80,8 @@ namespace FinalGame
 
         public override void Update(GameTime gameTime)
         {
+            ShopModeUpdated();
+
             // Check for input to change the selected item
             if (Input.WasKeyPressed(Keys.Up))
             {
@@ -92,7 +108,31 @@ namespace FinalGame
                 }
             }
 
-            base.Update(gameTime);
+            if (Input.WasKeyPressed(Keys.OemMinus))
+            {
+                SM = ShopMode.Sell; 
+            }
+
+            if (Input.WasKeyPressed(Keys.OemPlus))
+            {
+                SM = ShopMode.Buy;
+            }
+
+                base.Update(gameTime);
+        }
+
+        internal void ShopModeUpdated()
+        {
+            switch (SM)
+            {
+                case ShopMode.Buy:
+                    displayItems = buyableItems;
+                    break;
+                case ShopMode.Sell:
+                    displayItems = playerItems; 
+                    break;
+            }
+
         }
 
         public override void Draw(GameTime gameTime)
@@ -103,13 +143,13 @@ namespace FinalGame
             spriteBatch.Draw(background, windowBounds, Color.White);
 
             // Draw the title
-            spriteBatch.DrawString(font, "Shop", titlePosition, Color.Black);
+            spriteBatch.DrawString(title, $"Shop: {SM.ToString()}", titlePosition, Color.Black);
 
             // Draw the buyable items
-            for (int i = 0; i < buyableItems.Count; i++)
+            for (int i = 0; i < displayItems.Count; i++)
             {
                 Color color = (i == selectedItemIndex) ? Color.Red : Color.Black;
-                spriteBatch.DrawString(font, buyableItems[i].Name + " (" + buyableItems[i].Worth + ")\n", itemsPosition + new Vector2(0, i * 20), color);
+                spriteBatch.DrawString(font, displayItems[i].Name + " (" + displayItems[i].Worth + ")", itemsPosition + new Vector2(0, i * 40), color);
             }
 
             // Draw the money

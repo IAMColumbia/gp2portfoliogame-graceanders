@@ -68,11 +68,11 @@ namespace FinalGame
                     gs = new GridSquare(this.Game);
 
                     if (!GridVisible) 
-                    { 
+                    {
                         gs.TerrainMode(gs); 
                     }
                     else 
-                    { 
+                    {
                         gs.GridMode(gs); 
                     }
 
@@ -100,6 +100,15 @@ namespace FinalGame
                 }
             }
         }
+
+        private List<GridSquare> SoilSquares = new List<GridSquare>();
+        //public virtual List<GridSquare> ReturnSoilSquares()
+        //{
+        //    foreach (GridSquare gs in GridBoard)
+        //    {
+                
+        //    }
+        //}
 
         public override void Update(GameTime gameTime)
         {

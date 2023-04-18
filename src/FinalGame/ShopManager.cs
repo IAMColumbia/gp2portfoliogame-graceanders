@@ -87,7 +87,7 @@ namespace FinalGame
             {
                 // TODO: Code to open the shop window
                 // For example, you could create a new ShopWindow object and add it to the game components
-                ShopWindow shopWindow = new ShopWindow(Game,ShopInventory,PC.Player.gold,input);
+                ShopWindow shopWindow = new ShopWindow(Game,ShopInventory,PC ,input);
                 Game.Components.Add(shopWindow);
 
                 isShopOpen = true;

@@ -848,3 +848,10 @@
 /processorParam:TextureFormat=Color
 /build:Terrain_Water.png
 
+#begin Title.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Title.spritefont
+

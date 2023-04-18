@@ -122,9 +122,11 @@ namespace FinalGame
                     {
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true)
                         {
-                            playableCharacter.Inventory.Add(p);
+                            playableCharacter.Player.Inventory.Add(p);
                             p.PS = PlantState.Harvested;
                             gardenManager.UpdatePlantState(p);
+
+                            gs.GridState = GridState.Free;
                         }
                     }
 

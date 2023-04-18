@@ -27,7 +27,7 @@ namespace FinalGame
         
         }
 
-        List<Item> Inventory = new List<Item>();
+        internal List<Item> Inventory = new List<Item>();
         public int gold;
         private int Gold
         {

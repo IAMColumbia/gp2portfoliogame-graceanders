@@ -50,14 +50,12 @@ namespace FinalGame
                 case GridState.Free:
                     //this.Visible = true;
                     this.spriteTexture = FreeTexture;
-                    //this.spriteTexture = GrassTexture;
                     break;
                 case GridState.Occupied:
                     //this.Visible = true;
                     this.spriteTexture = OccupiedTexture;
                     break;
                 case GridState.Interacted:
-                    //need to make Interacted texture
                     this.spriteTexture = InteractedTexture;
                     break;
             }
