@@ -32,6 +32,30 @@
 /processorParam:TextureFormat=Color
 /build:BackSprite.png
 
+#begin Crops/Beet_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Beet_Seeds.png
+
+#begin Crops/Beet_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Beet_Seeds.png
+
 #begin Crops/Beet_Stage_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -91,6 +115,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Crops/Beet_Stage_5.png
+
+#begin Crops/Corn_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Corn_Seeds.png
+
+#begin Crops/Corn_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Corn_Seeds.png
 
 #begin Crops/Corn_Stage_1.png
 /importer:TextureImporter
@@ -164,6 +212,18 @@
 /processorParam:TextureFormat=Color
 /build:Crops/Corn_Stage_6.png
 
+#begin Crops/Garlic_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Garlic_Seeds.png
+
 #begin Crops/Garlic_Stage_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -223,6 +283,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Crops/Garlic_Stage_5.png
+
+#begin Crops/Grape_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Grape_Seeds.png
 
 #begin Crops/Grape_Stage_1.png
 /importer:TextureImporter
@@ -296,6 +368,18 @@
 /processorParam:TextureFormat=Color
 /build:Crops/Grape_Stage_6.png
 
+#begin Crops/Gree_Bean_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Gree_Bean_Seeds.png
+
 #begin Crops/Green_Bean_Stage_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -367,6 +451,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Crops/Green_Bean_Stage_6.png
+
+#begin Crops/Melon_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Melon_Seeds.png
 
 #begin Crops/Melon_Stage_1.png
 /importer:TextureImporter
@@ -440,6 +536,18 @@
 /processorParam:TextureFormat=Color
 /build:Crops/Melon_Stage_6.png
 
+#begin Crops/Potato_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Potato_Seeds.png
+
 #begin Crops/Potato_Stage_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -512,6 +620,18 @@
 /processorParam:TextureFormat=Color
 /build:Crops/Potato_Stage_6.png
 
+#begin Crops/Radish_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Radish_Seeds.png
+
 #begin Crops/Radish_Stage_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -571,6 +691,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Crops/Radish_Stage_5.png
+
+#begin Crops/Strawberry_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Strawberry_Seeds.png
 
 #begin Crops/Strawberry_Stage_1.png
 /importer:TextureImporter
@@ -643,6 +775,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Crops/Strawberry_Stage_6.png
+
+#begin Crops/Tomato_Seeds.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Tomato_Seeds.png
 
 #begin Crops/Tomato_Stage_1.png
 /importer:TextureImporter
@@ -763,6 +907,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:GridRed.png
+
+#begin InventorySprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:InventorySprite.png
 
 #begin LeftSprite.png
 /importer:TextureImporter

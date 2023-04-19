@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Util;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace FinalGame
         private Random random = new Random();
 
         Item BeetSeeds, CornSeeds, GarlicSeeds, GrapeSeeds, GreenBeanSeeds, MelonSeeds, PotatoSeeds, RadishSeeds, StrawberrySeeds, TomatoSeeds;
+        
 
         private bool isShopOpen;
 

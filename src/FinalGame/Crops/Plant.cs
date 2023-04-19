@@ -26,7 +26,7 @@ namespace FinalGame.Crops
 
     internal class Plant : Item, IHarvestable, IWaterable, IGrowable
     {
-        internal string TextureName { get; set; }
+        //internal string TextureName { get; set; }
         Quality PlantQuality;
         internal PlantState PS;
         private PlantDay plantDay;
