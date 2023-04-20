@@ -30,8 +30,6 @@ namespace FinalGame.Crops
             this.DayFourTextureName = "Crops/Grape_Stage_4";
             this.DayFiveTextureName = "Crops/Grape_Stage_5";
             this.DaySixTextureName = "Crops/Grape_Stage_6";
-
-            this.SeedTextureName = "Crops/Grape_Seeds";
         }
 
     }

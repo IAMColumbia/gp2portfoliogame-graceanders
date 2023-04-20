@@ -6,8 +6,10 @@ using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Sprite.Extensions;
 using MonoGameLibrary.Util;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -182,6 +184,8 @@ namespace FinalGame
 
             foreach(Vector2 loc in Hotbar){ sb.Draw(InventoryTexture, loc, Color.White); }
 
+            DrawHotbar();
+
             sb.End();
 
             base.Draw(gameTime);
@@ -192,6 +196,17 @@ namespace FinalGame
             foreach(GridSquare gs in gridManager.GridBoard) 
             {
                 sb.DrawString(font, $"({gs.Cords.X},{gs.Cords.Y})", gs.Location, Color.Black);
+            }
+        }
+
+        int count;
+        Vector2 Center = new Vector2(25, 25);
+        public void DrawHotbar()
+        {
+            foreach (Item item in PC.Player.Inventory)
+            {
+                count = PC.Player.Inventory.IndexOf(item);
+                sb.Draw(item.spriteTexture, Hotbar[count] + Center, Color.White);
             }
         }
 

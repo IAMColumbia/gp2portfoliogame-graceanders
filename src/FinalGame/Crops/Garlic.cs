@@ -30,8 +30,6 @@ namespace FinalGame.Crops
             this.DayFourTextureName = "Crops/Garlic_Stage_4";
             this.DayFiveTextureName = "Crops/Garlic_Stage_4";
             this.DaySixTextureName = "Crops/Garlic_Stage_5";
-
-            this.SeedTextureName = "Crops/Garlic_Seeds";
         }
     }
 }

@@ -18,7 +18,8 @@ namespace FinalGame
         private Random random = new Random();
 
         Item BeetSeeds, CornSeeds, GarlicSeeds, GrapeSeeds, GreenBeanSeeds, MelonSeeds, PotatoSeeds, RadishSeeds, StrawberrySeeds, TomatoSeeds;
-        
+
+        string BeetSeedTextureName, CornSeedTextureName, GarlicSeedTextureName, GrapeSeedTextureName, GreenBeanSeedTextureName, MelonSeedTextureName, PotatoSeedTextureName, RadishSeedTextureName, StrawberrySeedTextureName, TomatoSeedTextureName;
 
         private bool isShopOpen;
 
@@ -56,6 +57,33 @@ namespace FinalGame
             }
         }
 
+        protected override void LoadContent()
+        {
+            BeetSeedTextureName = "Crops/Beet_Seeds";
+            CornSeedTextureName = "Crops/Corn_Seeds";
+            GarlicSeedTextureName = "Crops/Garlic_Seeds";
+            GrapeSeedTextureName = "Crops/Grape_Seeds";
+            GreenBeanSeedTextureName = "Crops/Green_Bean_Seeds";
+            MelonSeedTextureName = "Crops/Melon_Seeds";
+            PotatoSeedTextureName = "Crops/Potato_Seeds";
+            RadishSeedTextureName = "Crops/Radish_Seeds";
+            StrawberrySeedTextureName = "Crops/Strawberry_Seeds";
+            TomatoSeedTextureName = "Crops/Tomato_Seeds";
+
+            BeetSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(BeetSeedTextureName);
+            CornSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(CornSeedTextureName);
+            GarlicSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(GarlicSeedTextureName);
+            GrapeSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(GrapeSeedTextureName);
+            GreenBeanSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(GreenBeanSeedTextureName);
+            MelonSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(MelonSeedTextureName);
+            PotatoSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(PotatoSeedTextureName);
+            RadishSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(RadishSeedTextureName);
+            StrawberrySeeds.spriteTexture = this.Game.Content.Load<Texture2D>(StrawberrySeedTextureName);
+            TomatoSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(TomatoSeedTextureName);
+
+            base.LoadContent();
+        }
+
         internal void BuyItem(Item item, Player player)
         {
             int cost = item.Worth;
@@ -87,8 +115,6 @@ namespace FinalGame
         {
             if (!isShopOpen)
             {
-                // TODO: Code to open the shop window
-                // For example, you could create a new ShopWindow object and add it to the game components
                 ShopWindow shopWindow = new ShopWindow(Game,ShopInventory,PC ,input);
                 Game.Components.Add(shopWindow);
 
@@ -104,8 +130,6 @@ namespace FinalGame
         {
             if (isShopOpen)
             {
-                // TODO: Code to close the shop window
-                // For example, you could remove the ShopWindow object from the game components
                 ShopWindow shopWindow = (ShopWindow)Game.Components.FirstOrDefault(c => c is ShopWindow);
                 Game.Components.Remove(shopWindow);
 

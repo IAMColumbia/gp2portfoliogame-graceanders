@@ -30,8 +30,6 @@ namespace FinalGame.Crops
             this.DayFourTextureName = "Crops/Radish_Stage_3";
             this.DayFiveTextureName = "Crops/Radish_Stage_4";
             this.DaySixTextureName = "Crops/Radish_Stage_5";
-
-            this.SeedTextureName = "Crops/Radish_Seeds";
         }
     }
 }

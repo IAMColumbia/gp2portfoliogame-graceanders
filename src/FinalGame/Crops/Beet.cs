@@ -21,6 +21,7 @@ namespace FinalGame.Crops
 
             Initialize();
         }
+
         internal void SetTextureNames()
         {
             this.DayOneTextureName = "Crops/Beet_Stage_1";
@@ -29,8 +30,6 @@ namespace FinalGame.Crops
             this.DayFourTextureName = "Crops/Beet_Stage_4";
             this.DayFiveTextureName = "Crops/Beet_Stage_4";
             this.DaySixTextureName = "Crops/Beet_Stage_5";
-
-            this.SeedTextureName = "Crops/Beet_Seeds";
         }
     }
 }
