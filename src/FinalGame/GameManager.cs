@@ -36,15 +36,13 @@ namespace FinalGame
         int Day;
 
         List<Hotbar> Hotbar;
+        Item SelectedItem;
 
         Texture2D InventoryTexture, SelectedTexture;
         string InventoryTextureName, SelectedTextureName;
         Vector2 InventoryOneLoc, InventoryTwoLoc, InventoryThreeLoc, InventoryFourLoc, InventoryFiveLoc, InventorySixLoc, InventorySevenLoc, InventoryEightLoc, InventoryNineLoc;
         
-        public GameManager(Game game) : base(game)
-        {
-            g = game;
-        }
+        public GameManager(Game game) : base(game) { g = game; }
 
         internal GameManager(Game game, InputHandler input, PlayableCharacter p, GridManager gridM, GardenManager gardenM, ShopManager shopM) : base(game)
         {
@@ -83,15 +81,9 @@ namespace FinalGame
             InventoryTexture = this.Game.Content.Load<Texture2D>(InventoryTextureName);
             SelectedTexture = this.Game.Content.Load<Texture2D>(SelectedTextureName);
 
-            InventoryOneLoc = new Vector2(300, 870);
-            InventoryTwoLoc = new Vector2(425, 870);
-            InventoryThreeLoc = new Vector2(550, 870);
-            InventoryFourLoc = new Vector2(675, 870);
-            InventoryFiveLoc = new Vector2(800, 870);
-            InventorySixLoc = new Vector2(925, 870);
-            InventorySevenLoc = new Vector2(1050, 870);
-            InventoryEightLoc = new Vector2(1175, 870);
-            InventoryNineLoc = new Vector2(1300, 870);
+            InventoryOneLoc = new Vector2(300, 870); InventoryTwoLoc = new Vector2(425, 870); InventoryThreeLoc = new Vector2(550, 870);
+            InventoryFourLoc = new Vector2(675, 870); InventoryFiveLoc = new Vector2(800, 870); InventorySixLoc = new Vector2(925, 870);
+            InventorySevenLoc = new Vector2(1050, 870); InventoryEightLoc = new Vector2(1175, 870); InventoryNineLoc = new Vector2(1300, 870);
 
             Hotbar = new List<Hotbar> { new Hotbar(InventoryOneLoc, "InventoryOne"), 
                 new Hotbar(InventoryTwoLoc,"InventoryTwo"), new Hotbar(InventoryThreeLoc,"InventorThree"), 
@@ -146,7 +138,8 @@ namespace FinalGame
                 shopManager.CloseShopWindow();
             }
 
-            //Hotbar Select
+            #region Hotbar Select
+
             if (Input.KeyboardState.WasKeyPressed(Keys.D1)){
                 UnselectHotbar();
                 Hotbar[0].Selected = true;
@@ -183,7 +176,7 @@ namespace FinalGame
                 UnselectHotbar();
                 Hotbar[8].Selected = true;
             }
-
+            #endregion
         }
 
         private void UnselectHotbar() { foreach (Hotbar hb in Hotbar) { hb.Selected = false; } }
@@ -195,12 +188,15 @@ namespace FinalGame
             
         }
 
+        int toChange, changeWith;
+        bool Planted;
         public void CheckInteractedSquare()
         {
             foreach (GridSquare gs in gridManager.SoilSquares)
             {
                 if (gs.GridState == GridState.Interacted)
                 {
+                    Planted = false;
                     foreach (Plant p in gardenManager.Garden)
                     {
                         //Water
@@ -215,9 +211,27 @@ namespace FinalGame
                             p.PS = PlantState.Harvested;
                         }
 
+                        //Replant
+                        if(p.LocationRect.Intersects(gs.LocationRect) && p.DrawColor == Color.Transparent)
+                        {
+                            changeWith = SelectedItem.ReturnPlantIndex();
+                            toChange = gardenManager.Garden.IndexOf(p);
+                            PC.Player.Inventory.Remove(SelectedItem);
+                            Planted = true;
+                        }
+
                         gs.GridState = GridState.Free;
                         gardenManager.UpdatePlantState(p);
                     }
+
+                    if (Planted) 
+                    { 
+                        gardenManager.Garden[toChange] = gardenManager.AllPlants[changeWith];
+                        gardenManager.Garden[toChange].PS = PlantState.Alive;
+                        gardenManager.Garden[toChange].DrawColor = Color.White;
+                        gardenManager.UpdatePlantState(gardenManager.Garden[toChange]);
+                    }
+                    
                 }
             }
         }
@@ -232,10 +246,18 @@ namespace FinalGame
 
             if (DrawCords) { DrawGridCords(); }
 
+            int i;
             foreach(Hotbar hb in Hotbar)
             { 
                 sb.Draw(InventoryTexture, hb.Loc, Color.White); 
-                if(hb.Selected == true) { sb.Draw(SelectedTexture, hb.Loc, Color.White); }
+                if(hb.Selected == true) 
+                { 
+                    sb.Draw(SelectedTexture, hb.Loc, Color.White);
+                    i = Hotbar.IndexOf(hb);
+                    if(PC.Player.Inventory.Count >= i + 1){ 
+                        SelectedItem = PC.Player.Inventory[i]; 
+                    }
+                }
             }
 
             DrawHotbarItems();

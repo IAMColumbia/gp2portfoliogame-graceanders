@@ -12,7 +12,7 @@ namespace FinalGame.Crops
     internal class GardenManager : DrawableGameComponent
     {
         internal List<Plant> Garden;// May have all plants in garden drawn, but not visible
-        List<Plant> AllPlants;
+        internal List<Plant> AllPlants;
         Plant Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry, Tomato;
         
 
@@ -40,16 +40,16 @@ namespace FinalGame.Crops
 
         private void LoadPlants()
         {
-            Beet = new Beet(this.Game, GardenPlotTwoX); 
-            Corn = new Corn(this.Game, GardenPlotThreeX);
-            Garlic = new Garlic(this.Game, GardenPlotFourX);
-            Grapes = new Grapes(this.Game, GardenPlotOneX);
-            GreenBean = new GreenBean(this.Game, GardenPlotOneX);
-            Melon = new Melon(this.Game, GardenPlotOneX);
-            Potato = new Potato(this.Game, GardenPlotOneX);
-            Radish = new Radish(this.Game, GardenPlotOneX);
-            Strawberry = new Strawberry(this.Game, GardenPlotOneX);
-            Tomato = new Tomato(this.Game, GardenPlotOneX);
+            Beet = new Beet(this.Game, GardenPlotTwoX);   //0
+            Corn = new Corn(this.Game, GardenPlotThreeX);   //1
+            Garlic = new Garlic(this.Game, GardenPlotFourX);   //2
+            Grapes = new Grapes(this.Game, GardenPlotOneX);   //3
+            GreenBean = new GreenBean(this.Game, GardenPlotOneX);   //4
+            Melon = new Melon(this.Game, GardenPlotOneX);   //5
+            Potato = new Potato(this.Game, GardenPlotOneX);   //6
+            Radish = new Radish(this.Game, GardenPlotOneX);   //7
+            Strawberry = new Strawberry(this.Game, GardenPlotOneX);   //8
+            Tomato = new Tomato(this.Game, GardenPlotOneX);   //9
 
             AllPlants = new List<Plant>() { Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry , Tomato};
 

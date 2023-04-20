@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FinalGame.Crops;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Util;
 using System;
@@ -34,16 +35,16 @@ namespace FinalGame
             PC = p;
             input = IH;
 
-            BeetSeeds = new Item(game, "Beet Seeds", 20);
-            CornSeeds = new Item(game, "Corn Seeds", 50);
-            GarlicSeeds = new Item(game, "Garlic Seeds", 40);
-            GrapeSeeds = new Item(game, "Grape Seeds", 60);
-            GreenBeanSeeds = new Item(game, "Green Bean Seeds", 60);
-            MelonSeeds = new Item(game, "Melon Seeds", 80);
-            PotatoSeeds = new Item(game, "Potato Seeds", 50);
-            RadishSeeds = new Item(game, "Radish Seeds", 40);
-            StrawberrySeeds = new Item(game, "Strawberry Seeds", 100);
-            TomatoSeeds = new Item(game, "Tomato Seeds", 50);
+            BeetSeeds = new Item(game, "Beet", 20);
+            CornSeeds = new Item(game, "Corn", 50);
+            GarlicSeeds = new Item(game, "Garlic", 40);
+            GrapeSeeds = new Item(game, "Grape", 60);
+            GreenBeanSeeds = new Item(game, "Green Bean", 60);
+            MelonSeeds = new Item(game, "Melon", 80);
+            PotatoSeeds = new Item(game, "Potato", 50);
+            RadishSeeds = new Item(game, "Radish", 40);
+            StrawberrySeeds = new Item(game, "Strawberry", 100);
+            TomatoSeeds = new Item(game, "Tomato", 50);
 
             ShopInventory = new List<Item>() { BeetSeeds, CornSeeds, GarlicSeeds, GrapeSeeds, GreenBeanSeeds, MelonSeeds, PotatoSeeds, RadishSeeds, StrawberrySeeds , TomatoSeeds};
 
