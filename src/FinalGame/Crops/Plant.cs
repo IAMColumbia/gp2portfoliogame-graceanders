@@ -48,6 +48,8 @@ namespace FinalGame.Crops
             this.plantDay = PlantDay.DayOne;
             this.PS = PlantState.Alive;
             this.Harvestable = false;
+
+            ItemType = ItemType.Plant;
         }
 
         protected override void LoadContent()

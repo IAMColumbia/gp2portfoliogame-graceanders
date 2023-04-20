@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace FinalGame
 {
+    enum ItemType
+    {
+        Plant, Seed, Fertalizer
+    }
 
     internal class Item : DrawableSprite
     {
@@ -22,6 +26,13 @@ namespace FinalGame
 
         internal int PlantIndex;
 
+        private ItemType itemType;
+        public ItemType ItemType
+        {
+            get { return this.itemType; }
+            set { this.itemType = value; }
+        }
+
         public Item(Game game) : base(game) { }
 
         public Item(Game game, string plantName, int worth) : base(game) 
@@ -29,6 +40,8 @@ namespace FinalGame
             this.Name = $"{plantName} Seed";
             this.PlantIndex = CalculatePlantIndex(plantName);
             this.Worth = worth;
+
+            itemType = ItemType.Seed;
         }
 
         internal int ReturnPlantIndex() { return this.PlantIndex; }

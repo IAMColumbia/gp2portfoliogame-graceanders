@@ -214,10 +214,13 @@ namespace FinalGame
                         //Replant
                         if(p.LocationRect.Intersects(gs.LocationRect) && p.DrawColor == Color.Transparent)
                         {
-                            changeWith = SelectedItem.ReturnPlantIndex();
-                            toChange = gardenManager.Garden.IndexOf(p);
-                            PC.Player.Inventory.Remove(SelectedItem);
-                            Planted = true;
+                            if(SelectedItem.ItemType == ItemType.Seed)
+                            {
+                                changeWith = SelectedItem.ReturnPlantIndex();
+                                toChange = gardenManager.Garden.IndexOf(p);
+                                PC.Player.Inventory.Remove(SelectedItem);
+                                Planted = true;
+                            }
                         }
 
                         gs.GridState = GridState.Free;
