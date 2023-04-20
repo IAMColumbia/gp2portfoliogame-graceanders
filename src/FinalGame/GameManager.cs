@@ -35,7 +35,7 @@ namespace FinalGame
         float CurrentTime, DayTime, DayDuration;
         int Day;
 
-        List<Vector2> Hotbar;
+        List<Hotbar> Hotbar;
 
         Texture2D InventoryTexture;
         string InventoryTextureName;
@@ -91,7 +91,12 @@ namespace FinalGame
             InventoryEightLoc = new Vector2(1175, 870);
             InventoryNineLoc = new Vector2(1300, 870);
 
-            Hotbar = new List<Vector2> { InventoryOneLoc, InventoryTwoLoc, InventoryThreeLoc, InventoryFourLoc, InventoryFiveLoc, InventorySixLoc, InventorySevenLoc, InventoryEightLoc, InventoryNineLoc };
+            Hotbar = new List<Hotbar> { new Hotbar(InventoryOneLoc, "InventoryOne"), 
+                new Hotbar(InventoryTwoLoc,"InventoryTwo"), new Hotbar(InventoryThreeLoc,"InventorThree"), 
+                new Hotbar(InventoryFourLoc, "InventoryFour"), new Hotbar(InventoryFiveLoc, "InventoryFive"), 
+                new Hotbar(InventorySixLoc, "InventorySix"), new Hotbar(InventorySevenLoc,"InventorySeven"), 
+                new Hotbar(InventoryEightLoc,"InventoryEight"), new Hotbar(InventoryNineLoc,"InventoryNine") 
+            };
         }
 
         public override void Update(GameTime gameTime)
@@ -182,7 +187,7 @@ namespace FinalGame
 
             if (DrawCords) { DrawGridCords(); }
 
-            foreach(Vector2 loc in Hotbar){ sb.Draw(InventoryTexture, loc, Color.White); }
+            foreach(Hotbar hb in Hotbar){ sb.Draw(InventoryTexture, hb.Loc, Color.White); }
 
             DrawHotbar();
 
@@ -206,7 +211,7 @@ namespace FinalGame
             foreach (Item item in PC.Player.Inventory)
             {
                 count = PC.Player.Inventory.IndexOf(item);
-                sb.Draw(item.spriteTexture, Hotbar[count] + Center, Color.White);
+                sb.Draw(item.spriteTexture, Hotbar[count].Loc + Center, Color.White);
             }
         }
 
