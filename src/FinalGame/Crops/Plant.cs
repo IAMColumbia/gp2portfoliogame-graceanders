@@ -26,7 +26,6 @@ namespace FinalGame.Crops
 
     internal class Plant : Item, IHarvestable, IWaterable, IGrowable
     {
-        //internal string TextureName { get; set; }
         Quality PlantQuality;
         internal PlantState PS;
         private PlantDay plantDay;
@@ -35,6 +34,9 @@ namespace FinalGame.Crops
             get { return this.plantDay; }
             set { this.plantDay = value; }
         }
+
+        internal Texture2D SeedTexture;
+        internal string SeedTextureName;
 
         internal Texture2D DayOneTexture, DayTwoTexture, DayThreeTexture, DayFourTexture, DayFiveTexture, DaySixTexture;
         internal string DayOneTextureName, DayTwoTextureName, DayThreeTextureName, DayFourTextureName, DayFiveTextureName, DaySixTextureName;
@@ -46,6 +48,21 @@ namespace FinalGame.Crops
             this.plantDay = PlantDay.DayOne;
             this.PS = PlantState.Alive;
             this.Harvestable = false;
+        }
+
+        protected override void LoadContent()
+        {
+            this.DayOneTexture = this.Game.Content.Load<Texture2D>(this.DayOneTextureName);
+            this.DayTwoTexture = this.Game.Content.Load<Texture2D>(this.DayTwoTextureName);
+            this.DayThreeTexture = this.Game.Content.Load<Texture2D>(this.DayThreeTextureName);
+            this.DayFourTexture = this.Game.Content.Load<Texture2D>(this.DayFourTextureName);
+            this.DayFiveTexture = this.Game.Content.Load<Texture2D>(this.DayFiveTextureName);
+            this.DaySixTexture = this.Game.Content.Load<Texture2D>(this.DaySixTextureName);
+
+            this.SeedTexture = this.Game.Content.Load<Texture2D>(this.SeedTextureName);
+            base.LoadContent();
+
+            this.UpdatePlantDay();
         }
 
         public override void Update(GameTime gameTime)

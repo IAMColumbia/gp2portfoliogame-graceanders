@@ -30,20 +30,8 @@ namespace FinalGame.Crops
             this.DayFourTextureName = "Crops/Radish_Stage_3";
             this.DayFiveTextureName = "Crops/Radish_Stage_4";
             this.DaySixTextureName = "Crops/Radish_Stage_5";
+
+            this.SeedTextureName = "Crops/Radish_Seeds";
         }
-
-        protected override void LoadContent()
-        {
-            this.DayOneTexture = this.Game.Content.Load<Texture2D>(this.DayOneTextureName);
-            this.DayTwoTexture = this.Game.Content.Load<Texture2D>(this.DayTwoTextureName);
-            this.DayThreeTexture = this.Game.Content.Load<Texture2D>(this.DayThreeTextureName);
-            this.DayFourTexture = this.Game.Content.Load<Texture2D>(this.DayFourTextureName);
-            this.DayFiveTexture = this.Game.Content.Load<Texture2D>(this.DayFiveTextureName);
-            this.DaySixTexture = this.Game.Content.Load<Texture2D>(this.DaySixTextureName);
-            base.LoadContent();
-
-            this.UpdatePlantDay();
-        }
-
     }
 }
