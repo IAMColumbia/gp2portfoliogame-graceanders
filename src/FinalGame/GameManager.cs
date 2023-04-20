@@ -37,8 +37,8 @@ namespace FinalGame
 
         List<Hotbar> Hotbar;
 
-        Texture2D InventoryTexture;
-        string InventoryTextureName;
+        Texture2D InventoryTexture, SelectedTexture;
+        string InventoryTextureName, SelectedTextureName;
         Vector2 InventoryOneLoc, InventoryTwoLoc, InventoryThreeLoc, InventoryFourLoc, InventoryFiveLoc, InventorySixLoc, InventorySevenLoc, InventoryEightLoc, InventoryNineLoc;
         
         public GameManager(Game game) : base(game)
@@ -58,6 +58,7 @@ namespace FinalGame
             DrawCords = false;
 
             InventoryTextureName = "InventorySprite";
+            SelectedTextureName = "SelectedSprite";
         }
 
         protected override void LoadContent()
@@ -80,6 +81,7 @@ namespace FinalGame
         private void LoadInventoryElements()
         {
             InventoryTexture = this.Game.Content.Load<Texture2D>(InventoryTextureName);
+            SelectedTexture = this.Game.Content.Load<Texture2D>(SelectedTextureName);
 
             InventoryOneLoc = new Vector2(300, 870);
             InventoryTwoLoc = new Vector2(425, 870);
@@ -97,6 +99,8 @@ namespace FinalGame
                 new Hotbar(InventorySixLoc, "InventorySix"), new Hotbar(InventorySevenLoc,"InventorySeven"), 
                 new Hotbar(InventoryEightLoc,"InventoryEight"), new Hotbar(InventoryNineLoc,"InventoryNine") 
             };
+
+            Hotbar[0].Selected = true;
         }
 
         public override void Update(GameTime gameTime)
@@ -132,16 +136,57 @@ namespace FinalGame
 
         public void HandleInput()
         {
-            if (!shopManager.IsShopOpen && Input.KeyboardState.WasKeyPressed(Keys.D4))
+            //Shop Window
+            if (!shopManager.IsShopOpen && Input.KeyboardState.WasKeyPressed(Keys.P))
             {
                 shopManager.OpenShopWindow();
             }
-            else if (shopManager.IsShopOpen && Input.KeyboardState.WasKeyPressed(Keys.D4))
+            else if (shopManager.IsShopOpen && Input.KeyboardState.WasKeyPressed(Keys.P))
             {
                 shopManager.CloseShopWindow();
             }
 
+            //Hotbar Select
+            if (Input.KeyboardState.WasKeyPressed(Keys.D1)){
+                UnselectHotbar();
+                Hotbar[0].Selected = true;
+            }
+            if (Input.KeyboardState.WasKeyPressed(Keys.D2)){
+                UnselectHotbar();
+                Hotbar[1].Selected = true;
+            }
+            if (Input.KeyboardState.WasKeyPressed(Keys.D3)){
+                UnselectHotbar();
+                Hotbar[2].Selected = true;
+            }
+            if (Input.KeyboardState.WasKeyPressed(Keys.D4)){
+                UnselectHotbar();
+                Hotbar[3].Selected = true;
+            }
+            if (Input.KeyboardState.WasKeyPressed(Keys.D5)){
+                UnselectHotbar();
+                Hotbar[4].Selected = true;
+            }
+            if (Input.KeyboardState.WasKeyPressed(Keys.D6)){
+                UnselectHotbar();
+                Hotbar[5].Selected = true;
+            }
+            if (Input.KeyboardState.WasKeyPressed(Keys.D7)){
+                UnselectHotbar();
+                Hotbar[6].Selected = true;
+            }
+            if (Input.KeyboardState.WasKeyPressed(Keys.D8)){
+                UnselectHotbar();
+                Hotbar[7].Selected = true;
+            }
+            if (Input.KeyboardState.WasKeyPressed(Keys.D9)){
+                UnselectHotbar();
+                Hotbar[8].Selected = true;
+            }
+
         }
+
+        private void UnselectHotbar() { foreach (Hotbar hb in Hotbar) { hb.Selected = false; } }
 
         public void NextDay(GameTime gameTime)
         {
@@ -183,13 +228,17 @@ namespace FinalGame
             sb.Begin();
 
             sb.DrawString(font, $"Total Time: {(int)CurrentTime} | Day Time: {(int)DayTime} | Day: {Day}                                " +
-                $"Click to water plants!                          S: Shop | Money: {PC.Player.gold}", TimeLocation, Color.White);
+                $"Click to water plants!                          P: Shop | Money: {PC.Player.gold}", TimeLocation, Color.White);
 
             if (DrawCords) { DrawGridCords(); }
 
-            foreach(Hotbar hb in Hotbar){ sb.Draw(InventoryTexture, hb.Loc, Color.White); }
+            foreach(Hotbar hb in Hotbar)
+            { 
+                sb.Draw(InventoryTexture, hb.Loc, Color.White); 
+                if(hb.Selected == true) { sb.Draw(SelectedTexture, hb.Loc, Color.White); }
+            }
 
-            DrawHotbar();
+            DrawHotbarItems();
 
             sb.End();
 
@@ -206,7 +255,7 @@ namespace FinalGame
 
         int count;
         Vector2 Center = new Vector2(25, 25);
-        public void DrawHotbar()
+        public void DrawHotbarItems()
         {
             foreach (Item item in PC.Player.Inventory)
             {

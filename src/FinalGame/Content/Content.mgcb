@@ -920,6 +920,18 @@
 /processorParam:TextureFormat=Color
 /build:RightSprite.png
 
+#begin SelectedSprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:SelectedSprite.png
+
 #begin ShopBackground.png
 /importer:TextureImporter
 /processor:TextureProcessor
