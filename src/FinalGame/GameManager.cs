@@ -202,7 +202,7 @@ namespace FinalGame
             
         }
 
-        int toChange, changeWith;
+        int OldPlant, NewPlant;
         bool Planted;
         public void CheckInteractedSquare()
         {
@@ -232,8 +232,9 @@ namespace FinalGame
                             {
                                 if (SelectedItem.ItemType == ItemType.Seed)
                                 {
-                                    changeWith = SelectedItem.ReturnPlantIndex();
-                                    toChange = gardenManager.Garden.IndexOf(p);
+                                    OldPlant = gardenManager.Garden.IndexOf(p);
+                                    NewPlant = SelectedItem.ReturnPlantIndex();
+                                    
                                     PC.Player.Inventory.Remove(SelectedItem);
                                     Planted = true;
                                 }
@@ -244,14 +245,18 @@ namespace FinalGame
                         gardenManager.UpdatePlantState(p);
                     }
 
-                    if (Planted) 
-                    { 
-                        gardenManager.Garden[toChange] = gardenManager.AllPlants[changeWith];
-                        gardenManager.Garden[toChange].PS = PlantState.Alive;
-                        gardenManager.Garden[toChange].DrawColor = Color.White;
-                        gardenManager.UpdatePlantState(gardenManager.Garden[toChange]);
+
+
+                    if (Planted)
+                    {
+                        gardenManager.Garden[OldPlant] = gardenManager.AllPlants[NewPlant];
+
+                        gardenManager.Garden[OldPlant].PS = PlantState.Alive;
+                        gardenManager.Garden[OldPlant].DrawColor = Color.White;
+                        gardenManager.Garden[OldPlant].DaysUnwatered = 0;
+                        //gardenManager.UpdatePlantState(gardenManager.Garden[OldPlant]);
                     }
-                    
+
                 }
             }
         }
@@ -295,7 +300,7 @@ namespace FinalGame
             }
         }
 
-        int count;
+        int count = 0;
         Vector2 Center = new Vector2(25, 25);
         public void DrawHotbarItems()
         {
