@@ -27,6 +27,7 @@ namespace FinalGame
         GridManager gridManager;
         GardenManager gardenManager;
         ShopManager shopManager;
+        StatsManager statsManager;
 
         IInputHandler Input;
 
@@ -44,7 +45,7 @@ namespace FinalGame
         
         public GameManager(Game game) : base(game) { g = game; }
 
-        internal GameManager(Game game, InputHandler input, PlayableCharacter p, GridManager gridM, GardenManager gardenM, ShopManager shopM) : base(game)
+        internal GameManager(Game game, InputHandler input, PlayableCharacter p, GridManager gridM, GardenManager gardenM, ShopManager shopM, StatsManager statsM) : base(game)
         {
             g = game;
             Input = input;
@@ -52,6 +53,7 @@ namespace FinalGame
             gridManager = gridM;
             gardenManager = gardenM;
             shopManager = shopM;
+            statsManager = statsM;
 
             DrawCords = false;
 
@@ -138,6 +140,16 @@ namespace FinalGame
                 shopManager.CloseShopWindow();
             }
 
+            //Stats Window
+            if (!statsManager.IsStatsOpen && Input.KeyboardState.WasKeyPressed(Keys.O))
+            {
+                statsManager.OpenStatsWindow();
+            }
+            else if (statsManager.IsStatsOpen && Input.KeyboardState.WasKeyPressed(Keys.O))
+            {
+                statsManager.CloseStatsWindow();
+            }
+
             #region Hotbar Select
 
             if (Input.KeyboardState.WasKeyPressed(Keys.D1)){
@@ -214,12 +226,15 @@ namespace FinalGame
                         //Replant
                         if(p.LocationRect.Intersects(gs.LocationRect) && p.DrawColor == Color.Transparent)
                         {
-                            if(SelectedItem.ItemType == ItemType.Seed)
+                            if(SelectedItem != null)
                             {
-                                changeWith = SelectedItem.ReturnPlantIndex();
-                                toChange = gardenManager.Garden.IndexOf(p);
-                                PC.Player.Inventory.Remove(SelectedItem);
-                                Planted = true;
+                                if (SelectedItem.ItemType == ItemType.Seed)
+                                {
+                                    changeWith = SelectedItem.ReturnPlantIndex();
+                                    toChange = gardenManager.Garden.IndexOf(p);
+                                    PC.Player.Inventory.Remove(SelectedItem);
+                                    Planted = true;
+                                }
                             }
                         }
 

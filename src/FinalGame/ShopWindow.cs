@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using MonoGameLibrary.Util;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace FinalGame
 {
@@ -16,12 +15,9 @@ namespace FinalGame
     {
         Buy, Sell
     }
-    public class ShopWindow : DrawableGameComponent
+    public class ShopWindow : Window
     {
-        private SpriteBatch spriteBatch;
-        private SpriteFont font, title;
-        private Texture2D background;
-        private Rectangle windowBounds;
+        
         private Vector2 titlePosition;
         private Vector2 itemsPosition;
         private Vector2 moneyPosition;
@@ -35,10 +31,6 @@ namespace FinalGame
         PlayableCharacter PC;
 
         ShopMode SM;
-
-        internal event EventHandler<Item> BuyItemSelected;
-
-        internal event EventHandler<Item> SellItemSelected;
 
         InputHandler Input;
 

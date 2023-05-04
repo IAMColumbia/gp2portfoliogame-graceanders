@@ -23,6 +23,8 @@ namespace FinalGame
 
         ShopManager shopM;
 
+        StatsManager statsM;
+
         InputHandler input;
         GameConsole console;
 
@@ -64,7 +66,10 @@ namespace FinalGame
             shopM = new ShopManager(this, player, input);
             this.Components.Add(shopM);
 
-            gameM = new GameManager(this, input, player, gridM, gardenM, shopM);
+            statsM = new StatsManager(this, player, input);
+            this.Components.Add(statsM);
+
+            gameM = new GameManager(this, input, player, gridM, gardenM, shopM, statsM);
             this.Components.Add(gameM);
 
         }
