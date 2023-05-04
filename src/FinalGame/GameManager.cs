@@ -262,7 +262,7 @@ namespace FinalGame
             sb.Begin();
 
             sb.DrawString(font, $"Total Time: {(int)CurrentTime} | Day Time: {(int)DayTime} | Day: {Day}                                " +
-                $"Click to water plants!                          P: Shop | Money: {PC.Player.gold}", TimeLocation, Color.White);
+                $"Click to water plants!                 O: Stats | P: Shop | Money: {PC.Player.gold}", TimeLocation, Color.White);
 
             if (DrawCords) { DrawGridCords(); }
 

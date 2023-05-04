@@ -22,6 +22,9 @@ namespace FinalGame
 
         internal List<Plant> AllPlants;
 
+        internal Texture2D PoorStar, AcceptableStar, DecentStar, ExcellentStar;
+        internal string PoorStarTextureName, AcceptableStarTextureName, DecentStarTextureName, ExcellentStarTextureName;
+
         public StatsWindow(Game game, List<Plant> plants) : base(game)
         {
             AllPlants = plants;
@@ -64,6 +67,16 @@ namespace FinalGame
 
         protected override void LoadContent()
         {
+            PoorStarTextureName = "Poor_Quality_Icon";
+            AcceptableStarTextureName = "Acceptable_Quality_Icon";
+            DecentStarTextureName = "Decent_Quality_Icon";
+            ExcellentStarTextureName = "Excellent_Quality_Icon";
+
+            PoorStar = Game.Content.Load<Texture2D>(PoorStarTextureName);
+            AcceptableStar = Game.Content.Load <Texture2D>(AcceptableStarTextureName);;
+            DecentStar = Game.Content.Load <Texture2D>(DecentStarTextureName);
+            ExcellentStar = Game.Content.Load<Texture2D>(ExcellentStarTextureName);
+
             base.LoadContent();
         }
 
@@ -114,6 +127,7 @@ namespace FinalGame
             for (int i =0; i <=9; i++)
             {
                 spriteBatch.Draw(AllPlants[i].DaySixTexture, AdjustPlantRec(i), Color.White);
+                if(AllPlants[i].PlantQuality > 0) { DrawQualityStars(i);}
             }
         }
 
@@ -125,6 +139,28 @@ namespace FinalGame
             PlantLoc.X += 20;
 
             return PlantLoc;
+        }
+
+        private void DrawQualityStars(int i)
+        {
+            if(AllPlants[i].PlantQuality == Quality.Poor)
+            {
+                spriteBatch.Draw(PoorStar, objectLocations[i], Color.White);
+            }
+            if (AllPlants[i].PlantQuality == Quality.Acceptable)
+            {
+                spriteBatch.Draw(AcceptableStar, objectLocations[i], Color.White);
+            }
+            if (AllPlants[i].PlantQuality == Quality.Decent)
+            {
+                spriteBatch.Draw(DecentStar, objectLocations[i], Color.White);
+            }
+            if (AllPlants[i].PlantQuality == Quality.Excellent)
+            {
+                spriteBatch.Draw(ExcellentStar, objectLocations[i], Color.White);
+            }
+
+
         }
 
         Vector2 TextLoc = new Vector2();
