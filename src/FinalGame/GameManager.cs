@@ -113,7 +113,7 @@ namespace FinalGame
 
         public void UpdateTime(GameTime gameTime)
         {
-            if (shopManager.IsShopOpen)
+            if (shopManager.IsShopOpen || statsManager.IsStatsOpen)
             {
                 return;
             }
@@ -143,7 +143,7 @@ namespace FinalGame
             //Stats Window
             if (!statsManager.IsStatsOpen && Input.KeyboardState.WasKeyPressed(Keys.O))
             {
-                statsManager.OpenStatsWindow();
+                statsManager.OpenStatsWindow(ref gardenManager.AllPlants);
             }
             else if (statsManager.IsStatsOpen && Input.KeyboardState.WasKeyPressed(Keys.O))
             {

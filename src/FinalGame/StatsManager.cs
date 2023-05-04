@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FinalGame.Crops;
+using Microsoft.Xna.Framework;
 using MonoGameLibrary.Util;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace FinalGame
         PlayableCharacter PC;
         InputHandler input;
 
+        internal List<Plant> AllPlants;
+
         private bool isStatsOpen;
         internal bool IsStatsOpen
         {
@@ -25,6 +28,7 @@ namespace FinalGame
             Game = game;
             PC = p;
             input = IH;
+
         }
 
         protected override void LoadContent()
@@ -33,11 +37,13 @@ namespace FinalGame
             base.LoadContent();
         }
 
-        public void OpenStatsWindow()
+        internal void OpenStatsWindow(ref List<Plant> allPlants)
         {
+            if (AllPlants == null) { AllPlants = allPlants; }
+
             if (!isStatsOpen)
             {
-                StatsWindow statsWindow = new StatsWindow(Game);
+                StatsWindow statsWindow = new StatsWindow(Game, AllPlants);
                 //StatsWindow statsWindow = new StatsWindow(Game, PC, input);
                 Game.Components.Add(statsWindow);
 
@@ -53,8 +59,8 @@ namespace FinalGame
         {
             if (isStatsOpen)
             {
-                ShopWindow shopWindow = (ShopWindow)Game.Components.FirstOrDefault(c => c is ShopWindow);
-                Game.Components.Remove(shopWindow);
+                StatsWindow statsWindow = (StatsWindow)Game.Components.FirstOrDefault(c => c is StatsWindow);
+                Game.Components.Remove(statsWindow);
 
                 isStatsOpen = false;
 

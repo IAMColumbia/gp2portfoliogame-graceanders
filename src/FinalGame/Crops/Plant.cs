@@ -145,5 +145,10 @@ namespace FinalGame.Crops
                 this.AchievedExelence = true;
             }
         }
+
+        internal Quality ReturnQuality()
+        {
+            return this.PlantQuality;
+        }
     }    
 }

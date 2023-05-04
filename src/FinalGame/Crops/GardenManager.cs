@@ -34,8 +34,9 @@ namespace FinalGame.Crops
             GardenPlotThreeX = 1160;
             GardenPlotFourX = 1450;
 
-            base.LoadContent();
             LoadPlants();
+            base.LoadContent();
+            
         }
 
         private void LoadPlants()
@@ -107,6 +108,12 @@ namespace FinalGame.Crops
                 }
                 plant.UpdatePlantDay();
             }
+        }
+
+        public List<Plant> ReturnAllPlants()
+        {
+            if( AllPlants == null ) { return null; }
+            return AllPlants;
         }
 
         public override void Draw(GameTime gameTime)
