@@ -47,7 +47,7 @@ namespace FinalGame.Crops
         internal Texture2D DayOneTexture, DayTwoTexture, DayThreeTexture, DayFourTexture, DayFiveTexture, DaySixTexture;
         internal string DayOneTextureName, DayTwoTextureName, DayThreeTextureName, DayFourTextureName, DayFiveTextureName, DaySixTextureName;
 
-        bool AchievedExelence;
+        internal bool AchievedExcellence;
 
         public Plant(Game game) : base(game) 
         {
@@ -148,7 +148,7 @@ namespace FinalGame.Crops
             {
                 this.PlantQuality = Quality.Excellent;
                 this.Worth += 20;
-                this.AchievedExelence = true;
+                this.AchievedExcellence = true;
             }
         }
 

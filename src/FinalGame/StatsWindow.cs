@@ -18,6 +18,7 @@ namespace FinalGame
         internal SpriteFont smallFont;
 
         internal Rectangle object1Loc, object2Loc, object3Loc, object4Loc, object5Loc, object6Loc, object7Loc, object8Loc, object9Loc, object10Loc;
+        internal Vector2 ExcellentAchievedTextLoc;
         internal List<Rectangle> objectLocations;
 
         internal List<Plant> AllPlants;
@@ -60,6 +61,8 @@ namespace FinalGame
             object10Loc = new Rectangle(1120, 450, 100, 100);
 
             objectLocations = new List<Rectangle>() { object1Loc, object2Loc, object3Loc, object4Loc, object5Loc, object6Loc, object7Loc, object8Loc, object9Loc, object10Loc };
+
+            ExcellentAchievedTextLoc = new Vector2(870, 600);
 
 
             base.Initialize();
@@ -172,6 +175,21 @@ namespace FinalGame
                 TextLoc.Y = objectLocations[i].Y;
                 spriteBatch.DrawString(smallFont, $"{AllPlants[i].Name}\nQuality: {AllPlants[i].PlantQuality}", TextLoc, Color.Black);
             }
+
+            spriteBatch.DrawString(font, $"You have achieved:\n{NumOfExcelentPlants()}/10 Excellent Plants", ExcellentAchievedTextLoc, Color.Brown);
+
+        }
+
+        int num;
+        internal int NumOfExcelentPlants()
+        {
+            num = 0;
+            foreach (Plant plant in AllPlants)
+            {
+                if (plant.AchievedExcellence)
+                    num++;
+            }
+            return num;
         }
     }
 }

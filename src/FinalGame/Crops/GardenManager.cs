@@ -96,6 +96,18 @@ namespace FinalGame.Crops
             }
         }
 
+        int num;
+        internal int NumOfExcelentPlants()
+        {
+            num = 0;
+            foreach(Plant plant in AllPlants)
+            {
+                if (plant.AchievedExcellence)
+                    num++;
+            }
+            return num;
+        }
+
 
         public void AddPlant(Plant plant)
         {
