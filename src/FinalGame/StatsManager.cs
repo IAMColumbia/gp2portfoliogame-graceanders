@@ -39,7 +39,7 @@ namespace FinalGame
 
         internal void OpenStatsWindow(ref List<Plant> allPlants)
         {
-            if (AllPlants == null) { AllPlants = allPlants; }
+            AllPlants = allPlants;
 
             if (!isStatsOpen)
             {

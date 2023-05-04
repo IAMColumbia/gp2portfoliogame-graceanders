@@ -26,7 +26,13 @@ namespace FinalGame.Crops
 
     internal class Plant : Item, IHarvestable, IWaterable, IGrowable
     {
-        Quality PlantQuality;
+        private Quality plantQuality;
+        internal Quality PlantQuality
+        {
+            get { return this.plantQuality; }
+            set { this.plantQuality = value; }
+        }
+
         internal PlantState PS;
         private PlantDay plantDay;
         public PlantDay PlantDay
@@ -146,9 +152,9 @@ namespace FinalGame.Crops
             }
         }
 
-        internal Quality ReturnQuality()
-        {
-            return this.PlantQuality;
-        }
+        //internal Quality ReturnQuality()
+        //{
+        //    return this.PlantQuality;
+        //}
     }    
 }

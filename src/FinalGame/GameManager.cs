@@ -197,6 +197,8 @@ namespace FinalGame
         {
             gardenManager.GrowPlants();
             foreach (Plant plant in gardenManager.Garden) { plant.Watered = false; }
+
+            gardenManager.UpdatePlantQuality();
             
         }
 

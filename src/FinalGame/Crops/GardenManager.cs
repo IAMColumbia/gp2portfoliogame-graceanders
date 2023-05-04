@@ -81,6 +81,21 @@ namespace FinalGame.Crops
 
         }
 
+        internal void UpdatePlantQuality()
+        {
+            foreach(Plant plant in AllPlants)
+            {
+                foreach(Plant GP in Garden)
+                {
+                    if(GP == plant)
+                    {
+                        if(plant.PlantQuality < GP.PlantQuality) { plant.PlantQuality = GP.PlantQuality; }
+                        break;
+                    }
+                }
+            }
+        }
+
 
         public void AddPlant(Plant plant)
         {

@@ -134,7 +134,7 @@ namespace FinalGame
             {
                 TextLoc.X = objectLocations[i].X + 110;
                 TextLoc.Y = objectLocations[i].Y;
-                spriteBatch.DrawString(smallFont, $"{AllPlants[i].Name}\nQuality: {AllPlants[i].ReturnQuality()}", TextLoc, Color.Black);
+                spriteBatch.DrawString(smallFont, $"{AllPlants[i].Name}\nQuality: {AllPlants[i].PlantQuality}", TextLoc, Color.Black);
             }
         }
     }
