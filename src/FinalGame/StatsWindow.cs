@@ -45,16 +45,16 @@ namespace FinalGame
             // Calculate the positions of the various elements
             titlePosition = new Vector2(windowBounds.X + 40, windowBounds.Y + 40);
 
-            object1Loc = new Rectangle(380, 300, 100, 100);
-            object2Loc = new Rectangle(380, 450, 100, 100);
-            object3Loc = new Rectangle(380, 600, 100, 100);
-            object4Loc = new Rectangle(630, 300, 100, 100);
-            object5Loc = new Rectangle(630, 450, 100, 100);
-            object6Loc = new Rectangle(630, 600, 100, 100);
-            object7Loc = new Rectangle(850, 300, 100, 100);
-            object8Loc = new Rectangle(850, 450, 100, 100);
-            object9Loc = new Rectangle(1070, 300, 100, 100);
-            object10Loc = new Rectangle(1070, 450, 100, 100);
+            object1Loc = new Rectangle(370, 300, 100, 100);
+            object2Loc = new Rectangle(370, 450, 100, 100);
+            object3Loc = new Rectangle(370, 600, 100, 100);
+            object4Loc = new Rectangle(620, 300, 100, 100);
+            object5Loc = new Rectangle(620, 450, 100, 100);
+            object6Loc = new Rectangle(620, 600, 100, 100);
+            object7Loc = new Rectangle(870, 300, 100, 100);
+            object8Loc = new Rectangle(870, 450, 100, 100);
+            object9Loc = new Rectangle(1120, 300, 100, 100);
+            object10Loc = new Rectangle(1120, 450, 100, 100);
 
             objectLocations = new List<Rectangle>() { object1Loc, object2Loc, object3Loc, object4Loc, object5Loc, object6Loc, object7Loc, object8Loc, object9Loc, object10Loc };
 
@@ -107,14 +107,24 @@ namespace FinalGame
             spriteBatch.Draw(itemSquare, object10Loc, Color.White);
         }
 
-        
 
+        Rectangle PlantLoc = new Rectangle();
         public void DrawPlants()
         {
             for (int i =0; i <=9; i++)
             {
-                spriteBatch.Draw(AllPlants[i].DaySixTexture, objectLocations[i], Color.White);
+                spriteBatch.Draw(AllPlants[i].DaySixTexture, AdjustPlantRec(i), Color.White);
             }
+        }
+
+        private Rectangle AdjustPlantRec(int i)
+        {
+            PlantLoc = objectLocations[i];
+            PlantLoc.Width = AllPlants[i].DaySixTexture.Width + 10;
+            PlantLoc.Height = AllPlants[i].DaySixTexture.Height + 10;
+            PlantLoc.X += 20;
+
+            return PlantLoc;
         }
 
         Vector2 TextLoc = new Vector2();
