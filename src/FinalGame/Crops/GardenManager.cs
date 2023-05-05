@@ -106,6 +106,11 @@ namespace FinalGame.Crops
         {
             foreach (Plant plant in Garden)
             {
+                if (plant.PS == PlantState.Harvested || plant.Harvestable == true)
+                {
+                    break;
+                }
+
                 if (plant.Watered)
                 {
                     plant.Grow();

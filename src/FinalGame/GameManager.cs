@@ -213,11 +213,34 @@ namespace FinalGame
                     Planted = false;
                     foreach (Plant p in gardenManager.Garden)
                     {
+                        //If Harvested Don't Update
+                        //if(p.PS == PlantState.Harvested|| p.Harvestable == true)
+                        //{
+                        //    break;
+                        //}
+
                         //Water
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.PS == PlantState.Alive)
                         {
                             p.Water();
                         }
+
+                        //Replant
+                        if (p.LocationRect.Intersects(gs.LocationRect) && p.DrawColor == Color.Transparent)
+                        {
+                            if (SelectedItem != null)
+                            {
+                                if (SelectedItem.ItemType == ItemType.Seed)
+                                {
+                                    OldPlant = gardenManager.Garden.IndexOf(p);
+                                    NewPlant = SelectedItem.ReturnPlantIndex();
+
+                                    PC.Player.Inventory.Remove(SelectedItem);
+                                    Planted = true;
+                                }
+                            }
+                        }
+
                         //Harvest
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true && p.PS != PlantState.Harvested)
                         {
@@ -225,27 +248,9 @@ namespace FinalGame
                             p.PS = PlantState.Harvested;
                         }
 
-                        //Replant
-                        if(p.LocationRect.Intersects(gs.LocationRect) && p.DrawColor == Color.Transparent)
-                        {
-                            if(SelectedItem != null)
-                            {
-                                if (SelectedItem.ItemType == ItemType.Seed)
-                                {
-                                    OldPlant = gardenManager.Garden.IndexOf(p);
-                                    NewPlant = SelectedItem.ReturnPlantIndex();
-                                    
-                                    PC.Player.Inventory.Remove(SelectedItem);
-                                    Planted = true;
-                                }
-                            }
-                        }
-
                         gs.GridState = GridState.Free;
                         gardenManager.UpdatePlantState(p);
                     }
-
-
 
                     if (Planted)
                     {
@@ -254,8 +259,9 @@ namespace FinalGame
                         gardenManager.Garden[OldPlant].PS = PlantState.Alive;
                         gardenManager.Garden[OldPlant].DrawColor = Color.White;
                         gardenManager.Garden[OldPlant].DaysUnwatered = 0;
-                        //gardenManager.UpdatePlantState(gardenManager.Garden[OldPlant]);
                     }
+
+                    Planted = false;
 
                 }
             }
