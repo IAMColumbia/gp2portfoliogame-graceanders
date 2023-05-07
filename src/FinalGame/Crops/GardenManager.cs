@@ -136,6 +136,15 @@ namespace FinalGame.Crops
             return AllPlants;
         }
 
+        public void ResetPlant(Plant plant)
+        {
+            plant.PlantDay = 0;
+            plant.PS = PlantState.Alive;
+            plant.DrawColor = Color.White;
+            plant.Harvestable = false;
+            plant.DaysUnwatered = 0;
+        }
+
         public override void Draw(GameTime gameTime)
         {
             foreach (Plant plant in this.Garden)

@@ -213,11 +213,6 @@ namespace FinalGame
                     Planted = false;
                     foreach (Plant p in gardenManager.Garden)
                     {
-                        //If Harvested Don't Update
-                        //if(p.PS == PlantState.Harvested|| p.Harvestable == true)
-                        //{
-                        //    break;
-                        //}
 
                         //Water
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.PS == PlantState.Alive)
@@ -256,13 +251,11 @@ namespace FinalGame
                     {
                         gardenManager.Garden[OldPlant] = gardenManager.AllPlants[NewPlant];
 
-                        gardenManager.Garden[OldPlant].PS = PlantState.Alive;
-                        gardenManager.Garden[OldPlant].DrawColor = Color.White;
-                        gardenManager.Garden[OldPlant].DaysUnwatered = 0;
+                        gardenManager.ResetPlant(gardenManager.Garden[OldPlant]);
+
                     }
 
                     Planted = false;
-
                 }
             }
         }
@@ -288,6 +281,7 @@ namespace FinalGame
                     if(PC.Player.Inventory.Count >= i + 1){ 
                         SelectedItem = PC.Player.Inventory[i]; 
                     }
+                    else { SelectedItem = null; }
                 }
             }
 
