@@ -252,6 +252,7 @@ namespace FinalGame
                         gardenManager.Garden[OldPlant] = gardenManager.AllPlants[NewPlant];
 
                         gardenManager.ResetPlant(gardenManager.Garden[OldPlant]);
+                        gardenManager.UpdatePlantState(gardenManager.Garden[OldPlant]);
 
                     }
 
