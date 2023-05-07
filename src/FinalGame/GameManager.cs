@@ -308,7 +308,12 @@ namespace FinalGame
             foreach (Item item in PC.Player.Inventory)
             {
                 count = PC.Player.Inventory.IndexOf(item);
-                sb.Draw(item.spriteTexture, Hotbar[count].Loc + Center, Color.White);
+                if(item.ItemType == ItemType.Plant) { sb.Draw(item.ItemTexture, Hotbar[count].Loc + Center, Color.White); }
+                else 
+                { 
+                    sb.Draw(item.spriteTexture, Hotbar[count].Loc + Center, Color.White); 
+                }
+                    
             }
         }
 

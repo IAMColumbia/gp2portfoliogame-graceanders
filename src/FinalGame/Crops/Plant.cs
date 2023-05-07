@@ -67,6 +67,8 @@ namespace FinalGame.Crops
             this.DayFiveTexture = this.Game.Content.Load<Texture2D>(this.DayFiveTextureName);
             this.DaySixTexture = this.Game.Content.Load<Texture2D>(this.DaySixTextureName);
 
+            this.ItemTexture = this.Game.Content.Load<Texture2D>(this.DaySixTextureName);
+
             base.LoadContent();
 
             this.UpdatePlantDay();

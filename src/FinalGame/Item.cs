@@ -1,5 +1,6 @@
 ﻿using FinalGame.Crops;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Sprite;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace FinalGame
         { get { return worth; } set { worth = value; } }
 
         internal int PlantIndex;
+
+        internal Texture2D ItemTexture;
 
         private ItemType itemType;
         public ItemType ItemType
