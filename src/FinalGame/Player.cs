@@ -50,7 +50,13 @@ namespace FinalGame
 
         public void AddItem(Item item)
         {
-            Inventory.Add(item);
+            if (Inventory.Contains(item)) { item.Count++; }
+            else
+            {
+                Inventory.Add(item);
+                item.Count++;
+            }
+            
         }
 
         public bool HasItem(Item item, int quantity = 1)
@@ -60,7 +66,8 @@ namespace FinalGame
 
         public void RemoveItem(Item item) 
         {
-            Inventory.Remove(item);
+            if(item.Count > 1) { item.Count--; }
+            else { Inventory.Remove(item); }
         }
     }
 }

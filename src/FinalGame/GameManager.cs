@@ -21,7 +21,7 @@ namespace FinalGame
 
         Game g;
 
-        SpriteFont font;
+        SpriteFont font, small;
 
         PlayableCharacter PC;
         GridManager gridManager;
@@ -71,6 +71,7 @@ namespace FinalGame
         {
             sb = new SpriteBatch(this.Game.GraphicsDevice);
             font = this.Game.Content.Load<SpriteFont>("Arial");
+            small = this.Game.Content.Load<SpriteFont>("Small");
             Day = 1;
             DayDuration = 10;
 
@@ -83,9 +84,9 @@ namespace FinalGame
             InventoryTexture = this.Game.Content.Load<Texture2D>(InventoryTextureName);
             SelectedTexture = this.Game.Content.Load<Texture2D>(SelectedTextureName);
 
-            InventoryOneLoc = new Vector2(300, 870); InventoryTwoLoc = new Vector2(425, 870); InventoryThreeLoc = new Vector2(550, 870);
-            InventoryFourLoc = new Vector2(675, 870); InventoryFiveLoc = new Vector2(800, 870); InventorySixLoc = new Vector2(925, 870);
-            InventorySevenLoc = new Vector2(1050, 870); InventoryEightLoc = new Vector2(1175, 870); InventoryNineLoc = new Vector2(1300, 870);
+            InventoryOneLoc = new Vector2(300, Bottom); InventoryTwoLoc = new Vector2(425, Bottom); InventoryThreeLoc = new Vector2(550, Bottom);
+            InventoryFourLoc = new Vector2(675, Bottom); InventoryFiveLoc = new Vector2(800, Bottom); InventorySixLoc = new Vector2(925, Bottom);
+            InventorySevenLoc = new Vector2(1050, Bottom); InventoryEightLoc = new Vector2(1175, Bottom); InventoryNineLoc = new Vector2(1300, Bottom);
 
             Hotbar = new List<Hotbar> { new Hotbar(InventoryOneLoc, "InventoryOne"), 
                 new Hotbar(InventoryTwoLoc,"InventoryTwo"), new Hotbar(InventoryThreeLoc,"InventorThree"), 
@@ -215,7 +216,6 @@ namespace FinalGame
                     Planted = false;
                     foreach (Plant p in gardenManager.Garden)
                     {
-
                         //Water
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.PS == PlantState.Alive)
                         {
@@ -232,7 +232,7 @@ namespace FinalGame
                                     OldPlant = gardenManager.Garden.IndexOf(p);
                                     NewPlant = SelectedItem.ReturnPlantIndex();
 
-                                    PC.Player.Inventory.Remove(SelectedItem);
+                                    PC.Player.RemoveItem(SelectedItem);
                                     Planted = true;
                                 }
                             }
@@ -241,7 +241,7 @@ namespace FinalGame
                         //Harvest
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true && p.PS != PlantState.Harvested)
                         {
-                            PC.Player.Inventory.Add(p);
+                            PC.Player.AddItem(p);
                             p.PS = PlantState.Harvested;
                         }
 
@@ -305,6 +305,7 @@ namespace FinalGame
 
         int count = 0;
         Vector2 Center = new Vector2(25, 25);
+        Vector2 BottomCorner = new Vector2(70, 70);
         public void DrawHotbarItems()
         {
             foreach (Item item in PC.Player.Inventory)
@@ -315,6 +316,8 @@ namespace FinalGame
                 { 
                     sb.Draw(item.spriteTexture, Hotbar[count].Loc + Center, Color.White); 
                 }
+
+                sb.DrawString(small, $"{item.Count}", Hotbar[count].Loc + BottomCorner, Color.Black);
                     
             }
         }

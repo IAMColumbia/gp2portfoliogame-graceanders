@@ -41,6 +41,7 @@ namespace FinalGame.Crops
             set { this.plantDay = value; }
         }
 
+
         internal Texture2D DayOneTexture, DayTwoTexture, DayThreeTexture, DayFourTexture, DayFiveTexture, DaySixTexture;
         internal string DayOneTextureName, DayTwoTextureName, DayThreeTextureName, DayFourTextureName, DayFiveTextureName, DaySixTextureName;
 
@@ -109,7 +110,6 @@ namespace FinalGame.Crops
         public int DaysUnwatered { get; set; }
         public bool Harvestable { get; set; }
 
-        int i;
         public void Grow()
         {
             this.plantDay++;
@@ -150,10 +150,5 @@ namespace FinalGame.Crops
                 this.AchievedExcellence = true;
             }
         }
-
-        //internal Quality ReturnQuality()
-        //{
-        //    return this.PlantQuality;
-        //}
     }    
 }

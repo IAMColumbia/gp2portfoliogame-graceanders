@@ -10,7 +10,6 @@ namespace FinalGame
 {
     public class ShopManager : DrawableGameComponent
     {
-        Game Game;
         PlayableCharacter PC;
         InputHandler input;
 
@@ -31,7 +30,6 @@ namespace FinalGame
 
         internal ShopManager(Game game, PlayableCharacter p, InputHandler IH) : base(game)
         {
-            Game = game;
             PC = p;
             input = IH;
 

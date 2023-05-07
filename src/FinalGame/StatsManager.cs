@@ -12,7 +12,6 @@ namespace FinalGame
 {
     public class StatsManager : DrawableGameComponent
     {
-        Game Game;
         PlayableCharacter PC;
         InputHandler input;
 
@@ -26,7 +25,6 @@ namespace FinalGame
 
         internal StatsManager(Game game, PlayableCharacter p, InputHandler IH) : base(game)
         {
-            Game = game;
             PC = p;
             input = IH;
 

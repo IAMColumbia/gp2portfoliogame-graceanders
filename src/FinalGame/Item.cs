@@ -27,6 +27,8 @@ namespace FinalGame
 
         internal int PlantIndex;
 
+        internal int Count;
+
         internal Texture2D ItemTexture;
 
         private ItemType itemType;
@@ -51,7 +53,6 @@ namespace FinalGame
         internal int ReturnPlantIndex() { return this.PlantIndex; }
 
         int val;
-        private Item item;
 
         private int CalculatePlantIndex(string name)
         {
