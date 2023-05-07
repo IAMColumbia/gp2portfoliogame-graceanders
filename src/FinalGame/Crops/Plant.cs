@@ -41,9 +41,6 @@ namespace FinalGame.Crops
             set { this.plantDay = value; }
         }
 
-        internal Texture2D SeedTexture;
-        internal string SeedTextureName;
-
         internal Texture2D DayOneTexture, DayTwoTexture, DayThreeTexture, DayFourTexture, DayFiveTexture, DaySixTexture;
         internal string DayOneTextureName, DayTwoTextureName, DayThreeTextureName, DayFourTextureName, DayFiveTextureName, DaySixTextureName;
 

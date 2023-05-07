@@ -46,16 +46,10 @@ namespace FinalGame
             StrawberrySeeds = new Item(game, "Strawberry", 100);
             TomatoSeeds = new Item(game, "Tomato", 50);
 
-            ShopInventory = new List<Item>() { BeetSeeds, CornSeeds, GarlicSeeds, GrapeSeeds, GreenBeanSeeds, MelonSeeds, PotatoSeeds, RadishSeeds, StrawberrySeeds , TomatoSeeds};
+            PopulateShopInventory();
 
             // Pick 5 random items to be buyable
-            for (int i = 0; i < 5; i++)
-            {
-                int index = random.Next(ShopInventory.Count);
-                Item item = ShopInventory[index];
-                BuyableItems.Add(item);
-                ShopInventory.RemoveAt(index);
-            }
+            RandomItems();
         }
 
         protected override void LoadContent()
@@ -83,6 +77,26 @@ namespace FinalGame
             TomatoSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(TomatoSeedTextureName);
 
             base.LoadContent();
+        }
+
+        internal void PopulateShopInventory()
+        {
+            ShopInventory = new List<Item>() { BeetSeeds, CornSeeds, GarlicSeeds, GrapeSeeds, GreenBeanSeeds, MelonSeeds, PotatoSeeds, RadishSeeds, StrawberrySeeds, TomatoSeeds };
+
+        }
+
+        internal void RandomItems()
+        {
+            BuyableItems.Clear();
+
+            for (int i = 0; i < 5; i++)
+            {
+                int index = random.Next(ShopInventory.Count);
+                Item item = ShopInventory[index];
+                BuyableItems.Add(item);
+                ShopInventory.RemoveAt(index);
+            }
+            PopulateShopInventory();
         }
 
         internal void BuyItem(Item item, Player player)
@@ -116,7 +130,7 @@ namespace FinalGame
         {
             if (!isShopOpen)
             {
-                ShopWindow shopWindow = new ShopWindow(Game,ShopInventory,PC ,input);
+                ShopWindow shopWindow = new ShopWindow(Game,BuyableItems,PC ,input);
                 Game.Components.Add(shopWindow);
 
                 isShopOpen = true;

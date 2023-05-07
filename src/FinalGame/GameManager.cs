@@ -199,7 +199,9 @@ namespace FinalGame
             foreach (Plant plant in gardenManager.Garden) { plant.Watered = false; }
 
             gardenManager.UpdatePlantQuality();
-            
+
+            shopManager.RandomItems();
+
         }
 
         int OldPlant, NewPlant;

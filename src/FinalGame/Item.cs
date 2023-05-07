@@ -47,9 +47,12 @@ namespace FinalGame
             itemType = ItemType.Seed;
         }
 
+
         internal int ReturnPlantIndex() { return this.PlantIndex; }
 
         int val;
+        private Item item;
+
         private int CalculatePlantIndex(string name)
         {
             switch (name)
