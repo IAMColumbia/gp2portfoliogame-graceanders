@@ -46,6 +46,7 @@ namespace FinalGame.Crops
         internal string DayOneTextureName, DayTwoTextureName, DayThreeTextureName, DayFourTextureName, DayFiveTextureName, DaySixTextureName;
 
         internal bool AchievedExcellence;
+        private Plant plant;
 
         public Plant(Game game) : base(game) 
         {

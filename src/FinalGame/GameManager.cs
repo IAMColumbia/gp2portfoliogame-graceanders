@@ -42,7 +42,9 @@ namespace FinalGame
         Texture2D InventoryTexture, SelectedTexture;
         string InventoryTextureName, SelectedTextureName;
         Vector2 InventoryOneLoc, InventoryTwoLoc, InventoryThreeLoc, InventoryFourLoc, InventoryFiveLoc, InventorySixLoc, InventorySevenLoc, InventoryEightLoc, InventoryNineLoc;
-        
+
+        Plant NewPlant;
+
         public GameManager(Game game) : base(game) { g = game; }
 
         internal GameManager(Game game, InputHandler input, PlayableCharacter p, GridManager gridM, GardenManager gardenM, ShopManager shopM, StatsManager statsM) : base(game)
@@ -59,6 +61,8 @@ namespace FinalGame
 
             InventoryTextureName = "InventorySprite";
             SelectedTextureName = "SelectedSprite";
+
+            NewPlant = new Plant(game);
         }
 
         protected override void LoadContent()
@@ -204,8 +208,8 @@ namespace FinalGame
             shopManager.RandomItems();
 
         }
-
-        int OldPlant, NewPlant;
+        
+        int OldPlantIndex, NewPlantIndex;
         bool Planted;
         public void CheckInteractedSquare()
         {
@@ -229,8 +233,8 @@ namespace FinalGame
                             {
                                 if (SelectedItem.ItemType == ItemType.Seed)
                                 {
-                                    OldPlant = gardenManager.Garden.IndexOf(p);
-                                    NewPlant = SelectedItem.ReturnPlantIndex();
+                                    OldPlantIndex = gardenManager.Garden.IndexOf(p);
+                                    NewPlantIndex = SelectedItem.ReturnPlantIndex();
 
                                     PC.Player.RemoveItem(SelectedItem);
                                     Planted = true;
@@ -251,10 +255,11 @@ namespace FinalGame
 
                     if (Planted)
                     {
-                        gardenManager.Garden[OldPlant] = gardenManager.AllPlants[NewPlant];
+                        NewPlant = gardenManager.AllPlants[NewPlantIndex];
+                        gardenManager.Garden[OldPlantIndex] = NewPlant; 
 
-                        gardenManager.ResetPlant(gardenManager.Garden[OldPlant]);
-                        gardenManager.UpdatePlantState(gardenManager.Garden[OldPlant]);
+                        gardenManager.ResetPlant(gardenManager.Garden[OldPlantIndex]);
+                        gardenManager.UpdatePlantState(gardenManager.Garden[OldPlantIndex]);
                     }
 
                     Planted = false;

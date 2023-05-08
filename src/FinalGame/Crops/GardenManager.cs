@@ -78,6 +78,7 @@ namespace FinalGame.Crops
                     break;
                 case PlantState.Dead:
                     plant.DrawColor = Color.Transparent;
+                    plant = FreePlot;
                     break;
                 case PlantState.Harvested:
                     plant.DrawColor = Color.Transparent;
