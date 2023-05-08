@@ -25,6 +25,8 @@ namespace FinalGame
 
         StatsManager statsM;
 
+        AnimationManager animationM;
+
         InputHandler input;
         GameConsole console;
 
@@ -69,7 +71,10 @@ namespace FinalGame
             statsM = new StatsManager(this, player, input);
             this.Components.Add(statsM);
 
-            gameM = new GameManager(this, input, player, gridM, gardenM, shopM, statsM);
+            animationM = new AnimationManager(this);
+            this.Components.Add(animationM);
+
+            gameM = new GameManager(this, input, player, gridM, gardenM, shopM, statsM, animationM);
             this.Components.Add(gameM);
 
         }
