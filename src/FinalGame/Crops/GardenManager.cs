@@ -102,7 +102,7 @@ namespace FinalGame.Crops
             {
                 foreach(Plant GP in Garden)
                 {
-                    if(GP == plant)
+                    if(GP.Name == plant.Name)
                     {
                         if(plant.PlantQuality < GP.PlantQuality) { plant.PlantQuality = GP.PlantQuality; }
                         break;
@@ -114,26 +114,6 @@ namespace FinalGame.Crops
         
         internal void SetPlantLocation()
         {
-            //foreach(Plant plant in Garden)//Tall Plants
-            //{
-            //    if(plant.Name == "Corn" || plant.Name == "Grapes" || plant.Name == "GreenBean")
-            //    {
-            //        Y = 430;
-            //    }
-            //    else
-            //    {
-            //        Y = 480;
-            //    }
-
-            //    plant.Location = 
-
-            //    //Garden[]
-            //}
-
-            //Garden[0].Location = GardenPlotOne;
-            //Garden[1].Location = GardenPlotTwo;
-            //Garden[2].Location = GardenPlotThree;
-            //Garden[3].Location = GardenPlotFour;
 
             for (int i = 0; i < 4; i++)//Tall Plants
             {
