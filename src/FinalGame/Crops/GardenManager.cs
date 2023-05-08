@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Intrinsics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using FinalGame.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,7 +20,10 @@ namespace FinalGame.Crops
 
         bool testing;
 
-        internal Vector2 GardenPlotOne, GardenPlotTwo, GardenPlotThree, GardenPlotFour;
+        internal int GardenPlotOneX, GardenPlotTwoX, GardenPlotThreeX, GardenPlotFourX;
+
+        int Y = 480;
+        Vector2 GardenPlotOne, GardenPlotTwo, GardenPlotThree, GardenPlotFour;
 
         public GardenManager(Game game) : base(game)
         {
@@ -28,13 +32,17 @@ namespace FinalGame.Crops
             testing = true;
         }
 
-        int Yloc = 480;
         protected override void LoadContent()
         {
-            GardenPlotOne = new Vector2(550, Yloc);
-            GardenPlotTwo = new Vector2(850, Yloc);
-            GardenPlotThree = new Vector2(1160, Yloc);
-            GardenPlotFour = new Vector2(1450, Yloc);
+            GardenPlotOneX = 550;
+            GardenPlotTwoX = 850;
+            GardenPlotThreeX = 1160;
+            GardenPlotFourX = 1450;
+
+            GardenPlotOne = new Vector2(GardenPlotOneX, Y);
+            GardenPlotTwo = new Vector2 (GardenPlotTwoX, Y);
+            GardenPlotThree = new Vector2(GardenPlotThreeX, Y);
+            GardenPlotFour = new Vector2(GardenPlotFourX, Y);
 
             LoadPlants();
             base.LoadContent();
@@ -103,18 +111,50 @@ namespace FinalGame.Crops
             }
         }
 
+        
         internal void SetPlantLocation()
         {
-            Garden[0].Location = GardenPlotOne;
-            Garden[1].Location = GardenPlotTwo;
-            Garden[2].Location = GardenPlotThree;
-            Garden[3].Location = GardenPlotFour;
+            //foreach(Plant plant in Garden)//Tall Plants
+            //{
+            //    if(plant.Name == "Corn" || plant.Name == "Grapes" || plant.Name == "GreenBean")
+            //    {
+            //        Y = 430;
+            //    }
+            //    else
+            //    {
+            //        Y = 480;
+            //    }
 
-            foreach(Plant plant in Garden)//Tall Plants
+            //    plant.Location = 
+
+            //    //Garden[]
+            //}
+
+            //Garden[0].Location = GardenPlotOne;
+            //Garden[1].Location = GardenPlotTwo;
+            //Garden[2].Location = GardenPlotThree;
+            //Garden[3].Location = GardenPlotFour;
+
+            for (int i = 0; i < 4; i++)//Tall Plants
             {
-                if(plant == Corn || plant == Grapes || plant == GreenBean)
-                {
-                    plant.Location.Y = 430;
+                if (Garden[i].Name == "Corn" || Garden[i].Name == "Grapes" || Garden[i].Name == "Green Bean") { Y = 430; }
+                else { Y = 480; }
+
+                if (i == 0){ 
+                    GardenPlotOne.Y = Y;
+                    Garden[i].Location = GardenPlotOne; 
+                }
+                if (i == 1){
+                    GardenPlotTwo.Y = Y;
+                    Garden[i].Location = GardenPlotTwo;
+                }
+                if (i == 2){
+                    GardenPlotThree.Y = Y;
+                    Garden[i].Location = GardenPlotThree;
+                }
+                if (i == 3){
+                    GardenPlotFour.Y = Y;
+                    Garden[i].Location = GardenPlotFour;
                 }
             }
         }
@@ -170,6 +210,46 @@ namespace FinalGame.Crops
 
             plant.UpdatePlantDay();
         }
+
+        Plant Plant;
+        public Plant NewPlant(int index, Game game)
+        {
+            switch (index)
+            {
+                case 0:
+                    Plant = new Beet(game);
+                    break;
+                case 1:
+                    Plant = new Corn(game);
+                    break;
+                case 2:
+                    Plant = new Garlic(game);
+                    break;
+                case 3:
+                    Plant = new Grapes(game);
+                    break;
+                case 4:
+                    Plant = new GreenBean(game);
+                    break;
+                case 5:
+                    Plant = new Melon(game);
+                    break;
+                case 6:
+                    Plant = new Potato(game);
+                    break;
+                case 7:
+                    Plant = new Radish(game);
+                    break;
+                case 8:
+                    Plant = new Strawberry(game);
+                    break;
+                case 9:
+                    Plant = new Tomato(game);
+                    break;
+            }
+            return Plant;
+        }
+    
 
         public override void Draw(GameTime gameTime)
         {

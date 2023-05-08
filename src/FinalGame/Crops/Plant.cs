@@ -102,7 +102,8 @@ namespace FinalGame.Crops
                 case PlantDay.DaySix:
                     this.spriteTexture = this.DaySixTexture;
                     this.Harvestable = true;
-                    if(this.PlantQuality == Quality.Unknown) { CalculateQuality();}
+                    CalculateQuality();
+                    //if(this.PlantQuality == Quality.Unknown) { }
                     break;
             }
         }

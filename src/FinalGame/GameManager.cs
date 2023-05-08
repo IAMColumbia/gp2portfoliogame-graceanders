@@ -43,8 +43,6 @@ namespace FinalGame
         string InventoryTextureName, SelectedTextureName;
         Vector2 InventoryOneLoc, InventoryTwoLoc, InventoryThreeLoc, InventoryFourLoc, InventoryFiveLoc, InventorySixLoc, InventorySevenLoc, InventoryEightLoc, InventoryNineLoc;
 
-        Plant NewPlant;
-
         public GameManager(Game game) : base(game) { g = game; }
 
         internal GameManager(Game game, InputHandler input, PlayableCharacter p, GridManager gridM, GardenManager gardenM, ShopManager shopM, StatsManager statsM) : base(game)
@@ -61,8 +59,6 @@ namespace FinalGame
 
             InventoryTextureName = "InventorySprite";
             SelectedTextureName = "SelectedSprite";
-
-            NewPlant = new Plant(game);
         }
 
         protected override void LoadContent()
@@ -211,6 +207,7 @@ namespace FinalGame
         
         int OldPlantIndex, NewPlantIndex;
         bool Planted;
+        int i;
         public void CheckInteractedSquare()
         {
             foreach (GridSquare gs in gridManager.SoilSquares)
@@ -233,10 +230,13 @@ namespace FinalGame
                             {
                                 if (SelectedItem.ItemType == ItemType.Seed)
                                 {
+                                    if(SelectedItem.Count > 1) { SelectedItem.Count--; }
                                     OldPlantIndex = gardenManager.Garden.IndexOf(p);
                                     NewPlantIndex = SelectedItem.ReturnPlantIndex();
 
-                                    PC.Player.RemoveItem(SelectedItem);
+                                    if (SelectedItem.Count > 1) { SelectedItem.Count--; }
+                                    else { PC.Player.RemoveItem(SelectedItem); }
+                                    
                                     Planted = true;
                                 }
                             }
@@ -245,7 +245,12 @@ namespace FinalGame
                         //Harvest
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true && p.PS != PlantState.Harvested)
                         {
-                            PC.Player.AddItem(p);
+                            if (PC.Player.Inventory.Contains(p))
+                            {
+                                i = PC.Player.Inventory.IndexOf(p);
+                                PC.Player.Inventory[i].Count++;
+                            }
+                            else { PC.Player.AddItem(p); }
                             p.Harvest();
                         }
 
@@ -255,8 +260,7 @@ namespace FinalGame
 
                     if (Planted)
                     {
-                        NewPlant = gardenManager.AllPlants[NewPlantIndex];
-                        gardenManager.Garden[OldPlantIndex] = NewPlant; 
+                        gardenManager.Garden[OldPlantIndex] = gardenManager.NewPlant(NewPlantIndex, g); 
 
                         gardenManager.ResetPlant(gardenManager.Garden[OldPlantIndex]);
                         gardenManager.UpdatePlantState(gardenManager.Garden[OldPlantIndex]);
