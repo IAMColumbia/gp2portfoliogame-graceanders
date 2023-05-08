@@ -208,6 +208,7 @@ namespace FinalGame
         int OldPlantIndex, NewPlantIndex;
         bool Planted;
         int i;
+        bool Contains;
         public void CheckInteractedSquare()
         {
             foreach (GridSquare gs in gridManager.SoilSquares)
@@ -230,7 +231,6 @@ namespace FinalGame
                             {
                                 if (SelectedItem.ItemType == ItemType.Seed)
                                 {
-                                    if(SelectedItem.Count > 1) { SelectedItem.Count--; }
                                     OldPlantIndex = gardenManager.Garden.IndexOf(p);
                                     NewPlantIndex = SelectedItem.ReturnPlantIndex();
 
@@ -245,12 +245,14 @@ namespace FinalGame
                         //Harvest
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true && p.PS != PlantState.Harvested)
                         {
-                            if (PC.Player.Inventory.Contains(p))
+                            Contains = false;
+                            foreach(Item item in PC.Player.Inventory)
                             {
-                                i = PC.Player.Inventory.IndexOf(p);
-                                PC.Player.Inventory[i].Count++;
+                                if(item.Name == p.Name) { item.Count++; }
+                                else { Contains = true; }
                             }
-                            else { PC.Player.AddItem(p); }
+                            if (Contains) { PC.Player.AddItem(p); }
+
                             p.Harvest();
                         }
 
