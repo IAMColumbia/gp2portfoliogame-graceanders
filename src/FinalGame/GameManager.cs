@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Sprite.Extensions;
 using MonoGameLibrary.Util;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,6 +46,11 @@ namespace FinalGame
 
         public GameManager(Game game) : base(game) { g = game; }
 
+        Texture2D WateringSprite;
+        Rectangle WateringSprite1, WateringSprite2, WateringSprite3, WateringSprite4, WateringSprite5, WateringSprite6, 
+            WateringSprite7, WateringSprite8, WateringSprite9, WateringSprite10, WateringSprite11;
+        List<Rectangle> WateringSprites;
+
         internal GameManager(Game game, InputHandler input, PlayableCharacter p, GridManager gridM, GardenManager gardenM, ShopManager shopM, StatsManager statsM) : base(game)
         {
             g = game;
@@ -83,6 +89,21 @@ namespace FinalGame
         {
             InventoryTexture = this.Game.Content.Load<Texture2D>(InventoryTextureName);
             SelectedTexture = this.Game.Content.Load<Texture2D>(SelectedTextureName);
+            
+            WateringSprite = this.Game.Content.Load<Texture2D>("WateringSprites");
+            WateringSprite1 = new Rectangle(0, 0, 100, 90);
+            WateringSprite2 = new Rectangle(100, 0, 100, 90);
+            WateringSprite3 = new Rectangle(200, 0, 100, 90);
+            WateringSprite4 = new Rectangle(0, 90, 100, 90);
+            WateringSprite5 = new Rectangle(100, 90, 100, 90);
+            WateringSprite6 = new Rectangle(200, 90, 100, 90);
+            WateringSprite7 = new Rectangle(0, 180, 100, 90);
+            WateringSprite8 = new Rectangle(100, 180, 100, 90);
+            WateringSprite9 = new Rectangle(200, 180, 100, 90);
+            WateringSprite10 = new Rectangle(0, 270, 100, 90);
+            WateringSprite11 = new Rectangle(100, 270, 100, 90);
+
+            WateringSprites = new List<Rectangle> { WateringSprite1, WateringSprite2, WateringSprite3, WateringSprite4, WateringSprite5, WateringSprite6, WateringSprite7, WateringSprite8, WateringSprite9, WateringSprite10, WateringSprite11 };
 
             InventoryOneLoc = new Vector2(300, Bottom); InventoryTwoLoc = new Vector2(425, Bottom); InventoryThreeLoc = new Vector2(550, Bottom);
             InventoryFourLoc = new Vector2(675, Bottom); InventoryFiveLoc = new Vector2(800, Bottom); InventorySixLoc = new Vector2(925, Bottom);
@@ -277,7 +298,15 @@ namespace FinalGame
             }
         }
 
+        float timer = 0;
+        int threshold;
+
+        byte previousAnimationIndex = 10;
+        byte currentAnimationIndex = 0;
+
+
         Vector2 TimeLocation = new Vector2(10, 10);
+        byte j;
         public override void Draw(GameTime gameTime)
         {
             sb.Begin();
@@ -303,6 +332,35 @@ namespace FinalGame
             }
 
             DrawHotbarItems();
+
+            
+            threshold = 250;
+
+            //if (currentAnimationIndex == 11) { currentAnimationIndex = 0; }
+            sb.Draw(WateringSprite, new Vector2(100, 90), WateringSprites[currentAnimationIndex], Color.White);
+
+            if(timer > threshold)
+            {
+                j = currentAnimationIndex;
+                if(j >= WateringSprites.Count - 1)
+                {
+                    previousAnimationIndex = currentAnimationIndex;
+                    currentAnimationIndex = 0;
+                }
+                else
+                {
+                    previousAnimationIndex = currentAnimationIndex;
+                    currentAnimationIndex++;
+                }
+
+                timer = 0;
+            }
+            else
+            {
+                timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+
+
 
             sb.End();
 

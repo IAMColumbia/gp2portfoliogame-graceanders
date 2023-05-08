@@ -103,7 +103,6 @@ namespace FinalGame.Crops
                     this.spriteTexture = this.DaySixTexture;
                     this.Harvestable = true;
                     CalculateQuality();
-                    //if(this.PlantQuality == Quality.Unknown) { }
                     break;
             }
         }
@@ -144,12 +143,12 @@ namespace FinalGame.Crops
             else if (qualityRoll <= 95) // 10% chance of Decent quality
             {
                 this.PlantQuality = Quality.Decent;
-                this.Worth += 20;
+                this.Worth += 40;
             }
             else // 5% chance of Excellent quality
             {
                 this.PlantQuality = Quality.Excellent;
-                this.Worth += 20;
+                this.Worth += 60;
                 this.AchievedExcellence = true;
             }
         }
