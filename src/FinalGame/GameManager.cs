@@ -6,6 +6,7 @@ using MonoGameLibrary.Sprite;
 using MonoGameLibrary.Sprite.Extensions;
 using MonoGameLibrary.Util;
 using SharpDX.Direct3D9;
+using SharpDX.XAudio2;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -292,34 +293,13 @@ namespace FinalGame
 
             if (DrawCords) { DrawGridCords(); }
 
-            int i;
-            foreach(Hotbar hb in Hotbar)
-            { 
-                sb.Draw(InventoryTexture, hb.Loc, Color.White); 
-                if(hb.Selected == true) 
-                { 
-                    sb.Draw(SelectedTexture, hb.Loc, Color.White);
-                    i = Hotbar.IndexOf(hb);
-                    if(PC.Player.Inventory.Count >= i + 1){ 
-                        SelectedItem = PC.Player.Inventory[i]; 
-                    }
-                    else { SelectedItem = null; }
-                }
-            }
+            DrawHotbar();
 
             DrawHotbarItems();
 
             if(animationManager.Watering)
             {
-                if(animationManager.currentAnimationIndex == 0) 
-                {
-                    var mouseState = Mouse.GetState();
-                    Vector2 mousePoint = new Vector2(mouseState.X, mouseState.Y);
-
-                    animationManager.Location = mousePoint + animationManager.WateringLocation; 
-                }
-                
-                animationManager.WaterAnimation(sb, gameTime);
+                DrawWatering(gameTime);
             }
 
             sb.End();
@@ -332,6 +312,25 @@ namespace FinalGame
             foreach(GridSquare gs in gridManager.GridBoard) 
             {
                 sb.DrawString(font, $"({gs.Cords.X},{gs.Cords.Y})", gs.Location, Color.Black);
+            }
+        }
+
+        public void DrawHotbar()
+        {
+            int i;
+            foreach (Hotbar hb in Hotbar)
+            {
+                sb.Draw(InventoryTexture, hb.Loc, Color.White);
+                if (hb.Selected == true)
+                {
+                    sb.Draw(SelectedTexture, hb.Loc, Color.White);
+                    i = Hotbar.IndexOf(hb);
+                    if (PC.Player.Inventory.Count >= i + 1)
+                    {
+                        SelectedItem = PC.Player.Inventory[i];
+                    }
+                    else { SelectedItem = null; }
+                }
             }
         }
 
@@ -352,6 +351,19 @@ namespace FinalGame
                 sb.DrawString(small, $"{item.Count}", Hotbar[count].Loc + BottomCorner, Color.Black);
                     
             }
+        }
+
+        public void DrawWatering(GameTime gameTime)
+        {
+            if (animationManager.currentAnimationIndex == 0)
+            {
+                var mouseState = Mouse.GetState();
+                Vector2 mousePoint = new Vector2(mouseState.X, mouseState.Y);
+
+                animationManager.Location = mousePoint + animationManager.WateringLocation;
+            }
+
+            animationManager.WaterAnimation(sb, gameTime);
         }
 
     }
