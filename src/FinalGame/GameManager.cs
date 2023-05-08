@@ -242,7 +242,7 @@ namespace FinalGame
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true && p.PS != PlantState.Harvested)
                         {
                             PC.Player.AddItem(p);
-                            p.PS = PlantState.Harvested;
+                            p.Harvest();
                         }
 
                         gs.GridState = GridState.Free;
@@ -255,7 +255,6 @@ namespace FinalGame
 
                         gardenManager.ResetPlant(gardenManager.Garden[OldPlant]);
                         gardenManager.UpdatePlantState(gardenManager.Garden[OldPlant]);
-
                     }
 
                     Planted = false;

@@ -10,12 +10,10 @@ namespace FinalGame.Crops
 {
     internal class Radish : Plant
     {
-        int Yloc = 480;
-        public Radish(Game game, int Xloc) : base(game)
+        public Radish(Game game) : base(game)
         {
             this.Name = "Radish";
             this.Worth = 90;
-            this.Location = new Vector2(Xloc, Yloc);
             this.Scale = 2;
             SetTextureNames();
 

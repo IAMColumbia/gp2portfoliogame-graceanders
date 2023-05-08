@@ -10,12 +10,10 @@ namespace FinalGame.Crops
 {
     internal class Garlic : Plant
     {
-        int Yloc = 480;
-        public Garlic(Game game, int Xloc) : base(game)
+        public Garlic(Game game) : base(game)
         {
             this.Name = "Garlic";
             this.Worth = 60;
-            this.Location = new Vector2(Xloc, Yloc);
             this.Scale = 2;
             SetTextureNames();
 

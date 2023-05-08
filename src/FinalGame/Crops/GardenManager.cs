@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics;
 using System.Text;
 using System.Threading.Tasks;
 using FinalGame.Interfaces;
@@ -18,7 +19,7 @@ namespace FinalGame.Crops
 
         bool testing;
 
-        int GardenPlotOneX, GardenPlotTwoX, GardenPlotThreeX, GardenPlotFourX;
+        internal Vector2 GardenPlotOne, GardenPlotTwo, GardenPlotThree, GardenPlotFour;
 
         public GardenManager(Game game) : base(game)
         {
@@ -27,12 +28,13 @@ namespace FinalGame.Crops
             testing = true;
         }
 
+        int Yloc = 480;
         protected override void LoadContent()
         {
-            GardenPlotOneX = 550;
-            GardenPlotTwoX = 850;
-            GardenPlotThreeX = 1160;
-            GardenPlotFourX = 1450;
+            GardenPlotOne = new Vector2(550, Yloc);
+            GardenPlotTwo = new Vector2(850, Yloc);
+            GardenPlotThree = new Vector2(1160, Yloc);
+            GardenPlotFour = new Vector2(1450, Yloc);
 
             LoadPlants();
             base.LoadContent();
@@ -41,16 +43,16 @@ namespace FinalGame.Crops
 
         private void LoadPlants()
         {
-            Beet = new Beet(this.Game, GardenPlotTwoX);   //0
-            Corn = new Corn(this.Game, GardenPlotThreeX);   //1
-            Garlic = new Garlic(this.Game, GardenPlotFourX);   //2
-            Grapes = new Grapes(this.Game, GardenPlotOneX);   //3
-            GreenBean = new GreenBean(this.Game, GardenPlotOneX);   //4
-            Melon = new Melon(this.Game, GardenPlotOneX);   //5
-            Potato = new Potato(this.Game, GardenPlotOneX);   //6
-            Radish = new Radish(this.Game, GardenPlotOneX);   //7
-            Strawberry = new Strawberry(this.Game, GardenPlotOneX);   //8
-            Tomato = new Tomato(this.Game, GardenPlotOneX);   //9
+            Beet = new Beet(this.Game);            //0
+            Corn = new Corn(this.Game);            //1
+            Garlic = new Garlic(this.Game);        //2
+            Grapes = new Grapes(this.Game);        //3
+            GreenBean = new GreenBean(this.Game);  //4
+            Melon = new Melon(this.Game);          //5
+            Potato = new Potato(this.Game);        //6
+            Radish = new Radish(this.Game);        //7
+            Strawberry = new Strawberry(this.Game);//8
+            Tomato = new Tomato(this.Game);        //9
 
             AllPlants = new List<Plant>() { Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry , Tomato};
 
@@ -61,6 +63,7 @@ namespace FinalGame.Crops
                 Garden.Add(Corn);
                 Garden.Add(Garlic);
 
+                SetPlantLocation();
             }
 
         }
@@ -96,6 +99,22 @@ namespace FinalGame.Crops
             }
         }
 
+        internal void SetPlantLocation()
+        {
+            Garden[0].Location = GardenPlotOne;
+            Garden[1].Location = GardenPlotTwo;
+            Garden[2].Location = GardenPlotThree;
+            Garden[3].Location = GardenPlotFour;
+
+            foreach(Plant plant in Garden)//Tall Plants
+            {
+                if(plant == Corn || plant == Grapes || plant == GreenBean)
+                {
+                    plant.Location.Y = 430;
+                }
+            }
+        }
+
 
         public void AddPlant(Plant plant)
         {
@@ -108,7 +127,7 @@ namespace FinalGame.Crops
             {
                 if (plant.PS == PlantState.Harvested || plant.Harvestable == true)
                 {
-                    break;
+                    continue;
                 }
 
                 if (plant.Watered)
@@ -143,6 +162,9 @@ namespace FinalGame.Crops
             plant.DrawColor = Color.White;
             plant.Harvestable = false;
             plant.DaysUnwatered = 0;
+            this.SetPlantLocation();
+
+            plant.UpdatePlantDay();
         }
 
         public override void Draw(GameTime gameTime)

@@ -115,15 +115,16 @@ namespace FinalGame.Crops
             this.plantDay++;
         }
 
-        public Plant Harvest()
+        public void Harvest()
         {
-            return this;
+            this.PS = PlantState.Harvested;
         }
 
         public void Water()
         {
             this.Watered = true;
         }
+
 
         internal void CalculateQuality()
         {

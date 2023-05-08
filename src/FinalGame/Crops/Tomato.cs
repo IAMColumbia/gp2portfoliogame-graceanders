@@ -10,12 +10,10 @@ namespace FinalGame.Crops
 {
     internal class Tomato : Plant
     {
-        int Yloc = 450;
-        public Tomato(Game game, int Xloc) : base(game)
+        public Tomato(Game game) : base(game)
         {
             this.Name = "Tomato";
             this.Worth = 60;
-            this.Location = new Vector2(Xloc, Yloc);
             this.Scale = 2;
             SetTextureNames();
 
