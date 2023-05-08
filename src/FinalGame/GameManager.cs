@@ -199,7 +199,7 @@ namespace FinalGame
             gardenManager.GrowPlants();
             foreach (Plant plant in gardenManager.Garden) { plant.Watered = false; }
 
-            //gardenManager.UpdatePlantQuality();
+            gardenManager.UpdatePlantQuality();
 
             shopManager.RandomItems();
 
@@ -245,7 +245,7 @@ namespace FinalGame
                         //Harvest
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.Harvestable == true && p.PS != PlantState.Harvested)
                         {
-                            //Plants Stack
+                            #region Plants Stack
                             //Contains = false;
                             //foreach(Item item in PC.Player.Inventory)
                             //{
@@ -253,7 +253,8 @@ namespace FinalGame
                             //    else { Contains = true; }
                             //}
                             //if (Contains || PC.Player.Inventory.Count == 0) { PC.Player.AddItem(p); }
-                            
+                            #endregion
+
                             PC.Player.AddItem(p);//If the plants stack then they just default to the first quality. dismisses each plants calculations
 
                             p.Harvest();

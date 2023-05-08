@@ -105,7 +105,6 @@ namespace FinalGame.Crops
                     if(GP.Name == plant.Name)
                     {
                         if(plant.PlantQuality < GP.PlantQuality) { plant.PlantQuality = GP.PlantQuality; }
-                        break;
                     }
                 }
             }
