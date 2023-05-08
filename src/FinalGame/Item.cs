@@ -12,7 +12,7 @@ namespace FinalGame
 {
     enum ItemType
     {
-        Plant, Seed, Fertalizer
+        Plant, Seed, Fertalizer, FreePlot
     }
 
     internal class Item : DrawableSprite

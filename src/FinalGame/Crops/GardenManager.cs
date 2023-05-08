@@ -14,7 +14,7 @@ namespace FinalGame.Crops
     {
         internal List<Plant> Garden;// May have all plants in garden drawn, but not visible
         internal List<Plant> AllPlants;
-        Plant Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry, Tomato;
+        Plant Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry, Tomato, FreePlot;
         
 
         bool testing;
@@ -54,6 +54,8 @@ namespace FinalGame.Crops
             Strawberry = new Strawberry(this.Game);//8
             Tomato = new Tomato(this.Game);        //9
 
+            FreePlot = new FreePlot(this.Game);
+
             AllPlants = new List<Plant>() { Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry , Tomato};
 
             if (testing) 
@@ -79,6 +81,7 @@ namespace FinalGame.Crops
                     break;
                 case PlantState.Harvested:
                     plant.DrawColor = Color.Transparent;
+                    plant = FreePlot;
                     break;
             }
 

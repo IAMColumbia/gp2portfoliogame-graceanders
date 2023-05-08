@@ -200,6 +200,18 @@
 /processorParam:TextureFormat=Color
 /build:Crops/Corn_Stage_6.png
 
+#begin Crops/Free_Plot.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Crops/Free_Plot.png
+
 #begin Crops/Garlic_Seeds.png
 /importer:TextureImporter
 /processor:TextureProcessor
