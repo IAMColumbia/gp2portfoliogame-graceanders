@@ -40,14 +40,20 @@ namespace FinalGame
 
         public Item(Game game) : base(game) { }
 
-        public Item(Game game, string plantName, int worth) : base(game) 
+        public Item(Game game, string name, int worth, ItemType IT) : base(game) 
         {
-            this.Name = $"{plantName} Seed";
-            this.PlantIndex = CalculatePlantIndex(plantName);
-            this.Worth = worth;
+            this.Name = $"{name}";
 
-            itemType = ItemType.Seed;
+            if (IT == ItemType.Seed)
+            {
+                this.Name += " Seed";
+                this.PlantIndex = CalculatePlantIndex(name);
+            }
+            
+            this.Worth = worth;
+            this.ItemType = IT;
         }
+
 
 
         internal int ReturnPlantIndex() { return this.PlantIndex; }

@@ -13,13 +13,16 @@ namespace FinalGame
         PlayableCharacter PC;
         InputHandler input;
 
-        private List<Item> ShopInventory;
+        private List<Item> ShopInventorySeeds;
+        private List<Item> ShopInventoryFertilizer;
         private List<Item> BuyableItems = new List<Item>();
         private Random random = new Random();
 
         Item BeetSeeds, CornSeeds, GarlicSeeds, GrapeSeeds, GreenBeanSeeds, MelonSeeds, PotatoSeeds, RadishSeeds, StrawberrySeeds, TomatoSeeds;
-
         string BeetSeedTextureName, CornSeedTextureName, GarlicSeedTextureName, GrapeSeedTextureName, GreenBeanSeedTextureName, MelonSeedTextureName, PotatoSeedTextureName, RadishSeedTextureName, StrawberrySeedTextureName, TomatoSeedTextureName;
+
+        Item BasicFertilizer, QualityFertilizer, DeluxeFertilizer;
+        string BasicFertilizerTextureName, QualityFertilizerTextureName, DeluxeFertilizerTextureName;
 
         private bool isShopOpen;
 
@@ -33,16 +36,20 @@ namespace FinalGame
             PC = p;
             input = IH;
 
-            BeetSeeds = new Item(game, "Beet", 20);
-            CornSeeds = new Item(game, "Corn", 50);
-            GarlicSeeds = new Item(game, "Garlic", 40);
-            GrapeSeeds = new Item(game, "Grape", 60);
-            GreenBeanSeeds = new Item(game, "Green Bean", 60);
-            MelonSeeds = new Item(game, "Melon", 80);
-            PotatoSeeds = new Item(game, "Potato", 50);
-            RadishSeeds = new Item(game, "Radish", 40);
-            StrawberrySeeds = new Item(game, "Strawberry", 100);
-            TomatoSeeds = new Item(game, "Tomato", 50);
+            BeetSeeds = new Item(game, "Beet", 20, ItemType.Seed);
+            CornSeeds = new Item(game, "Corn", 50, ItemType.Seed);
+            GarlicSeeds = new Item(game, "Garlic", 40, ItemType.Seed);
+            GrapeSeeds = new Item(game, "Grape", 60, ItemType.Seed);
+            GreenBeanSeeds = new Item(game, "Green Bean", 60, ItemType.Seed);
+            MelonSeeds = new Item(game, "Melon", 80, ItemType.Seed);
+            PotatoSeeds = new Item(game, "Potato", 50, ItemType.Seed);
+            RadishSeeds = new Item(game, "Radish", 40, ItemType.Seed);
+            StrawberrySeeds = new Item(game, "Strawberry", 100, ItemType.Seed);
+            TomatoSeeds = new Item(game, "Tomato", 50, ItemType.Seed);
+
+            BasicFertilizer = new Item(game, "Basic Fertilizer", 20, ItemType.Fertalizer);
+            QualityFertilizer = new Item(game, "Quality Fertilizer", 40, ItemType.Fertalizer);
+            DeluxeFertilizer = new Item(game, "Deluxe Fertilizer", 60, ItemType.Fertalizer);
 
             PopulateShopInventory();
 
@@ -52,6 +59,7 @@ namespace FinalGame
 
         protected override void LoadContent()
         {
+            #region Seeds
             BeetSeedTextureName = "Crops/Beet_Seeds";
             CornSeedTextureName = "Crops/Corn_Seeds";
             GarlicSeedTextureName = "Crops/Garlic_Seeds";
@@ -73,38 +81,59 @@ namespace FinalGame
             RadishSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(RadishSeedTextureName);
             StrawberrySeeds.spriteTexture = this.Game.Content.Load<Texture2D>(StrawberrySeedTextureName);
             TomatoSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(TomatoSeedTextureName);
+            #endregion
+
+            #region Fertilizer
+            BasicFertilizerTextureName = "Basic_Fertilizer";
+            QualityFertilizerTextureName = "Quality_Fertilizer";
+            DeluxeFertilizerTextureName = "Deluxe_Fertilizer";
+
+            BasicFertilizer.spriteTexture = this.Game.Content.Load<Texture2D>(BasicFertilizerTextureName);
+            QualityFertilizer.spriteTexture = this.Game.Content.Load<Texture2D>(QualityFertilizerTextureName);
+            DeluxeFertilizer.spriteTexture = this.Game.Content.Load<Texture2D>(DeluxeFertilizerTextureName);
+            #endregion
 
             base.LoadContent();
         }
 
         internal void PopulateShopInventory()
         {
-            ShopInventory = new List<Item>() { BeetSeeds, CornSeeds, GarlicSeeds, GrapeSeeds, GreenBeanSeeds, MelonSeeds, PotatoSeeds, RadishSeeds, StrawberrySeeds, TomatoSeeds };
+            ShopInventorySeeds = new List<Item>() { BeetSeeds, CornSeeds, GarlicSeeds, GrapeSeeds, GreenBeanSeeds, MelonSeeds, PotatoSeeds, RadishSeeds, StrawberrySeeds, TomatoSeeds };
+
+            ShopInventoryFertilizer = new List<Item> { BasicFertilizer, QualityFertilizer, DeluxeFertilizer };
 
         }
 
+        int index;
+        Item item;
         internal void RandomItems()
         {
             BuyableItems.Clear();
 
-            for (int i = 0; i < 5; i++)
+            //Adds 4 Seeds
+            for (int i = 0; i < 4; i++)
             {
-                int index = random.Next(ShopInventory.Count);
-                Item item = ShopInventory[index];
+                index = random.Next(ShopInventorySeeds.Count);
+                item = ShopInventorySeeds[index];
                 BuyableItems.Add(item);
-                ShopInventory.RemoveAt(index);
+                ShopInventorySeeds.RemoveAt(index);
             }
+            //Adds 1 Fertilizer
+            index = random.Next(ShopInventoryFertilizer.Count);
+            item = ShopInventoryFertilizer[index];
+            BuyableItems.Add(item);
+
             PopulateShopInventory();
         }
 
         internal void BuyItem(Item item, Player player)
         {
             int cost = item.Worth;
-            if (player.gold >= cost && ShopInventory.Contains(item))
+            if (player.gold >= cost && ShopInventorySeeds.Contains(item))
             {
                 player.gold -= cost;
                 player.AddItem(item);
-                ShopInventory.Remove(item);
+                ShopInventorySeeds.Remove(item);
             }
         }
 
@@ -115,13 +144,13 @@ namespace FinalGame
             {
                 player.gold += cost;
                 player.RemoveItem(item);
-                ShopInventory.Add(item);
+                ShopInventorySeeds.Add(item);
             }
         }
 
         internal int GetInventoryCount(Item item)
         {
-            return ShopInventory.Count(i => i == item);
+            return ShopInventorySeeds.Count(i => i == item);
         }
 
         public void OpenShopWindow()

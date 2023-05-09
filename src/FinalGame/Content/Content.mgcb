@@ -44,6 +44,18 @@
 /processorParam:TextureFormat=Color
 /build:BackSprite.png
 
+#begin Basic_Fertilizer.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Basic_Fertilizer.png
+
 #begin Crops/Beet_Seeds.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -872,6 +884,18 @@
 /processorParam:TextureFormat=Color
 /build:Decent_Quality_Icon.png
 
+#begin Deluxe_Fertilizer.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Deluxe_Fertilizer.png
+
 #begin Excellent_Quality_Icon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -967,6 +991,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Poor_Quality_Icon.png
+
+#begin Quality_Fertilizer.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Quality_Fertilizer.png
 
 #begin RightSprite.png
 /importer:TextureImporter
