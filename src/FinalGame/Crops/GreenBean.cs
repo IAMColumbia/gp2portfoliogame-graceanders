@@ -10,12 +10,10 @@ namespace FinalGame.Crops
 {
     internal class GreenBean : Plant
     {
-        int Yloc = 450;
-        public GreenBean(Game game, int Xloc) : base(game)
+        public GreenBean(Game game) : base(game)
         {
             this.Name = "Green Bean";
             this.Worth = 40; //Calculate worth later
-            this.Location = new Vector2(Xloc, Yloc);
             this.Scale = 2;
             SetTextureNames();
 
@@ -30,19 +28,6 @@ namespace FinalGame.Crops
             this.DayFourTextureName = "Crops/Green_Bean_Stage_4";
             this.DayFiveTextureName = "Crops/Green_Bean_Stage_5";
             this.DaySixTextureName = "Crops/Green_Bean_Stage_6";
-        }
-
-        protected override void LoadContent()
-        {
-            this.DayOneTexture = this.Game.Content.Load<Texture2D>(this.DayOneTextureName);
-            this.DayTwoTexture = this.Game.Content.Load<Texture2D>(this.DayTwoTextureName);
-            this.DayThreeTexture = this.Game.Content.Load<Texture2D>(this.DayThreeTextureName);
-            this.DayFourTexture = this.Game.Content.Load<Texture2D>(this.DayFourTextureName);
-            this.DayFiveTexture = this.Game.Content.Load<Texture2D>(this.DayFiveTextureName);
-            this.DaySixTexture = this.Game.Content.Load<Texture2D>(this.DaySixTextureName);
-            base.LoadContent();
-
-            this.UpdatePlantDay();
         }
     }
 }

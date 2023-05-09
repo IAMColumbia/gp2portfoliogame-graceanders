@@ -10,12 +10,10 @@ namespace FinalGame.Crops
 {
     internal class Radish : Plant
     {
-        int Yloc = 480;
-        public Radish(Game game, int Xloc) : base(game)
+        public Radish(Game game) : base(game)
         {
             this.Name = "Radish";
             this.Worth = 90;
-            this.Location = new Vector2(Xloc, Yloc);
             this.Scale = 2;
             SetTextureNames();
 
@@ -31,19 +29,5 @@ namespace FinalGame.Crops
             this.DayFiveTextureName = "Crops/Radish_Stage_4";
             this.DaySixTextureName = "Crops/Radish_Stage_5";
         }
-
-        protected override void LoadContent()
-        {
-            this.DayOneTexture = this.Game.Content.Load<Texture2D>(this.DayOneTextureName);
-            this.DayTwoTexture = this.Game.Content.Load<Texture2D>(this.DayTwoTextureName);
-            this.DayThreeTexture = this.Game.Content.Load<Texture2D>(this.DayThreeTextureName);
-            this.DayFourTexture = this.Game.Content.Load<Texture2D>(this.DayFourTextureName);
-            this.DayFiveTexture = this.Game.Content.Load<Texture2D>(this.DayFiveTextureName);
-            this.DaySixTexture = this.Game.Content.Load<Texture2D>(this.DaySixTextureName);
-            base.LoadContent();
-
-            this.UpdatePlantDay();
-        }
-
     }
 }

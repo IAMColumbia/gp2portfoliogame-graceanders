@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="FinalGame.Managers.AnimationManager">
+    <Position X="20" Y="12" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIAAAAAAAAAAAAAIFAAAAYAAAACAAAAAAAAAgAAw=</HashCode>
+      <FileName>Managers\AnimationManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Managers.GameManager">
+    <Position X="0.5" Y="6.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>UAaAQEDAKAQBKwAKBAAQRAJAEogAwiAIABkRhAC6QoQ=</HashCode>
+      <FileName>Managers\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Managers.GardenManager">
+    <Position X="28.5" Y="4.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAASACAEAAQAIkAAAEAABACiABAAEKAAMLQYBQiQogQ=</HashCode>
+      <FileName>Managers\GardenManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Managers.GridManager">
+    <Position X="4.25" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAACAAAQAAwgAAAJCAgAAAIQAAAEEAABAEIAAAAA=</HashCode>
+      <FileName>Managers\GridManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Managers.ShopManager">
+    <Position X="16.25" Y="0.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>iQGgAEAiBiAAIQASABYAACBBZCCQCDQQgAQIACQBgAY=</HashCode>
+      <FileName>Managers\ShopManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Managers.StatsManager">
+    <Position X="10.5" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAABAAAAASIAAAAAAAAAAAAAAAABAAAIAAAAAAAAQ=</HashCode>
+      <FileName>Managers\StatsManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Managers.WinManager">
+    <Position X="13.5" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAEAAAAAAAAAAAAAACBAAAAAAAAAAQ=</HashCode>
+      <FileName>Managers\WinManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Windows.ShopWindow">
+    <Position X="16.25" Y="11.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAABAAASAMwCAAAAAQAAAEAAKAAAAAAAAAAAAAAw=</HashCode>
+      <FileName>Windows\ShopWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Windows.StatsWindow">
+    <Position X="10.5" Y="4.25" Width="2.5" />
+    <InheritanceLine Type="FinalGame.Windows.Window" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="14.625" Y="10.704" />
+        <Point X="14.625" Y="11.188" />
+        <Point X="13" Y="11.188" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AIQAEAECAAKACwAEAAAACokACAkUCEAgCBEAQgAAAOQ=</HashCode>
+      <FileName>Windows\StatsWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Windows.WinWindow">
+    <Position X="13.5" Y="5" Width="2.25" />
+    <InheritanceLine Type="FinalGame.Windows.Window" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="14.625" Y="8.25" />
+        <Point X="14.625" Y="7.946" />
+        <Point X="14.625" Y="7.946" />
+        <Point X="14.625" Y="7.646" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAACAAwAAAAAAAIAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Windows\WinWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Windows.Window">
+    <Position X="13.5" Y="8.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAEAAQAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAIAA=</HashCode>
+      <FileName>Windows\Window.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Crops.Beet" Collapsed="true">
+    <Position X="23" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="FinalGame.Crops.Plant" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.5" Y="5.687" />
+        <Point X="23.688" Y="5.687" />
+        <Point X="23.688" Y="5.441" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Crops\Beet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Crops.Corn" Collapsed="true">
+    <Position X="24.75" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="FinalGame.Crops.Plant" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.5" Y="5.687" />
+        <Point X="25.438" Y="5.687" />
+        <Point X="25.438" Y="5.441" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Crops\Corn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Crops.Plant">
+    <Position X="20" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>CAQmgCgBBgAAAAAAECAIAAABAYkiAAAAABAACAhAFEY=</HashCode>
+      <FileName>Crops\Plant.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FinalGame.Crops.FreePlot" Collapsed="true">
+    <Position X="25.75" Y="8.5" Width="1.5" />
+    <InheritanceLine Type="FinalGame.Crops.Plant" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.5" Y="9.5" />
+        <Point X="26.5" Y="9.5" />
+        <Point X="26.5" Y="9.191" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Crops\FreePlot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Crops.Garlic" Collapsed="true">
+    <Position X="26.5" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="FinalGame.Crops.Plant" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.5" Y="5.687" />
+        <Point X="27.188" Y="5.687" />
+        <Point X="27.188" Y="5.441" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Crops\Garlic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Crops.Grapes" Collapsed="true">
+    <Position X="23" Y="6" Width="1.5" />
+    <InheritanceLine Type="FinalGame.Crops.Plant" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.5" Y="6.937" />
+        <Point X="23.75" Y="6.937" />
+        <Point X="23.75" Y="6.691" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Crops\Grapes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Crops.GreenBean" Collapsed="true">
+    <Position X="24.75" Y="6" Width="1.5" />
+    <InheritanceLine Type="FinalGame.Crops.Plant" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.5" Y="6.937" />
+        <Point X="25.5" Y="6.937" />
+        <Point X="25.5" Y="6.691" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Crops\GreenBean.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Crops.Melon" Collapsed="true">
+    <Position X="26.5" Y="6" Width="1.5" />
+    <InheritanceLine Type="FinalGame.Crops.Plant" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.5" Y="6.937" />
+        <Point X="27.188" Y="6.937" />
+        <Point X="27.188" Y="6.691" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Crops\Melon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Crops.Potato" Collapsed="true">
+    <Position X="23" Y="7.25" Width="1.5" />
+    <InheritanceLine Type="FinalGame.Crops.Plant" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.5" Y="8.188" />
+        <Point X="23.75" Y="8.188" />
+        <Point X="23.75" Y="7.941" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Crops\Potato.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Crops.Radish" Collapsed="true">
+    <Position X="24.75" Y="7.25" Width="1.5" />
+    <InheritanceLine Type="FinalGame.Crops.Plant" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.5" Y="8.188" />
+        <Point X="25.5" Y="8.188" />
+        <Point X="25.5" Y="7.941" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Crops\Radish.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Crops.Tomato" Collapsed="true">
+    <Position X="23.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Crops\Tomato.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Crops.Strawberry" Collapsed="true">
+    <Position X="26.5" Y="7.25" Width="1.5" />
+    <InheritanceLine Type="FinalGame.Crops.Plant" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.5" Y="8.188" />
+        <Point X="27.188" Y="8.188" />
+        <Point X="27.188" Y="7.941" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Crops\Strawberry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Character">
+    <Position X="7.25" Y="11.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Game1">
+    <Position X="0.5" Y="0.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>ABUAAAASgAAAAwAAAAIABAAAAQAAABEDQIAACAAAAAQ=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.GameConsolePlayer">
+    <Position X="4.25" Y="17.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameConsolePlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.GridSquare">
+    <Position X="7" Y="5.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AYQQQAAAEEAIAAAAAAQAAAoAAAAAAIAAQAMAJAAAIEY=</HashCode>
+      <FileName>GridSquare.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.GridTerrain">
+    <Position X="10.5" Y="14.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>CIAIAAAACAgIAAAAAAAACABAKAAAAAAACAgAAiAAAAQ=</HashCode>
+      <FileName>GridTerrain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Hotbar">
+    <Position X="13.75" Y="12.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAgAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Hotbar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Item">
+    <Position X="23.25" Y="10.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAIAAQAAAAAEAAAACAAQAgAAEAAAAAAACAAAAAwA=</HashCode>
+      <FileName>Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.PlayableCharacter">
+    <Position X="7.25" Y="13.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>EAQAABCAAAACAgAAAAAQgAAAQEAsAAEAEAAgAQIAAAQ=</HashCode>
+      <FileName>PlayableCharacter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Player">
+    <Position X="4.25" Y="13.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAwAAAAAAAAAAAAAACAAAgAgAAAAEAAAABgAAAAE=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Square">
+    <Position X="7" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAACAAAAAAAA=</HashCode>
+      <FileName>Square.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalGame.Terrain">
+    <Position X="4.25" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQIAAAAAAAA=</HashCode>
+      <FileName>Terrain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="FinalGame.Interfaces.IFertilize">
+    <Position X="26.75" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAI=</HashCode>
+      <FileName>Interfaces\IFertilize.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FinalGame.Interfaces.IGrowable">
+    <Position X="25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGrowable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FinalGame.Interfaces.IHarvestable">
+    <Position X="21.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IHarvestable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FinalGame.Interfaces.IWaterable">
+    <Position X="23" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAiAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IWaterable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="FinalGame.Windows.ShopMode">
+    <Position X="13.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Windows\ShopWindow.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalGame.Crops.Quality">
+    <Position X="24.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAIAAIAAAAAQBA=</HashCode>
+      <FileName>Crops\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalGame.Crops.PlantState">
+    <Position X="26.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAQAAAAACAAAAAA=</HashCode>
+      <FileName>Crops\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalGame.Crops.PlantDay">
+    <Position X="22.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAkAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAgACA=</HashCode>
+      <FileName>Crops\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalGame.Interfaces.FertilizerGrade">
+    <Position X="28" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Interfaces\IFertilize.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalGame.GridState">
+    <Position X="7" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>GridSquare.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalGame.TerrainType">
+    <Position X="4.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAIAAAAAAAQAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GridTerrain.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalGame.ItemType">
+    <Position X="26" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAQAgAAA=</HashCode>
+      <FileName>Item.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalGame.PlayerState">
+    <Position X="5.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FinalGame.SquareState">
+    <Position X="7" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Square.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

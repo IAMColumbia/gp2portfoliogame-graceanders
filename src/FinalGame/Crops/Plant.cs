@@ -24,10 +24,15 @@ namespace FinalGame.Crops
         DayOne, DayTwo, DayThree, DayFour, DayFive, DaySix
     }
 
-    internal class Plant : Item, IHarvestable, IWaterable, IGrowable
+    internal class Plant : Item, IHarvestable, IWaterable, IGrowable, IFertilize
     {
-        internal string TextureName { get; set; }
-        Quality PlantQuality;
+        private Quality plantQuality;
+        internal Quality PlantQuality
+        {
+            get { return this.plantQuality; }
+            set { this.plantQuality = value; }
+        }
+
         internal PlantState PS;
         private PlantDay plantDay;
         public PlantDay PlantDay
@@ -36,16 +41,45 @@ namespace FinalGame.Crops
             set { this.plantDay = value; }
         }
 
+        private FertilizerGrade fertilizerGrade;
+        public FertilizerGrade FertilizerGrade
+        {
+            get { return this.fertilizerGrade; }
+            set { this.fertilizerGrade = value; }
+        }
+
+
         internal Texture2D DayOneTexture, DayTwoTexture, DayThreeTexture, DayFourTexture, DayFiveTexture, DaySixTexture;
         internal string DayOneTextureName, DayTwoTextureName, DayThreeTextureName, DayFourTextureName, DayFiveTextureName, DaySixTextureName;
 
-        bool AchievedExelence;
+        //internal bool AchievedExcellence;
+        private Plant plant;
 
         public Plant(Game game) : base(game) 
         {
             this.plantDay = PlantDay.DayOne;
             this.PS = PlantState.Alive;
+            this.FertilizerGrade = FertilizerGrade.NonFertilized;
             this.Harvestable = false;
+            this.Fertilized = false;
+
+            ItemType = ItemType.Plant;
+        }
+
+        protected override void LoadContent()
+        {
+            this.DayOneTexture = this.Game.Content.Load<Texture2D>(this.DayOneTextureName);
+            this.DayTwoTexture = this.Game.Content.Load<Texture2D>(this.DayTwoTextureName);
+            this.DayThreeTexture = this.Game.Content.Load<Texture2D>(this.DayThreeTextureName);
+            this.DayFourTexture = this.Game.Content.Load<Texture2D>(this.DayFourTextureName);
+            this.DayFiveTexture = this.Game.Content.Load<Texture2D>(this.DayFiveTextureName);
+            this.DaySixTexture = this.Game.Content.Load<Texture2D>(this.DaySixTextureName);
+
+            this.ItemTexture = this.Game.Content.Load<Texture2D>(this.DaySixTextureName);
+
+            base.LoadContent();
+
+            this.UpdatePlantDay();
         }
 
         public override void Update(GameTime gameTime)
@@ -77,7 +111,7 @@ namespace FinalGame.Crops
                 case PlantDay.DaySix:
                     this.spriteTexture = this.DaySixTexture;
                     this.Harvestable = true;
-                    if(this.PlantQuality == Quality.Unknown) { CalculateQuality();}
+                    CalculateQuality();
                     break;
             }
         }
@@ -85,16 +119,17 @@ namespace FinalGame.Crops
         public bool Watered { get; set; }
         public int DaysUnwatered { get; set; }
         public bool Harvestable { get; set; }
+        public bool Fertilized { get; set; }
 
-        int i;
+
         public void Grow()
         {
             this.plantDay++;
         }
 
-        public Plant Harvest()
+        public void Harvest()
         {
-            return this;
+            this.PS = PlantState.Harvested;
         }
 
         public void Water()
@@ -102,9 +137,31 @@ namespace FinalGame.Crops
             this.Watered = true;
         }
 
+        public void Fertilize(Item SelectedItem)
+        {
+            this.Fertilized = true;
+            switch (SelectedItem.Name)
+            {
+                case "Basic Fertilizer":
+                    this.FertilizerGrade = FertilizerGrade.Basic;
+                    break;
+                case "Quality Fertilizer":
+                    this.FertilizerGrade = FertilizerGrade.Quality;
+                    break;
+                case "Deluxe Fertilizer":
+                    this.FertilizerGrade = FertilizerGrade.Deluxe;
+                    break;
+            }
+        }
+
         internal void CalculateQuality()
         {
-            int qualityRoll = new Random().Next(1, 101);
+            double qualityRoll = new Random().Next(1, 101);
+
+            if(this.FertilizerGrade != FertilizerGrade.NonFertilized)
+            {
+                qualityRoll += qualityRoll * CalculateFertilizerAffect();
+            }
 
             if (qualityRoll <= 60) // 60% chance of Poor quality
             {
@@ -118,14 +175,32 @@ namespace FinalGame.Crops
             else if (qualityRoll <= 95) // 10% chance of Decent quality
             {
                 this.PlantQuality = Quality.Decent;
-                this.Worth += 20;
+                this.Worth += 40;
             }
             else // 5% chance of Excellent quality
             {
                 this.PlantQuality = Quality.Excellent;
-                this.Worth += 20;
-                this.AchievedExelence = true;
+                this.Worth += 60;
+                //this.AchievedExcellence = true;
             }
+        }
+
+        double affect;
+        internal double CalculateFertilizerAffect()
+        {
+            switch(this.FertilizerGrade)
+            {
+                case FertilizerGrade.Basic:
+                    affect = .25;
+                    break;
+                case FertilizerGrade.Quality:
+                    affect = .50;
+                    break;
+                case FertilizerGrade.Deluxe:
+                    affect = .75;
+                    break;
+            }
+            return affect;
         }
     }    
 }

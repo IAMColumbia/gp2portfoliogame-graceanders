@@ -173,7 +173,7 @@ namespace MonoGameLibrary.Util
                     debugTextOutString += "\n" +  item.Key + " : " + item.Value;
                 }
                 
-                spriteBatch.DrawString(font, debugText + debugTextOutString, new Vector2(debugTextStartX, debugTextStartY), Color.Wheat);
+                //spriteBatch.DrawString(font, debugText + debugTextOutString, new Vector2(debugTextStartX, debugTextStartY), Color.Wheat);
 
                 spriteBatch.End();
             }

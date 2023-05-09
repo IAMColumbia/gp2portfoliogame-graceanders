@@ -1,4 +1,4 @@
-﻿using FinalGame.Crops;
+﻿using FinalGame.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -23,6 +23,12 @@ namespace FinalGame
 
         ShopManager shopM;
 
+        StatsManager statsM;
+
+        AnimationManager animationM;
+
+        WinManager winM;
+
         InputHandler input;
         GameConsole console;
 
@@ -31,6 +37,8 @@ namespace FinalGame
 
         public Game1()
         {
+            Window.Title = "Perfecting Cultivation";
+
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -64,7 +72,16 @@ namespace FinalGame
             shopM = new ShopManager(this, player, input);
             this.Components.Add(shopM);
 
-            gameM = new GameManager(this, input, player, gridM, gardenM, shopM);
+            statsM = new StatsManager(this, player, input);
+            this.Components.Add(statsM);
+
+            animationM = new AnimationManager(this);
+            this.Components.Add(animationM);
+
+            winM = new WinManager(this);
+            this.Components.Add(winM);
+
+            gameM = new GameManager(this, input, player, gridM, gardenM, shopM, statsM, animationM, winM);
             this.Components.Add(gameM);
 
         }
@@ -95,7 +112,7 @@ namespace FinalGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.LightBlue);
+            GraphicsDevice.Clear(Color.DimGray);
 
             // TODO: Add your drawing code here
 

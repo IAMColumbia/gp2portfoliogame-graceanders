@@ -1,0 +1,26 @@
+What patterns did you implement in your game? How did they help manage the structure of your game classes and their dependencies?
+The only pattern I feel I implemented in my game is Flight Weight. It seemed to align most with my project and what I intended to do. I mostly utilized it for my Grid, but I tried to carry the elements of the pattern into the structure of my class as a whole.
+
+What challenges did you have making your game components? What techniques did you use to overcome these challenges?
+The largest challenge I faced was the planting mechanics. Allowing the player to be able to Water, Fertilize, Harvest, and Replant successfully took some time. Initially, I wanted to try to only create each plant once. But that caused issues, such as not being able to plant 2 of the same plant at the same time. At times, I was uncertain why issues were happening, but by utilizing error testing, I was able to soon figure out what was causing the issue and elevate it. The hardest hurdle for me was having to take on what I felt was technical debt to fix an error. Allowing myself to put band-aids where necessary was most of the battle.
+
+Rate how reusable the game codebase is?
+There is definitely room for improvement in usability, but I'd say depending on how similar the game is a good chunk of the code can be reused. To put a number on it, I'd say around 40%
+
+What percentage is specific to the game?
+I'd say a large chunk of the code is specific to the planting game, around 60%, some elements like Window are outliers, but most of the reusability of the code depends on if I was coding out a similar game.
+
+What percentage is specific to the platform (monogame/unity)?
+I don't feel much is specific to monogame. Maybe around 15%. The game utilizes monogames Update, but I feel it would not be difficult to pull the code to another platform.
+
+How maintainable is your code?
+I believe 80%. I do my best to build a project in a way that can be understood and expanded. Though as I better my skills in programming games I am certain I will learn the best ways of writing highly maintainable objects.
+
+Is it easy to add more enemies, pickups, weapons, levels etc?
+Yes, I believe it is. I feel I structured it in a way that someone with minimal guidance could figure out how to plug in new Plants or even Windows. Though I do see room for improving that even farther.
+
+Did you finish your game?
+Yes, I did. There is always room to improve, but I did what I set out to do.
+
+Is there any outstanding technical debt?
+There are some small elements here and there. I don't love how I had to default to creating a new plant when a seed is planted. There is code here and there that isn't quite where I wish it was. But with the time I had I did my best to clear up the most egregious elements. I feel the only element I didn't fulfill completely was only allowing the player to click on things in range, though the foundations to implement that are present. It just became less important in the end.
