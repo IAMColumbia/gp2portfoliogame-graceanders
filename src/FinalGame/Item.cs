@@ -54,8 +54,6 @@ namespace FinalGame
             this.ItemType = IT;
         }
 
-
-
         internal int ReturnPlantIndex() { return this.PlantIndex; }
 
         int val;

@@ -182,6 +182,7 @@ namespace FinalGame.Crops
         {
             plant.PlantDay = 0;
             plant.PS = PlantState.Alive;
+            plant.FertilizerGrade = 0;
             plant.DrawColor = Color.White;
             plant.Harvestable = false;
             plant.DaysUnwatered = 0;

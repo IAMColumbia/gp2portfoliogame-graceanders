@@ -24,7 +24,7 @@ namespace FinalGame.Crops
         DayOne, DayTwo, DayThree, DayFour, DayFive, DaySix
     }
 
-    internal class Plant : Item, IHarvestable, IWaterable, IGrowable
+    internal class Plant : Item, IHarvestable, IWaterable, IGrowable, IFertilize
     {
         private Quality plantQuality;
         internal Quality PlantQuality
@@ -41,6 +41,13 @@ namespace FinalGame.Crops
             set { this.plantDay = value; }
         }
 
+        private FertilizerGrade fertilizerGrade;
+        public FertilizerGrade FertilizerGrade
+        {
+            get { return this.fertilizerGrade; }
+            set { this.fertilizerGrade = value; }
+        }
+
 
         internal Texture2D DayOneTexture, DayTwoTexture, DayThreeTexture, DayFourTexture, DayFiveTexture, DaySixTexture;
         internal string DayOneTextureName, DayTwoTextureName, DayThreeTextureName, DayFourTextureName, DayFiveTextureName, DaySixTextureName;
@@ -52,7 +59,9 @@ namespace FinalGame.Crops
         {
             this.plantDay = PlantDay.DayOne;
             this.PS = PlantState.Alive;
+            this.FertilizerGrade = FertilizerGrade.Basic;
             this.Harvestable = false;
+            this.Fertilized = false;
 
             ItemType = ItemType.Plant;
         }
@@ -110,6 +119,8 @@ namespace FinalGame.Crops
         public bool Watered { get; set; }
         public int DaysUnwatered { get; set; }
         public bool Harvestable { get; set; }
+        public bool Fertilized { get; set; }
+
 
         public void Grow()
         {
@@ -126,10 +137,20 @@ namespace FinalGame.Crops
             this.Watered = true;
         }
 
+        public void Fertilize(FertilizerGrade FG)
+        {
+            this.FertilizerGrade = FG;
+            this.Fertilized = true;
+        }
 
         internal void CalculateQuality()
         {
-            int qualityRoll = new Random().Next(1, 101);
+            double qualityRoll = new Random().Next(1, 101);
+
+            if(this.FertilizerGrade != FertilizerGrade.NonFertilized)
+            {
+                qualityRoll *= CalculateFertilizerAffect();
+            }
 
             if (qualityRoll <= 60) // 60% chance of Poor quality
             {
@@ -151,6 +172,24 @@ namespace FinalGame.Crops
                 this.Worth += 60;
                 this.AchievedExcellence = true;
             }
+        }
+
+        double affect;
+        internal double CalculateFertilizerAffect()
+        {
+            switch(this.FertilizerGrade)
+            {
+                case FertilizerGrade.Basic:
+                    affect = .25;
+                    break;
+                case FertilizerGrade.Quality:
+                    affect = .50;
+                    break;
+                case FertilizerGrade.Deluxe:
+                    affect = .75;
+                    break;
+            }
+            return affect;
         }
     }    
 }
