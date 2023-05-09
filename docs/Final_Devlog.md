@@ -45,6 +45,9 @@ There is a lot of code that danced between this class and other like Plant.
 
 I feel content with the responsibility it has now, and do feel a Garden Manager was necessary
 
+For awhile I had a Plant Manager that was going to handel all of the plants, but as I thought about it further
+it was better to seperate the responsibility between the plant classes as expressed above.
+
 ## Grid Manager
 Getting the grid working how I wanted took time, but overall I am happy with where it is now
 
@@ -61,3 +64,30 @@ Probally just hard setting the window size would be easier.
 Terrian is not utilized exactly how I had in mind, but The grid was built with grid squares, and the
 interaction and character reach was essnetial, so switching over to Terrain fully was not an option.
 
+## Shop Manager && Stats Manager && WinManager
+
+These simply handel the opening and closing of their respective windows, or better expressed the creation,
+and removal of the windows.
+
+I feel seperating the responsability is important and that it shouldn't be the games responsibility
+
+## Game Manager
+I am sure there are arguments for was to better and further seperate Game Manager
+
+I needed a central hub for the game to run and for the differnt classes to be able to get info about
+the others without creating a new value.
+
+There could be arguments for a hotbar manager but it did not feel nesacary, and I think it is alright
+for the game to manage to hotbar, but it could be seperated,
+
+ItemTexture is not a value I love it is just what needed to be done to allow plants to be added 
+to the hot bar without their grapics changing. Though since I later fixed the issue that was causing
+that I'm sure it could be removed
+
+I ended up not allow plants to stack because it was causing issue with Quality since I was not
+calculating in the plant that was about to increase the current plant in the inventory had a higher qualtity.
+I'm sure it could be fixed but I think it is fine that crops don't stack.
+
+There is an issue where if there is one see in the inventory and a fertilizer in the next once
+the seed is planted the fertilizer is the used since it moves to the seeds spot and is now selected. 
+This is a slight bug but I do not feel it is a big deal.
