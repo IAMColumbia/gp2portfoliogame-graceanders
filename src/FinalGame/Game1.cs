@@ -37,6 +37,8 @@ namespace FinalGame
 
         public Game1()
         {
+            Window.Title = "Perfecting Cultivation";
+
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
