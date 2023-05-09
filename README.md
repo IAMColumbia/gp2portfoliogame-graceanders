@@ -1,29 +1,19 @@
 # GameProgramming 2 Final
- Game Programming 2 Final Template
 
 Game Name: Perfecting Cultivation
 
-Description Short:  
-Description Long:
+Genre: Role-playing game
 
-Genre:
+Platform: Windows
 
-Platform:
+Game Name: Perfecting Cultivation
 
-Folder Sturcture
+Game Description Short: 
+Perfecting Cultivation is an achievement-based farming game.
 
-\src
+Game Description Long:
+Perfecting Cultivation is a time-based farming game where the player must: plant crops, take care of them, harvest them, sell them, and used the funds to buy new seeds and fertilizer. To win the game the player must achieve excellent quality on all of their crops. This is possible without purchasing fertilizer but is easier to achieve with the product.
 
-\src\packages
-
-\assets
-
-\docs
-
-\build
-
-\build\0.1POC
-
-\build\0.2VS
-
-\build\0.3Final
+Credits: 
+Plant, Fertilizer, and Seed assets from: https://stardewvalleywiki.com/Stardew_Valley_Wiki
+Shop Background asset from: https://www.normalday.xyz/
