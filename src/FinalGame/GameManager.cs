@@ -246,7 +246,7 @@ namespace FinalGame
                                         case "Quality Fertilizer":
                                             p.FertilizerGrade = FertilizerGrade.Quality;
                                             break;
-                                        case "DeluxeFertilizer":
+                                        case "Deluxe Fertilizer":
                                             p.FertilizerGrade = FertilizerGrade.Deluxe;
                                             break;
                                     }
@@ -311,7 +311,11 @@ namespace FinalGame
         private void RemoveInventoryItem(Item SelectedItem)
         {
             if (SelectedItem.Count > 1) { SelectedItem.Count--; }
-            else { PC.Player.RemoveItem(SelectedItem); }
+            else 
+            { 
+                PC.Player.RemoveItem(SelectedItem); 
+                SelectedItem.Count = 0;
+            }
         }
 
         Vector2 TimeLocation = new Vector2(10, 10);
@@ -321,7 +325,7 @@ namespace FinalGame
             sb.Begin();
 
             sb.DrawString(font, $"Total Time: {(int)CurrentTime} | Day Time: {(int)DayTime} | Day: {Day}                                " +
-                $"Click to water plants!                 O: Stats | P: Shop | Money: {PC.Player.gold}", TimeLocation, Color.White);
+                $"Click to water plants!               O: Stats | P: Shop | Money: {PC.Player.gold}", TimeLocation, Color.White);
 
             if (DrawCords) { DrawGridCords(); }
 

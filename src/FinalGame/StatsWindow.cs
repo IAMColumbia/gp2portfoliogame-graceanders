@@ -186,7 +186,7 @@ namespace FinalGame
             num = 0;
             foreach (Plant plant in AllPlants)
             {
-                if (plant.AchievedExcellence)
+                if (plant.PlantQuality == Quality.Excellent)
                     num++;
             }
             return num;
