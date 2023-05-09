@@ -20,3 +20,6 @@ Perfecting Cultivation is a time-based farming game where the player must: plant
 Plant, Fertilizer, and Seed assets from: https://stardewvalleywiki.com/Stardew_Valley_Wiki
 
 Shop Background asset from: https://www.normalday.xyz/
+
+## UML: 
+![Project UML Diagram](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff202f935-ff3d-49da-96f8-1c517d1a8cb4%2FUML.png?table=block&id=3217b3cd-14b0-4878-a2c1-5fd4a811935d&spaceId=2ee0c91e-81e9-4831-a147-d60f97bbf511&width=2000&userId=e4c7736a-3687-426e-aaba-066aac244ce8&cache=v2)
