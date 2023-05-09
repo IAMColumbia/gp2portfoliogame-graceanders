@@ -1,4 +1,5 @@
 ﻿using FinalGame.Crops;
+using FinalGame.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.XAudio2;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalGame
+namespace FinalGame.Windows
 {
     internal class StatsWindow : Window
     {
@@ -21,14 +22,14 @@ namespace FinalGame
         internal Vector2 ExcellentAchievedTextLoc;
         internal List<Rectangle> objectLocations;
 
-        internal List<Plant> AllPlants;
+        GardenManager gardenManager;
 
         internal Texture2D PoorStar, AcceptableStar, DecentStar, ExcellentStar;
         internal string PoorStarTextureName, AcceptableStarTextureName, DecentStarTextureName, ExcellentStarTextureName;
 
-        public StatsWindow(Game game, List<Plant> plants) : base(game)
+        public StatsWindow(Game game, GardenManager gm) : base(game)
         {
-            AllPlants = plants;
+            gardenManager = gm;
         }
 
         public override void Initialize()
@@ -37,7 +38,7 @@ namespace FinalGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Game.Content.Load<SpriteFont>("Arial");
             title = Game.Content.Load<SpriteFont>("Title");
-            smallFont = Game.Content.Load <SpriteFont>("Small");
+            smallFont = Game.Content.Load<SpriteFont>("Small");
             background = Game.Content.Load<Texture2D>("ShopBackground");
             itemSquare = Game.Content.Load<Texture2D>("InventorySprite");
 
@@ -76,8 +77,8 @@ namespace FinalGame
             ExcellentStarTextureName = "Excellent_Quality_Icon";
 
             PoorStar = Game.Content.Load<Texture2D>(PoorStarTextureName);
-            AcceptableStar = Game.Content.Load <Texture2D>(AcceptableStarTextureName);;
-            DecentStar = Game.Content.Load <Texture2D>(DecentStarTextureName);
+            AcceptableStar = Game.Content.Load<Texture2D>(AcceptableStarTextureName); ;
+            DecentStar = Game.Content.Load<Texture2D>(DecentStarTextureName);
             ExcellentStar = Game.Content.Load<Texture2D>(ExcellentStarTextureName);
 
             base.LoadContent();
@@ -127,18 +128,18 @@ namespace FinalGame
         Rectangle PlantLoc = new Rectangle();
         public void DrawPlants()
         {
-            for (int i =0; i <=9; i++)
+            for (int i = 0; i <= 9; i++)
             {
-                spriteBatch.Draw(AllPlants[i].DaySixTexture, AdjustPlantRec(i), Color.White);
-                if(AllPlants[i].PlantQuality > 0) { DrawQualityStars(i);}
+                spriteBatch.Draw(gardenManager.AllPlants[i].DaySixTexture, AdjustPlantRec(i), Color.White);
+                if (gardenManager.AllPlants[i].PlantQuality > 0) { DrawQualityStars(i); }
             }
         }
 
         private Rectangle AdjustPlantRec(int i)
         {
             PlantLoc = objectLocations[i];
-            PlantLoc.Width = AllPlants[i].DaySixTexture.Width + 10;
-            PlantLoc.Height = AllPlants[i].DaySixTexture.Height + 10;
+            PlantLoc.Width = gardenManager.AllPlants[i].DaySixTexture.Width + 10;
+            PlantLoc.Height = gardenManager.AllPlants[i].DaySixTexture.Height + 10;
             PlantLoc.X += 20;
 
             return PlantLoc;
@@ -146,19 +147,19 @@ namespace FinalGame
 
         private void DrawQualityStars(int i)
         {
-            if(AllPlants[i].PlantQuality == Quality.Poor)
+            if (gardenManager.AllPlants[i].PlantQuality == Quality.Poor)
             {
                 spriteBatch.Draw(PoorStar, objectLocations[i], Color.White);
             }
-            if (AllPlants[i].PlantQuality == Quality.Acceptable)
+            if (gardenManager.AllPlants[i].PlantQuality == Quality.Acceptable)
             {
                 spriteBatch.Draw(AcceptableStar, objectLocations[i], Color.White);
             }
-            if (AllPlants[i].PlantQuality == Quality.Decent)
+            if (gardenManager.AllPlants[i].PlantQuality == Quality.Decent)
             {
                 spriteBatch.Draw(DecentStar, objectLocations[i], Color.White);
             }
-            if (AllPlants[i].PlantQuality == Quality.Excellent)
+            if (gardenManager.AllPlants[i].PlantQuality == Quality.Excellent)
             {
                 spriteBatch.Draw(ExcellentStar, objectLocations[i], Color.White);
             }
@@ -173,23 +174,13 @@ namespace FinalGame
             {
                 TextLoc.X = objectLocations[i].X + 110;
                 TextLoc.Y = objectLocations[i].Y;
-                spriteBatch.DrawString(smallFont, $"{AllPlants[i].Name}\nQuality: {AllPlants[i].PlantQuality}", TextLoc, Color.Black);
+                spriteBatch.DrawString(smallFont, $"{gardenManager.AllPlants[i].Name}\nQuality: {gardenManager.AllPlants[i].PlantQuality}", TextLoc, Color.Black);
             }
 
-            spriteBatch.DrawString(font, $"You have achieved:\n{NumOfExcelentPlants()}/10 Excellent Plants", ExcellentAchievedTextLoc, Color.Brown);
+            spriteBatch.DrawString(font, $"You have achieved:\n{gardenManager.NumOfExcelentPlants()}/10 Excellent Plants", ExcellentAchievedTextLoc, Color.Brown);
 
         }
 
-        int num;
-        internal int NumOfExcelentPlants()
-        {
-            num = 0;
-            foreach (Plant plant in AllPlants)
-            {
-                if (plant.PlantQuality == Quality.Excellent)
-                    num++;
-            }
-            return num;
-        }
+
     }
 }

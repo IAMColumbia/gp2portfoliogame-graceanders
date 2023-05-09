@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalGame
+namespace FinalGame.Managers
 {
     internal class AnimationManager : DrawableGameComponent
     {
@@ -17,14 +17,14 @@ namespace FinalGame
 
         internal bool Watering;
 
-        public AnimationManager(Game game) : base(game) 
-        { 
+        public AnimationManager(Game game) : base(game)
+        {
             Watering = false;
         }
 
         protected override void LoadContent()
         {
-            WateringSprite = this.Game.Content.Load<Texture2D>("WateringSprites");
+            WateringSprite = Game.Content.Load<Texture2D>("WateringSprites");
             WateringSprite1 = new Rectangle(0, 0, 100, 90);
             WateringSprite2 = new Rectangle(100, 0, 100, 90);
             WateringSprite3 = new Rectangle(200, 0, 100, 90);
@@ -37,7 +37,7 @@ namespace FinalGame
             WateringSprite10 = new Rectangle(0, 270, 100, 90);
             WateringSprite11 = new Rectangle(100, 270, 100, 90);
 
-            WateringSprites = new List<Rectangle> { WateringSprite1, WateringSprite2, WateringSprite3, WateringSprite4, WateringSprite5, WateringSprite6, 
+            WateringSprites = new List<Rectangle> { WateringSprite1, WateringSprite2, WateringSprite3, WateringSprite4, WateringSprite5, WateringSprite6,
                 WateringSprite7, WateringSprite8, WateringSprite9, WateringSprite10, WateringSprite11 };
             base.LoadContent();
         }
@@ -53,9 +53,9 @@ namespace FinalGame
 
             if (timer > threshold)
             {
-                if (currentAnimationIndex >= WateringSprites.Count - 1) 
-                { 
-                    Watering = false; 
+                if (currentAnimationIndex >= WateringSprites.Count - 1)
+                {
+                    Watering = false;
                     currentAnimationIndex = 0;
                 }
                 else { currentAnimationIndex++; }

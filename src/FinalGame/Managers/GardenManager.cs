@@ -5,18 +5,19 @@ using System.Runtime.Intrinsics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using FinalGame.Crops;
 using FinalGame.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace FinalGame.Crops
+namespace FinalGame.Managers
 {
     internal class GardenManager : DrawableGameComponent
     {
         internal List<Plant> Garden;// May have all plants in garden drawn, but not visible
         internal List<Plant> AllPlants;
         Plant Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry, Tomato, FreePlot;
-        
+
 
         bool testing;
 
@@ -40,33 +41,33 @@ namespace FinalGame.Crops
             GardenPlotFourX = 1450;
 
             GardenPlotOne = new Vector2(GardenPlotOneX, Y);
-            GardenPlotTwo = new Vector2 (GardenPlotTwoX, Y);
+            GardenPlotTwo = new Vector2(GardenPlotTwoX, Y);
             GardenPlotThree = new Vector2(GardenPlotThreeX, Y);
             GardenPlotFour = new Vector2(GardenPlotFourX, Y);
 
             LoadPlants();
             base.LoadContent();
-            
+
         }
 
         private void LoadPlants()
         {
-            Beet = new Beet(this.Game);            //0
-            Corn = new Corn(this.Game);            //1
-            Garlic = new Garlic(this.Game);        //2
-            Grapes = new Grapes(this.Game);        //3
-            GreenBean = new GreenBean(this.Game);  //4
-            Melon = new Melon(this.Game);          //5
-            Potato = new Potato(this.Game);        //6
-            Radish = new Radish(this.Game);        //7
-            Strawberry = new Strawberry(this.Game);//8
-            Tomato = new Tomato(this.Game);        //9
+            Beet = new Beet(Game);            //0
+            Corn = new Corn(Game);            //1
+            Garlic = new Garlic(Game);        //2
+            Grapes = new Grapes(Game);        //3
+            GreenBean = new GreenBean(Game);  //4
+            Melon = new Melon(Game);          //5
+            Potato = new Potato(Game);        //6
+            Radish = new Radish(Game);        //7
+            Strawberry = new Strawberry(Game);//8
+            Tomato = new Tomato(Game);        //9
 
-            FreePlot = new FreePlot(this.Game);
+            FreePlot = new FreePlot(Game);
 
-            AllPlants = new List<Plant>() { Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry , Tomato};
+            AllPlants = new List<Plant>() { Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry, Tomato };
 
-            if (testing) 
+            if (testing)
             {
                 Garden.Add(Potato);
                 Garden.Add(Beet);
@@ -98,19 +99,19 @@ namespace FinalGame.Crops
 
         internal void UpdatePlantQuality()
         {
-            foreach(Plant plant in AllPlants)
+            foreach (Plant plant in AllPlants)
             {
-                foreach(Plant GP in Garden)
+                foreach (Plant GP in Garden)
                 {
-                    if(GP.Name == plant.Name)
+                    if (GP.Name == plant.Name)
                     {
-                        if(plant.PlantQuality < GP.PlantQuality) { plant.PlantQuality = GP.PlantQuality; }
+                        if (plant.PlantQuality < GP.PlantQuality) { plant.PlantQuality = GP.PlantQuality; }
                     }
                 }
             }
         }
 
-        
+
         internal void SetPlantLocation()
         {
 
@@ -119,19 +120,23 @@ namespace FinalGame.Crops
                 if (Garden[i].Name == "Corn" || Garden[i].Name == "Grapes" || Garden[i].Name == "Green Bean") { Y = 430; }
                 else { Y = 480; }
 
-                if (i == 0){ 
+                if (i == 0)
+                {
                     GardenPlotOne.Y = Y;
-                    Garden[i].Location = GardenPlotOne; 
+                    Garden[i].Location = GardenPlotOne;
                 }
-                if (i == 1){
+                if (i == 1)
+                {
                     GardenPlotTwo.Y = Y;
                     Garden[i].Location = GardenPlotTwo;
                 }
-                if (i == 2){
+                if (i == 2)
+                {
                     GardenPlotThree.Y = Y;
                     Garden[i].Location = GardenPlotThree;
                 }
-                if (i == 3){
+                if (i == 3)
+                {
                     GardenPlotFour.Y = Y;
                     Garden[i].Location = GardenPlotFour;
                 }
@@ -159,11 +164,13 @@ namespace FinalGame.Crops
                 }
                 else
                 {
-                    if (plant.DaysUnwatered >= 2) { 
+                    if (plant.DaysUnwatered >= 2)
+                    {
                         plant.PS = PlantState.Dead;
                         plant.DrawColor = Color.Transparent;
                     }
-                    else{ 
+                    else
+                    {
                         plant.DaysUnwatered++;
                         plant.DrawColor = Color.Olive;
                     }
@@ -174,7 +181,7 @@ namespace FinalGame.Crops
 
         public List<Plant> ReturnAllPlants()
         {
-            if( AllPlants == null ) { return null; }
+            if (AllPlants == null) { return null; }
             return AllPlants;
         }
 
@@ -186,7 +193,7 @@ namespace FinalGame.Crops
             plant.DrawColor = Color.White;
             plant.Harvestable = false;
             plant.DaysUnwatered = 0;
-            this.SetPlantLocation();
+            SetPlantLocation();
 
             plant.UpdatePlantDay();
         }
@@ -229,11 +236,22 @@ namespace FinalGame.Crops
             }
             return Plant;
         }
-    
+
+        int num;
+        internal int NumOfExcelentPlants()
+        {
+            num = 0;
+            foreach (Plant plant in AllPlants)
+            {
+                if (plant.PlantQuality == Quality.Excellent)
+                    num++;
+            }
+            return num;
+        }
 
         public override void Draw(GameTime gameTime)
         {
-            foreach (Plant plant in this.Garden)
+            foreach (Plant plant in Garden)
             {
                 plant.Update(gameTime);
                 plant.Draw(gameTime);

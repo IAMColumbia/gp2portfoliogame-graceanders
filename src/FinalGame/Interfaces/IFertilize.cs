@@ -14,7 +14,7 @@ namespace FinalGame.Interfaces
     internal interface IFertilize
     {
         bool Fertilized { get; set; }
-        void Fertilize(FertilizerGrade FG);
+        void Fertilize(Item SelctedItem);
 
         FertilizerGrade FertilizerGrade { get; set; }
     }

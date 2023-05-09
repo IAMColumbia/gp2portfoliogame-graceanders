@@ -16,7 +16,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalGame
+namespace FinalGame.Managers
 {
     public class GameManager : DrawableGameComponent
     {
@@ -36,6 +36,7 @@ namespace FinalGame
         IInputHandler Input;
 
         bool DrawCords;
+        bool GameWon;
 
         float CurrentTime, DayTime, DayDuration;
         int Day;
@@ -60,8 +61,6 @@ namespace FinalGame
             statsManager = statsM;
             animationManager = animationM;
 
-            DrawCords = false;
-
             InventoryTextureName = "InventorySprite";
             SelectedTextureName = "SelectedSprite";
         }
@@ -74,9 +73,12 @@ namespace FinalGame
 
         private void LoadGameElements()
         {
-            sb = new SpriteBatch(this.Game.GraphicsDevice);
-            font = this.Game.Content.Load<SpriteFont>("Arial");
-            small = this.Game.Content.Load<SpriteFont>("Small");
+            DrawCords = false;
+            GameWon = false;
+
+            sb = new SpriteBatch(Game.GraphicsDevice);
+            font = Game.Content.Load<SpriteFont>("Arial");
+            small = Game.Content.Load<SpriteFont>("Small");
             Day = 1;
             DayDuration = 10;
 
@@ -86,18 +88,18 @@ namespace FinalGame
         int Bottom = 870;
         private void LoadInventoryElements()
         {
-            InventoryTexture = this.Game.Content.Load<Texture2D>(InventoryTextureName);
-            SelectedTexture = this.Game.Content.Load<Texture2D>(SelectedTextureName);
+            InventoryTexture = Game.Content.Load<Texture2D>(InventoryTextureName);
+            SelectedTexture = Game.Content.Load<Texture2D>(SelectedTextureName);
 
             InventoryOneLoc = new Vector2(300, Bottom); InventoryTwoLoc = new Vector2(425, Bottom); InventoryThreeLoc = new Vector2(550, Bottom);
             InventoryFourLoc = new Vector2(675, Bottom); InventoryFiveLoc = new Vector2(800, Bottom); InventorySixLoc = new Vector2(925, Bottom);
             InventorySevenLoc = new Vector2(1050, Bottom); InventoryEightLoc = new Vector2(1175, Bottom); InventoryNineLoc = new Vector2(1300, Bottom);
 
-            Hotbar = new List<Hotbar> { new Hotbar(InventoryOneLoc, "InventoryOne"), 
-                new Hotbar(InventoryTwoLoc,"InventoryTwo"), new Hotbar(InventoryThreeLoc,"InventorThree"), 
-                new Hotbar(InventoryFourLoc, "InventoryFour"), new Hotbar(InventoryFiveLoc, "InventoryFive"), 
-                new Hotbar(InventorySixLoc, "InventorySix"), new Hotbar(InventorySevenLoc,"InventorySeven"), 
-                new Hotbar(InventoryEightLoc,"InventoryEight"), new Hotbar(InventoryNineLoc,"InventoryNine") 
+            Hotbar = new List<Hotbar> { new Hotbar(InventoryOneLoc, "InventoryOne"),
+                new Hotbar(InventoryTwoLoc,"InventoryTwo"), new Hotbar(InventoryThreeLoc,"InventorThree"),
+                new Hotbar(InventoryFourLoc, "InventoryFour"), new Hotbar(InventoryFiveLoc, "InventoryFive"),
+                new Hotbar(InventorySixLoc, "InventorySix"), new Hotbar(InventorySevenLoc,"InventorySeven"),
+                new Hotbar(InventoryEightLoc,"InventoryEight"), new Hotbar(InventoryNineLoc,"InventoryNine")
             };
 
             Hotbar[0].Selected = true;
@@ -134,6 +136,11 @@ namespace FinalGame
             }
         }
 
+        public void CheckForWin()
+        {
+            if (gardenManager.NumOfExcelentPlants() == 15) { GameWon = true; }
+        }
+
         public void HandleInput()
         {
             //Shop Window
@@ -149,7 +156,7 @@ namespace FinalGame
             //Stats Window
             if (!statsManager.IsStatsOpen && Input.KeyboardState.WasKeyPressed(Keys.O))
             {
-                statsManager.OpenStatsWindow(ref gardenManager.AllPlants);
+                statsManager.OpenStatsWindow(ref gardenManager);
             }
             else if (statsManager.IsStatsOpen && Input.KeyboardState.WasKeyPressed(Keys.O))
             {
@@ -158,39 +165,48 @@ namespace FinalGame
 
             #region Hotbar Select
 
-            if (Input.KeyboardState.WasKeyPressed(Keys.D1)){
+            if (Input.KeyboardState.WasKeyPressed(Keys.D1))
+            {
                 UnselectHotbar();
                 Hotbar[0].Selected = true;
             }
-            if (Input.KeyboardState.WasKeyPressed(Keys.D2)){
+            if (Input.KeyboardState.WasKeyPressed(Keys.D2))
+            {
                 UnselectHotbar();
                 Hotbar[1].Selected = true;
             }
-            if (Input.KeyboardState.WasKeyPressed(Keys.D3)){
+            if (Input.KeyboardState.WasKeyPressed(Keys.D3))
+            {
                 UnselectHotbar();
                 Hotbar[2].Selected = true;
             }
-            if (Input.KeyboardState.WasKeyPressed(Keys.D4)){
+            if (Input.KeyboardState.WasKeyPressed(Keys.D4))
+            {
                 UnselectHotbar();
                 Hotbar[3].Selected = true;
             }
-            if (Input.KeyboardState.WasKeyPressed(Keys.D5)){
+            if (Input.KeyboardState.WasKeyPressed(Keys.D5))
+            {
                 UnselectHotbar();
                 Hotbar[4].Selected = true;
             }
-            if (Input.KeyboardState.WasKeyPressed(Keys.D6)){
+            if (Input.KeyboardState.WasKeyPressed(Keys.D6))
+            {
                 UnselectHotbar();
                 Hotbar[5].Selected = true;
             }
-            if (Input.KeyboardState.WasKeyPressed(Keys.D7)){
+            if (Input.KeyboardState.WasKeyPressed(Keys.D7))
+            {
                 UnselectHotbar();
                 Hotbar[6].Selected = true;
             }
-            if (Input.KeyboardState.WasKeyPressed(Keys.D8)){
+            if (Input.KeyboardState.WasKeyPressed(Keys.D8))
+            {
                 UnselectHotbar();
                 Hotbar[7].Selected = true;
             }
-            if (Input.KeyboardState.WasKeyPressed(Keys.D9)){
+            if (Input.KeyboardState.WasKeyPressed(Keys.D9))
+            {
                 UnselectHotbar();
                 Hotbar[8].Selected = true;
             }
@@ -209,7 +225,7 @@ namespace FinalGame
             shopManager.RandomItems();
 
         }
-        
+
         int OldPlantIndex, NewPlantIndex;
         bool Planted;
         int i;
@@ -235,21 +251,9 @@ namespace FinalGame
                         {
                             if (SelectedItem != null)
                             {
-                                if(SelectedItem.ItemType == ItemType.Fertalizer)
+                                if (SelectedItem.ItemType == ItemType.Fertalizer)
                                 {
-                                    p.Fertilized = true;
-                                    switch(SelectedItem.Name) 
-                                    {
-                                        case "Basic Fertilizer":
-                                            p.FertilizerGrade = FertilizerGrade.Basic;
-                                            break;
-                                        case "Quality Fertilizer":
-                                            p.FertilizerGrade = FertilizerGrade.Quality;
-                                            break;
-                                        case "Deluxe Fertilizer":
-                                            p.FertilizerGrade = FertilizerGrade.Deluxe;
-                                            break;
-                                    }
+                                    p.Fertilize(SelectedItem);
 
                                     RemoveInventoryItem(SelectedItem);
                                 }
@@ -297,7 +301,7 @@ namespace FinalGame
 
                     if (Planted)
                     {
-                        gardenManager.Garden[OldPlantIndex] = gardenManager.NewPlant(NewPlantIndex, g); 
+                        gardenManager.Garden[OldPlantIndex] = gardenManager.NewPlant(NewPlantIndex, g);
 
                         gardenManager.ResetPlant(gardenManager.Garden[OldPlantIndex]);
                         gardenManager.UpdatePlantState(gardenManager.Garden[OldPlantIndex]);
@@ -311,15 +315,15 @@ namespace FinalGame
         private void RemoveInventoryItem(Item SelectedItem)
         {
             if (SelectedItem.Count > 1) { SelectedItem.Count--; }
-            else 
-            { 
-                PC.Player.RemoveItem(SelectedItem); 
+            else
+            {
+                PC.Player.RemoveItem(SelectedItem);
                 SelectedItem.Count = 0;
             }
         }
 
         Vector2 TimeLocation = new Vector2(10, 10);
-        
+
         public override void Draw(GameTime gameTime)
         {
             sb.Begin();
@@ -333,7 +337,7 @@ namespace FinalGame
 
             DrawHotbarItems();
 
-            if(animationManager.Watering)
+            if (animationManager.Watering)
             {
                 DrawWatering(gameTime);
             }
@@ -343,9 +347,9 @@ namespace FinalGame
             base.Draw(gameTime);
         }
 
-        public void DrawGridCords() 
+        public void DrawGridCords()
         {
-            foreach(GridSquare gs in gridManager.GridBoard) 
+            foreach (GridSquare gs in gridManager.GridBoard)
             {
                 sb.DrawString(font, $"({gs.Cords.X},{gs.Cords.Y})", gs.Location, Color.Black);
             }
@@ -378,14 +382,14 @@ namespace FinalGame
             foreach (Item item in PC.Player.Inventory)
             {
                 count = PC.Player.Inventory.IndexOf(item);
-                if(item.ItemType == ItemType.Plant) { sb.Draw(item.ItemTexture, Hotbar[count].Loc + Center, Color.White); }
-                else 
-                { 
-                    sb.Draw(item.spriteTexture, Hotbar[count].Loc + Center, Color.White); 
+                if (item.ItemType == ItemType.Plant) { sb.Draw(item.ItemTexture, Hotbar[count].Loc + Center, Color.White); }
+                else
+                {
+                    sb.Draw(item.spriteTexture, Hotbar[count].Loc + Center, Color.White);
                 }
 
                 sb.DrawString(small, $"{item.Count}", Hotbar[count].Loc + BottomCorner, Color.Black);
-                    
+
             }
         }
 

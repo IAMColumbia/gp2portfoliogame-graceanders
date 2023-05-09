@@ -137,10 +137,21 @@ namespace FinalGame.Crops
             this.Watered = true;
         }
 
-        public void Fertilize(FertilizerGrade FG)
+        public void Fertilize(Item SelectedItem)
         {
-            this.FertilizerGrade = FG;
             this.Fertilized = true;
+            switch (SelectedItem.Name)
+            {
+                case "Basic Fertilizer":
+                    this.FertilizerGrade = FertilizerGrade.Basic;
+                    break;
+                case "Quality Fertilizer":
+                    this.FertilizerGrade = FertilizerGrade.Quality;
+                    break;
+                case "Deluxe Fertilizer":
+                    this.FertilizerGrade = FertilizerGrade.Deluxe;
+                    break;
+            }
         }
 
         internal void CalculateQuality()

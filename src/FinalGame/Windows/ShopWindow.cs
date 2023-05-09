@@ -9,15 +9,15 @@ using MonoGameLibrary.Util;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
 
-namespace FinalGame
+namespace FinalGame.Windows
 {
-    enum ShopMode 
+    enum ShopMode
     {
         Buy, Sell
     }
     public class ShopWindow : Window
     {
-        
+
         private Vector2 titlePosition;
         private Vector2 itemsPosition;
         private Vector2 moneyPosition;
@@ -81,7 +81,7 @@ namespace FinalGame
             // Check for input to change the selected item
             if (Input.WasKeyPressed(Keys.Up))
             {
-                if(displayItems.Count != 0)
+                if (displayItems.Count != 0)
                     selectedItemIndex = (selectedItemIndex + displayItems.Count - 1) % displayItems.Count;
             }
             else if (Input.WasKeyPressed(Keys.Down))
@@ -108,7 +108,7 @@ namespace FinalGame
 
             if (Input.WasKeyPressed(Keys.OemMinus))
             {
-                SM = ShopMode.Sell; 
+                SM = ShopMode.Sell;
             }
 
             if (Input.WasKeyPressed(Keys.OemPlus))
@@ -116,7 +116,7 @@ namespace FinalGame
                 SM = ShopMode.Buy;
             }
 
-             base.Update(gameTime);
+            base.Update(gameTime);
         }
 
         internal void ShopModeUpdated()
@@ -127,7 +127,7 @@ namespace FinalGame
                     displayItems = buyableItems;
                     break;
                 case ShopMode.Sell:
-                    displayItems = playerItems; 
+                    displayItems = playerItems;
                     break;
             }
 
@@ -147,7 +147,7 @@ namespace FinalGame
             // Draw the display items
             for (int i = 0; i < displayItems.Count; i++)
             {
-                Color color = (i == selectedItemIndex) ? Color.Red : Color.Black;
+                Color color = i == selectedItemIndex ? Color.Red : Color.Black;
                 spriteBatch.DrawString(font, displayItems[i].Name + " (" + displayItems[i].Worth + ")", itemsPosition + new Vector2(0, i * 40), color);
             }
 

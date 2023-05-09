@@ -1,4 +1,5 @@
 ﻿using FinalGame.Crops;
+using FinalGame.Windows;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Util;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalGame
+namespace FinalGame.Managers
 {
     public class StatsManager : DrawableGameComponent
     {
@@ -36,13 +37,12 @@ namespace FinalGame
             base.LoadContent();
         }
 
-        internal void OpenStatsWindow(ref List<Plant> allPlants)
+        internal void OpenStatsWindow(ref GardenManager gm)
         {
-            AllPlants = allPlants;
 
             if (!isStatsOpen)
             {
-                StatsWindow statsWindow = new StatsWindow(Game, AllPlants);
+                StatsWindow statsWindow = new StatsWindow(Game, gm);
                 //StatsWindow statsWindow = new StatsWindow(Game, PC, input);
                 Game.Components.Add(statsWindow);
 
@@ -71,5 +71,5 @@ namespace FinalGame
     }
 }
 
-  
+
 

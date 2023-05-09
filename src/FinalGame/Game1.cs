@@ -1,4 +1,4 @@
-﻿using FinalGame.Crops;
+﻿using FinalGame.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

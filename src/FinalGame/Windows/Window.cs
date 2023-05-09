@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinalGame
+namespace FinalGame.Windows
 {
-    public class Window: DrawableGameComponent
+    public class Window : DrawableGameComponent
     {
         internal SpriteBatch spriteBatch;
         internal SpriteFont font, title;

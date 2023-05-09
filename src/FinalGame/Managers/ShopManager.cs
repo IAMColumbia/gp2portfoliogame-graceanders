@@ -1,4 +1,5 @@
 ﻿using FinalGame.Crops;
+using FinalGame.Windows;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameLibrary.Util;
@@ -6,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FinalGame
+namespace FinalGame.Managers
 {
     public class ShopManager : DrawableGameComponent
     {
@@ -71,16 +72,16 @@ namespace FinalGame
             StrawberrySeedTextureName = "Crops/Strawberry_Seeds";
             TomatoSeedTextureName = "Crops/Tomato_Seeds";
 
-            BeetSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(BeetSeedTextureName);
-            CornSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(CornSeedTextureName);
-            GarlicSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(GarlicSeedTextureName);
-            GrapeSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(GrapeSeedTextureName);
-            GreenBeanSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(GreenBeanSeedTextureName);
-            MelonSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(MelonSeedTextureName);
-            PotatoSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(PotatoSeedTextureName);
-            RadishSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(RadishSeedTextureName);
-            StrawberrySeeds.spriteTexture = this.Game.Content.Load<Texture2D>(StrawberrySeedTextureName);
-            TomatoSeeds.spriteTexture = this.Game.Content.Load<Texture2D>(TomatoSeedTextureName);
+            BeetSeeds.spriteTexture = Game.Content.Load<Texture2D>(BeetSeedTextureName);
+            CornSeeds.spriteTexture = Game.Content.Load<Texture2D>(CornSeedTextureName);
+            GarlicSeeds.spriteTexture = Game.Content.Load<Texture2D>(GarlicSeedTextureName);
+            GrapeSeeds.spriteTexture = Game.Content.Load<Texture2D>(GrapeSeedTextureName);
+            GreenBeanSeeds.spriteTexture = Game.Content.Load<Texture2D>(GreenBeanSeedTextureName);
+            MelonSeeds.spriteTexture = Game.Content.Load<Texture2D>(MelonSeedTextureName);
+            PotatoSeeds.spriteTexture = Game.Content.Load<Texture2D>(PotatoSeedTextureName);
+            RadishSeeds.spriteTexture = Game.Content.Load<Texture2D>(RadishSeedTextureName);
+            StrawberrySeeds.spriteTexture = Game.Content.Load<Texture2D>(StrawberrySeedTextureName);
+            TomatoSeeds.spriteTexture = Game.Content.Load<Texture2D>(TomatoSeedTextureName);
             #endregion
 
             #region Fertilizer
@@ -88,9 +89,9 @@ namespace FinalGame
             QualityFertilizerTextureName = "Quality_Fertilizer";
             DeluxeFertilizerTextureName = "Deluxe_Fertilizer";
 
-            BasicFertilizer.spriteTexture = this.Game.Content.Load<Texture2D>(BasicFertilizerTextureName);
-            QualityFertilizer.spriteTexture = this.Game.Content.Load<Texture2D>(QualityFertilizerTextureName);
-            DeluxeFertilizer.spriteTexture = this.Game.Content.Load<Texture2D>(DeluxeFertilizerTextureName);
+            BasicFertilizer.spriteTexture = Game.Content.Load<Texture2D>(BasicFertilizerTextureName);
+            QualityFertilizer.spriteTexture = Game.Content.Load<Texture2D>(QualityFertilizerTextureName);
+            DeluxeFertilizer.spriteTexture = Game.Content.Load<Texture2D>(DeluxeFertilizerTextureName);
             #endregion
 
             base.LoadContent();
@@ -157,7 +158,7 @@ namespace FinalGame
         {
             if (!isShopOpen)
             {
-                ShopWindow shopWindow = new ShopWindow(Game,BuyableItems,PC ,input);
+                ShopWindow shopWindow = new ShopWindow(Game, BuyableItems, PC, input);
                 Game.Components.Add(shopWindow);
 
                 isShopOpen = true;

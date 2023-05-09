@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGameLibrary.Util;
 
-namespace FinalGame
+namespace FinalGame.Managers
 {
     class GridManager : DrawableGameComponent
     {
@@ -30,9 +30,9 @@ namespace FinalGame
 
         bool GridVisible;
 
-        public GridManager(Game game, Rectangle SS, GridTerrain gT, InputHandler IH) : base(game) 
+        public GridManager(Game game, Rectangle SS, GridTerrain gT, InputHandler IH) : base(game)
         {
-            this.GridBoard = new GridSquare[17, 9];
+            GridBoard = new GridSquare[17, 9];
             SoilSquares = new List<GridSquare>();
             ScreenSize = SS;
 
@@ -41,11 +41,11 @@ namespace FinalGame
             GT = gT;
 
             //input = IH;
-        }       
+        }
 
         public override void Initialize()
         {
-            GridTexture = this.Game.Content.Load<Texture2D>("Grid");
+            GridTexture = Game.Content.Load<Texture2D>("Grid");
 
             SquaresWide = ScreenSize.Width / GridTexture.Width;
             SquaresHeigh = ScreenSize.Height / GridTexture.Height;
@@ -53,7 +53,7 @@ namespace FinalGame
             LoadGrid();
             base.Initialize();
         }
-        
+
         protected virtual void LoadGrid() { CreateGrid(SquaresWide, SquaresHeigh, Margin); }
 
         int x = 0;
@@ -67,15 +67,15 @@ namespace FinalGame
             {
                 for (int h = 0; h < GridBoard.GetLength(1); h++)
                 {
-                    gs = new GridSquare(this.Game);
+                    gs = new GridSquare(Game);
 
-                    if (!GridVisible) 
+                    if (!GridVisible)
                     {
-                        gs.TerrainMode(gs); 
+                        gs.TerrainMode(gs);
                     }
-                    else 
+                    else
                     {
-                        gs.GridMode(gs); 
+                        gs.GridMode(gs);
                     }
 
                     gs.spriteTexture = GT.ReturnTexture(GT.TerrainGuide[h, w]);
@@ -86,9 +86,9 @@ namespace FinalGame
 
                     gs.Cords = new Vector2(w, h);
 
-                    gs.Location = new Vector2(x + (w * (gs.SpriteTexture.Width)), 60 + (h * gs.SpriteTexture.Height + (h * Margin)));
+                    gs.Location = new Vector2(x + w * gs.SpriteTexture.Width, 60 + (h * gs.SpriteTexture.Height + h * Margin));
 
-                    GridBoard[w,h] = gs;
+                    GridBoard[w, h] = gs;
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace FinalGame
 
         public override void Draw(GameTime gameTime)
         {
-            foreach(var square in this.GridBoard)
+            foreach (var square in GridBoard)
             {
                 square.Draw(gameTime);
             }
