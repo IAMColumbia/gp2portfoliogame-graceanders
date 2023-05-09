@@ -59,7 +59,7 @@ namespace FinalGame.Crops
         {
             this.plantDay = PlantDay.DayOne;
             this.PS = PlantState.Alive;
-            this.FertilizerGrade = FertilizerGrade.Basic;
+            this.FertilizerGrade = FertilizerGrade.NonFertilized;
             this.Harvestable = false;
             this.Fertilized = false;
 
@@ -149,7 +149,7 @@ namespace FinalGame.Crops
 
             if(this.FertilizerGrade != FertilizerGrade.NonFertilized)
             {
-                qualityRoll *= CalculateFertilizerAffect();
+                qualityRoll += qualityRoll * CalculateFertilizerAffect();
             }
 
             if (qualityRoll <= 60) // 60% chance of Poor quality

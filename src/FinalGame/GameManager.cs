@@ -1,4 +1,5 @@
 ﻿using FinalGame.Crops;
+using FinalGame.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -229,6 +230,32 @@ namespace FinalGame
                             animationManager.Watering = true;
                         }
 
+                        //Fertilize
+                        if (p.LocationRect.Intersects(gs.LocationRect) && p.PS == PlantState.Alive && p.FertilizerGrade == FertilizerGrade.NonFertilized)
+                        {
+                            if (SelectedItem != null)
+                            {
+                                if(SelectedItem.ItemType == ItemType.Fertalizer)
+                                {
+                                    p.Fertilized = true;
+                                    switch(SelectedItem.Name) 
+                                    {
+                                        case "Basic Fertilizer":
+                                            p.FertilizerGrade = FertilizerGrade.Basic;
+                                            break;
+                                        case "Quality Fertilizer":
+                                            p.FertilizerGrade = FertilizerGrade.Quality;
+                                            break;
+                                        case "DeluxeFertilizer":
+                                            p.FertilizerGrade = FertilizerGrade.Deluxe;
+                                            break;
+                                    }
+
+                                    RemoveInventoryItem(SelectedItem);
+                                }
+                            }
+                        }
+
                         //Replant
                         if (p.LocationRect.Intersects(gs.LocationRect) && p.DrawColor == Color.Transparent)
                         {
@@ -239,9 +266,8 @@ namespace FinalGame
                                     OldPlantIndex = gardenManager.Garden.IndexOf(p);
                                     NewPlantIndex = SelectedItem.ReturnPlantIndex();
 
-                                    if (SelectedItem.Count > 1) { SelectedItem.Count--; }
-                                    else { PC.Player.RemoveItem(SelectedItem); }
-                                    
+                                    RemoveInventoryItem(SelectedItem);
+
                                     Planted = true;
                                 }
                             }
@@ -280,6 +306,12 @@ namespace FinalGame
                     Planted = false;
                 }
             }
+        }
+
+        private void RemoveInventoryItem(Item SelectedItem)
+        {
+            if (SelectedItem.Count > 1) { SelectedItem.Count--; }
+            else { PC.Player.RemoveItem(SelectedItem); }
         }
 
         Vector2 TimeLocation = new Vector2(10, 10);
