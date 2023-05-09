@@ -28,13 +28,6 @@
       <FileName>Managers\GridManager.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="FinalGame.Managers.PlantManager">
-    <Position X="28.5" Y="13.75" Width="2.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Managers\PlantManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="FinalGame.Managers.ShopManager">
     <Position X="16.25" Y="0.75" Width="2.75" />
     <TypeIdentifier>
