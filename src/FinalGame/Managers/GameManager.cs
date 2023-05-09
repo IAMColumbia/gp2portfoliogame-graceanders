@@ -1,20 +1,12 @@
-﻿using FinalGame.Crops;
-using FinalGame.Interfaces;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGameLibrary.Sprite;
-using MonoGameLibrary.Sprite.Extensions;
 using MonoGameLibrary.Util;
-using SharpDX.Direct3D9;
-using SharpDX.XAudio2;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using FinalGame.Crops;
+using FinalGame.Interfaces;
 
 namespace FinalGame.Managers
 {
@@ -32,6 +24,7 @@ namespace FinalGame.Managers
         ShopManager shopManager;
         StatsManager statsManager;
         AnimationManager animationManager;
+        WinManager winManager;
 
         IInputHandler Input;
 
@@ -50,7 +43,8 @@ namespace FinalGame.Managers
 
         public GameManager(Game game) : base(game) { g = game; }
 
-        internal GameManager(Game game, InputHandler input, PlayableCharacter p, GridManager gridM, GardenManager gardenM, ShopManager shopM, StatsManager statsM, AnimationManager animationM) : base(game)
+        internal GameManager(Game game, InputHandler input, PlayableCharacter p, GridManager gridM, 
+            GardenManager gardenM, ShopManager shopM, StatsManager statsM, AnimationManager animationM, WinManager winM) : base(game)
         {
             g = game;
             Input = input;
@@ -60,9 +54,11 @@ namespace FinalGame.Managers
             shopManager = shopM;
             statsManager = statsM;
             animationManager = animationM;
+            winManager = winM;
 
             InventoryTextureName = "InventorySprite";
             SelectedTextureName = "SelectedSprite";
+            
         }
 
         protected override void LoadContent()
@@ -121,7 +117,7 @@ namespace FinalGame.Managers
 
         public void UpdateTime(GameTime gameTime)
         {
-            if (shopManager.IsShopOpen || statsManager.IsStatsOpen)
+            if (shopManager.IsShopOpen || statsManager.IsStatsOpen || winManager.IsWinOpen)
             {
                 return;
             }
@@ -161,6 +157,16 @@ namespace FinalGame.Managers
             else if (statsManager.IsStatsOpen && Input.KeyboardState.WasKeyPressed(Keys.O))
             {
                 statsManager.CloseStatsWindow();
+            }
+
+            //Win Window
+            if(winManager.IsWinOpen && Input.KeyboardState.WasKeyPressed(Keys.E))
+            {
+                Game.Exit();
+            }
+            if (winManager.IsWinOpen && Input.KeyboardState.WasKeyPressed(Keys.R))
+            {
+                Restart();
             }
 
             #region Hotbar Select
@@ -213,6 +219,27 @@ namespace FinalGame.Managers
             #endregion
         }
 
+        internal void Restart()
+        {
+            winManager.CloseWinWindow();
+            GameWon = false;
+
+            //Garden
+            gardenManager.Garden.Clear();
+            gardenManager.AllPlants.Clear();
+            gardenManager.LoadPlants();
+
+            //Player
+            PC.Player.Inventory.Clear();
+            PC.Player.gold = 100;
+
+            //Time
+            CurrentTime = 0;
+            DayTime = 0;
+            Day = 0;
+
+        }
+
         private void UnselectHotbar() { foreach (Hotbar hb in Hotbar) { hb.Selected = false; } }
 
         public void NextDay(GameTime gameTime)
@@ -224,11 +251,12 @@ namespace FinalGame.Managers
 
             shopManager.RandomItems();
 
+            if (GameWon) { winManager.OpenWinWindow(); }
+
         }
 
         int OldPlantIndex, NewPlantIndex;
         bool Planted;
-        int i;
         bool Contains;
         public void CheckInteractedSquare()
         {
@@ -244,6 +272,7 @@ namespace FinalGame.Managers
                         {
                             p.Water();
                             animationManager.Watering = true;
+                            continue;
                         }
 
                         //Fertilize
@@ -328,8 +357,8 @@ namespace FinalGame.Managers
         {
             sb.Begin();
 
-            sb.DrawString(font, $"Total Time: {(int)CurrentTime} | Day Time: {(int)DayTime} | Day: {Day}                                " +
-                $"Click to water plants!               O: Stats | P: Shop | Money: {PC.Player.gold}", TimeLocation, Color.White);
+            sb.DrawString(font, $"Total Time: {(int)CurrentTime} | Day Time: {(int)DayTime} | Day: {Day}" +
+                $"                  [O] Stats | [P] Shop | Money: {PC.Player.gold}", TimeLocation, Color.White);
 
             if (DrawCords) { DrawGridCords(); }
 

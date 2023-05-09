@@ -63,7 +63,7 @@ namespace FinalGame.Windows
 
             objectLocations = new List<Rectangle>() { object1Loc, object2Loc, object3Loc, object4Loc, object5Loc, object6Loc, object7Loc, object8Loc, object9Loc, object10Loc };
 
-            ExcellentAchievedTextLoc = new Vector2(870, 600);
+            ExcellentAchievedTextLoc = new Vector2(900, 600);
 
 
             base.Initialize();
@@ -92,7 +92,8 @@ namespace FinalGame.Windows
             spriteBatch.Draw(background, windowBounds, Color.White);
 
             // Draw the title
-            spriteBatch.DrawString(title, "Stats", titlePosition, Color.Black);
+            spriteBatch.DrawString(title, "Stats                         " +
+                "[O] Close", titlePosition, Color.Black);
 
             //Draw display squares
             DrawSquares();
@@ -174,7 +175,7 @@ namespace FinalGame.Windows
             {
                 TextLoc.X = objectLocations[i].X + 110;
                 TextLoc.Y = objectLocations[i].Y;
-                spriteBatch.DrawString(smallFont, $"{gardenManager.AllPlants[i].Name}\nQuality: {gardenManager.AllPlants[i].PlantQuality}", TextLoc, Color.Black);
+                spriteBatch.DrawString(smallFont, $"{gardenManager.AllPlants[i].Name}\nQuality:\n{gardenManager.AllPlants[i].PlantQuality}", TextLoc, Color.Black);
             }
 
             spriteBatch.DrawString(font, $"You have achieved:\n{gardenManager.NumOfExcelentPlants()}/10 Excellent Plants", ExcellentAchievedTextLoc, Color.Brown);

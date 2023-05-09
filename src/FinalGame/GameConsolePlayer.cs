@@ -35,14 +35,14 @@ namespace FinalGame
 
         public virtual void Log(string DebugKey, string DebugValue)
         {
-            if (console != null)
-            {
-                console.Log(DebugKey, DebugValue);
-            }
-            else
-            {
-                base.Log(DebugKey + ":" + DebugValue);
-            }
+            //if (console != null)
+            //{
+            //    console.Log(DebugKey, DebugValue);
+            //}
+            //else
+            //{
+            //    base.Log(DebugKey + ":" + DebugValue);
+            //}
         }
     }
 }

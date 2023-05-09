@@ -18,9 +18,6 @@ namespace FinalGame.Managers
         internal List<Plant> AllPlants;
         Plant Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry, Tomato, FreePlot;
 
-
-        bool testing;
-
         internal int GardenPlotOneX, GardenPlotTwoX, GardenPlotThreeX, GardenPlotFourX;
 
         int Y = 480;
@@ -29,8 +26,6 @@ namespace FinalGame.Managers
         public GardenManager(Game game) : base(game)
         {
             Garden = new List<Plant>(4) { };
-
-            testing = true;
         }
 
         protected override void LoadContent()
@@ -50,7 +45,7 @@ namespace FinalGame.Managers
 
         }
 
-        private void LoadPlants()
+        internal void LoadPlants()
         {
             Beet = new Beet(Game);            //0
             Corn = new Corn(Game);            //1
@@ -67,16 +62,18 @@ namespace FinalGame.Managers
 
             AllPlants = new List<Plant>() { Beet, Corn, Garlic, Grapes, GreenBean, Melon, Potato, Radish, Strawberry, Tomato };
 
-            if (testing)
-            {
-                Garden.Add(Potato);
-                Garden.Add(Beet);
-                Garden.Add(Corn);
-                Garden.Add(Garlic);
+            StartingGarden();
 
-                SetPlantLocation();
-            }
+        }
 
+        internal void StartingGarden()
+        {
+            Garden.Add(Potato);
+            Garden.Add(Beet);
+            Garden.Add(Corn);
+            Garden.Add(Garlic);
+
+            SetPlantLocation();
         }
 
         internal void UpdatePlantState(Plant plant)

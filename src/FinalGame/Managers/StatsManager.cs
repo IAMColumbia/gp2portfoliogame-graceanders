@@ -33,7 +33,6 @@ namespace FinalGame.Managers
 
         protected override void LoadContent()
         {
-
             base.LoadContent();
         }
 
@@ -43,7 +42,6 @@ namespace FinalGame.Managers
             if (!isStatsOpen)
             {
                 StatsWindow statsWindow = new StatsWindow(Game, gm);
-                //StatsWindow statsWindow = new StatsWindow(Game, PC, input);
                 Game.Components.Add(statsWindow);
 
                 isStatsOpen = true;

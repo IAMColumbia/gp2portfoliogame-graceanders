@@ -27,6 +27,8 @@ namespace FinalGame
 
         AnimationManager animationM;
 
+        WinManager winM;
+
         InputHandler input;
         GameConsole console;
 
@@ -74,7 +76,10 @@ namespace FinalGame
             animationM = new AnimationManager(this);
             this.Components.Add(animationM);
 
-            gameM = new GameManager(this, input, player, gridM, gardenM, shopM, statsM, animationM);
+            winM = new WinManager(this);
+            this.Components.Add(winM);
+
+            gameM = new GameManager(this, input, player, gridM, gardenM, shopM, statsM, animationM, winM);
             this.Components.Add(gameM);
 
         }
@@ -105,7 +110,7 @@ namespace FinalGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.LightBlue);
+            GraphicsDevice.Clear(Color.DimGray);
 
             // TODO: Add your drawing code here
 

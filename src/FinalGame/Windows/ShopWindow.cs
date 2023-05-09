@@ -133,6 +133,7 @@ namespace FinalGame.Windows
 
         }
 
+        Vector2 KeyGuide = new Vector2(600, 0);
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
@@ -141,8 +142,8 @@ namespace FinalGame.Windows
             spriteBatch.Draw(background, windowBounds, Color.White);
 
             // Draw the title
-            spriteBatch.DrawString(title, $"Shop: {SM.ToString()}                       " +
-                $"| Enter Select | - Sell | + Buy |", titlePosition, Color.Black);
+            spriteBatch.DrawString(title, $"Shop: {SM.ToString()}", titlePosition, Color.Black);
+            spriteBatch.DrawString(title, $"[Enter] Select\n[-] Sell \n[+] Buy\n[P] Close", titlePosition + KeyGuide, Color.Black);
 
             // Draw the display items
             for (int i = 0; i < displayItems.Count; i++)
