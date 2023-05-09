@@ -16,6 +16,7 @@ namespace FinalGame
 {
     internal class PlayableCharacter : Character
     {
+        //
         public IPlayerController Contoller { get; set; }
 
         //internal GameConsolePlayer Player { get; private set; }
@@ -54,13 +55,13 @@ namespace FinalGame
 
         public PlayableCharacter(Game game) : base(game)
         {
-            SetupIPlayerController(game);
+            SetupIPlayerController(game);//
             Player = new GameConsolePlayer((GameConsole)game.Services.GetService<IGameConsole>());
             Player.gold = 100;
         }
 
         protected virtual void SetupIPlayerController(Game game)
-        {
+        {//
             this.Contoller = new PlayerController(game);
 
             this.Contoller.UpKey = Keys.W;
