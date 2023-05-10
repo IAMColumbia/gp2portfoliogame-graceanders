@@ -61,7 +61,7 @@ namespace FinalGame
         }
 
         protected virtual void SetupIPlayerController(Game game)
-        {//
+        {
             this.Contoller = new PlayerController(game);
 
             this.Contoller.UpKey = Keys.W;
