@@ -272,7 +272,6 @@ namespace FinalGame.Managers
                         {
                             p.Water();
                             animationManager.Watering = true;
-                            continue;
                         }
 
                         //Fertilize
