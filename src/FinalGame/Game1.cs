@@ -35,6 +35,8 @@ namespace FinalGame
         Rectangle ScreenSize;
         int Margin = 110;
 
+        int maxWidth = 1700;
+        int maxHeight = 970;
         public Game1()
         {
             Window.Title = "Perfecting Cultivation";
@@ -52,10 +54,18 @@ namespace FinalGame
             int w = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width - Margin * 2;
             int h = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height - Margin;
 
-            ScreenSize = new Rectangle(0, 0, w, h);
+            if (w > maxWidth)//locking width and hight if bounds are too large
+            {
+                w = maxWidth;
+                h = maxHeight;
+            }
 
             this._graphics.PreferredBackBufferWidth = w;
             this._graphics.PreferredBackBufferHeight = h;
+
+            ScreenSize = new Rectangle(0, 0, w, h);
+
+            
 
             gT = new GridTerrain(this);
             this.Components.Add(gT);

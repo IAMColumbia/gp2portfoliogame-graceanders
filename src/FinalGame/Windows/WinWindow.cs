@@ -54,7 +54,7 @@ namespace FinalGame.Windows
             // Draw the title
             spriteBatch.DrawString(title, "You Won!", titlePosition, Color.Black);
 
-            spriteBatch.DrawString(font, "You have gotten all 15 plants to Exelent quality!\nPress [R] to Restart\nor\nPress [E] to Exit\n\nThank you for playing!",textPosition, Color.Black);
+            spriteBatch.DrawString(font, "You have gotten all 10 plants to Exelent quality!\nPress [R] to Restart\nor\nPress [E] to Exit\n\nThank you for playing!",textPosition, Color.Black);
 
             spriteBatch.End();
 

@@ -134,7 +134,7 @@ namespace FinalGame.Managers
 
         public void CheckForWin()
         {
-            if (gardenManager.NumOfExcelentPlants() == 15) { GameWon = true; }
+            if (gardenManager.NumOfExcelentPlants() == 10) { GameWon = true; }
         }
 
         public void HandleInput()
@@ -251,6 +251,7 @@ namespace FinalGame.Managers
 
             shopManager.RandomItems();
 
+            CheckForWin();
             if (GameWon) { winManager.OpenWinWindow(); }
 
         }
